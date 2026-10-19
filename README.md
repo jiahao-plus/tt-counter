@@ -1,4 +1,4 @@
-# 8-bit up/down counter (tt_um_yiersansiwuliu0_counter)
+# 8-bit up/down counter (tt_um_jiahao_plus_counter)
 
 A minimal, fully combinational-control 8-bit up/down counter for Tiny Tapeout —
 a first silicon test design: it is small enough to leave huge margin for

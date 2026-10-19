@@ -1,7 +1,7 @@
 # Tiny Tapeout project information
 project:
   title:        "8-bit up/down counter"
-  author:       "yiersansiwuliu0"
+  author:       "jiahao_plus"
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "8-bit up/down counter controlled by two inputs (en/dir), useful as a first silicon test and for reverse-engineering reference structures"
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
@@ -11,7 +11,7 @@ project:
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_yiersansiwuliu0_counter"
+  top_module:  "tt_um_jiahao_plus_counter"
 
   # List your project's source files here.
   # Source files must be in ./src and you must list each source file separately, one per line.
