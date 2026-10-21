@@ -1,7 +1,7 @@
 # Enhanced (integrated) synthesis for tt_um_jiahao_plus_counter
 read_verilog ../src/project.v
-read_verilog ../third_party/pwm/pwm.v
-read_verilog ../third_party/lfsr/LFSR_Design.v
+read_verilog ../src/pwm.v
+read_verilog ../src/LFSR_Design.v
 synth -top tt_um_jiahao_plus_counter -flatten
 dfflibmap -liberty /root/openroad-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 abc -liberty /root/openroad-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib

@@ -18,8 +18,8 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project.v"
-    - "../third_party/pwm/pwm.v"
-    - "../third_party/lfsr/LFSR_Design.v"
+    - "pwm.v"
+    - "LFSR_Design.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
