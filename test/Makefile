@@ -7,6 +7,10 @@ TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES = project.v
 
+# Vendored third-party IP (experiment branch exp/ip-integration)
+VERILOG_SOURCES += $(PWD)/../third_party/pwm/pwm.v
+VERILOG_SOURCES += $(PWD)/../third_party/lfsr/LFSR_Design.v
+
 ifneq ($(GATES),yes)
 
 # RTL simulation:
