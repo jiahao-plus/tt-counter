@@ -1,0 +1,644 @@
+{
+ "method": "Independent re-derivation: LEF text parsed by this script, GDS metal rebuilt by this script, and a third-party reader (OpenROAD ODB) used as a cross-check. gen_lef.py is not imported, so a bug in its region construction cannot hide behind its own self-test.",
+ "rules": {
+  "E": "A/B/C1 electrical: OBS = drawn metal - PIN shapes",
+  "G": "C3/C4/D/E geometry-only: one OBS rect over prBoundary"
+ },
+ "min_free_sides": 3,
+ "corridor_um": 1.0,
+ "pdn_layers_must_stay_clear": [
+  "met4",
+  "met5"
+ ],
+ "all_pass": true,
+ "odb_status": "RUN",
+ "odb_error": null,
+ "problems": [],
+ "macros": [
+  {
+   "tag": "A",
+   "cell": "research_via1",
+   "rule": "E",
+   "n_pins": 1,
+   "n_ports": 1,
+   "n_obs": 7,
+   "layers": {
+    "met1": {
+     "n_obs": 4,
+     "n_pins": 1,
+     "obs_area": 2159200,
+     "metal_area": 2178800,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0,
+     "obs_not_metal": 0,
+     "pins_free_sides": [
+      3
+     ]
+    },
+    "met2": {
+     "n_obs": 3,
+     "n_pins": 1,
+     "obs_area": 459600,
+     "metal_area": 479200,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0,
+     "obs_not_metal": 0,
+     "pins_free_sides": [
+      3
+     ]
+    }
+   },
+   "pins": [
+    {
+     "name": "net",
+     "n_ports": 1,
+     "geometries": [
+      {
+       "layer": "met1",
+       "rect_um": [
+        0.0,
+        0.0,
+        0.14,
+        0.14
+       ]
+      },
+      {
+       "layer": "met2",
+       "rect_um": [
+        8.0,
+        2.0,
+        8.14,
+        2.14
+       ]
+      }
+     ]
+    }
+   ],
+   "free_sides": [
+    {
+     "tag": "A",
+     "layer": "met1",
+     "n_free": 3,
+     "free": [
+      "left",
+      "below",
+      "above"
+     ]
+    },
+    {
+     "tag": "A",
+     "layer": "met2",
+     "n_free": 3,
+     "free": [
+      "right",
+      "below",
+      "above"
+     ]
+    }
+   ],
+   "prboundary_anchored": true,
+   "verdict": "PASS"
+  },
+  {
+   "tag": "B",
+   "cell": "research_via2",
+   "rule": "E",
+   "n_pins": 1,
+   "n_ports": 1,
+   "n_obs": 6,
+   "layers": {
+    "met2": {
+     "n_obs": 3,
+     "n_pins": 1,
+     "obs_area": 1169000,
+     "metal_area": 1188600,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0,
+     "obs_not_metal": 0,
+     "pins_free_sides": [
+      3
+     ]
+    },
+    "met3": {
+     "n_obs": 3,
+     "n_pins": 1,
+     "obs_area": 1514400,
+     "metal_area": 1604400,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0,
+     "obs_not_metal": 0,
+     "pins_free_sides": [
+      3
+     ]
+    }
+   },
+   "pins": [
+    {
+     "name": "net",
+     "n_ports": 1,
+     "geometries": [
+      {
+       "layer": "met2",
+       "rect_um": [
+        0.0,
+        0.0,
+        0.14,
+        0.14
+       ]
+      },
+      {
+       "layer": "met3",
+       "rect_um": [
+        9.92,
+        2.92,
+        10.22,
+        3.22
+       ]
+      }
+     ]
+    }
+   ],
+   "free_sides": [
+    {
+     "tag": "B",
+     "layer": "met2",
+     "n_free": 3,
+     "free": [
+      "left",
+      "below",
+      "above"
+     ]
+    },
+    {
+     "tag": "B",
+     "layer": "met3",
+     "n_free": 3,
+     "free": [
+      "right",
+      "below",
+      "above"
+     ]
+    }
+   ],
+   "prboundary_anchored": true,
+   "verdict": "PASS"
+  },
+  {
+   "tag": "C1",
+   "cell": "research_branch",
+   "rule": "E",
+   "n_pins": 1,
+   "n_ports": 1,
+   "n_obs": 13,
+   "layers": {
+    "met1": {
+     "n_obs": 7,
+     "n_pins": 1,
+     "obs_area": 1493600,
+     "metal_area": 1513200,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0,
+     "obs_not_metal": 0,
+     "pins_free_sides": [
+      3
+     ]
+    },
+    "met2": {
+     "n_obs": 6,
+     "n_pins": 3,
+     "obs_area": 1168800,
+     "metal_area": 1227600,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0,
+     "obs_not_metal": 0,
+     "pins_free_sides": [
+      3,
+      3,
+      3
+     ]
+    }
+   },
+   "pins": [
+    {
+     "name": "net",
+     "n_ports": 1,
+     "geometries": [
+      {
+       "layer": "met1",
+       "rect_um": [
+        0.0,
+        0.06,
+        0.14,
+        0.2
+       ]
+      },
+      {
+       "layer": "met2",
+       "rect_um": [
+        1.0,
+        2.06,
+        1.14,
+        2.2
+       ]
+      },
+      {
+       "layer": "met2",
+       "rect_um": [
+        5.0,
+        2.56,
+        5.14,
+        2.7
+       ]
+      },
+      {
+       "layer": "met2",
+       "rect_um": [
+        9.0,
+        3.06,
+        9.14,
+        3.2
+       ]
+      }
+     ]
+    }
+   ],
+   "free_sides": [
+    {
+     "tag": "C1",
+     "layer": "met1",
+     "n_free": 3,
+     "free": [
+      "left",
+      "below",
+      "above"
+     ]
+    },
+    {
+     "tag": "C1",
+     "layer": "met2",
+     "n_free": 3,
+     "free": [
+      "left",
+      "right",
+      "above"
+     ]
+    },
+    {
+     "tag": "C1",
+     "layer": "met2",
+     "n_free": 3,
+     "free": [
+      "left",
+      "right",
+      "above"
+     ]
+    },
+    {
+     "tag": "C1",
+     "layer": "met2",
+     "n_free": 3,
+     "free": [
+      "left",
+      "right",
+      "above"
+     ]
+    }
+   ],
+   "prboundary_anchored": true,
+   "verdict": "PASS"
+  },
+  {
+   "tag": "C3",
+   "cell": "research_near",
+   "rule": "G",
+   "n_pins": 0,
+   "n_ports": 0,
+   "n_obs": 1,
+   "layers": {
+    "met1": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 83553600,
+     "metal_area": 11356800,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    }
+   },
+   "pins": [],
+   "free_sides": [],
+   "prboundary_anchored": true,
+   "verdict": "PASS"
+  },
+  {
+   "tag": "C4",
+   "cell": "research_cross",
+   "rule": "G",
+   "n_pins": 0,
+   "n_ports": 0,
+   "n_obs": 2,
+   "layers": {
+    "met1": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 82539600,
+     "metal_area": 1419600,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    },
+    "met2": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 82539600,
+     "metal_area": 1139600,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    }
+   },
+   "pins": [],
+   "free_sides": [],
+   "prboundary_anchored": true,
+   "verdict": "PASS"
+  },
+  {
+   "tag": "D",
+   "cell": "research_dense",
+   "rule": "G",
+   "n_pins": 0,
+   "n_ports": 0,
+   "n_obs": 3,
+   "layers": {
+    "met1": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 202650000,
+     "metal_area": 22799600,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    },
+    "met2": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 202650000,
+     "metal_area": 22799600,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    },
+    "met3": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 202650000,
+     "metal_area": 19340000,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    }
+   },
+   "pins": [],
+   "free_sides": [],
+   "prboundary_anchored": true,
+   "verdict": "PASS"
+  },
+  {
+   "tag": "E",
+   "cell": "research_fiducial",
+   "rule": "G",
+   "n_pins": 0,
+   "n_ports": 0,
+   "n_obs": 2,
+   "layers": {
+    "met1": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 16000000,
+     "metal_area": 4110000,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    },
+    "met2": {
+     "n_obs": 1,
+     "n_pins": 0,
+     "obs_area": 16000000,
+     "metal_area": 4110000,
+     "obs_pin_overlap": 0,
+     "obs_self_overlap": 0,
+     "obs_outside_footprint": 0,
+     "metal_uncovered": 0
+    }
+   },
+   "pins": [],
+   "free_sides": [],
+   "prboundary_anchored": true,
+   "verdict": "PASS"
+  }
+ ],
+ "odb": [
+  {
+   "cell": "research_via1",
+   "odb": {
+    "n_pins": 1,
+    "n_ports": 1,
+    "n_obs": 7,
+    "obs_per_layer": {
+     "met1": 4,
+     "met2": 3
+    },
+    "obs_layers": [
+     "met1",
+     "met2"
+    ]
+   },
+   "text": {
+    "n_pins": 1,
+    "n_ports": 1,
+    "n_obs": 7,
+    "obs_per_layer": {
+     "met1": 4,
+     "met2": 3
+    }
+   },
+   "verdict": "PASS"
+  },
+  {
+   "cell": "research_via2",
+   "odb": {
+    "n_pins": 1,
+    "n_ports": 1,
+    "n_obs": 6,
+    "obs_per_layer": {
+     "met2": 3,
+     "met3": 3
+    },
+    "obs_layers": [
+     "met2",
+     "met3"
+    ]
+   },
+   "text": {
+    "n_pins": 1,
+    "n_ports": 1,
+    "n_obs": 6,
+    "obs_per_layer": {
+     "met2": 3,
+     "met3": 3
+    }
+   },
+   "verdict": "PASS"
+  },
+  {
+   "cell": "research_branch",
+   "odb": {
+    "n_pins": 1,
+    "n_ports": 1,
+    "n_obs": 13,
+    "obs_per_layer": {
+     "met1": 7,
+     "met2": 6
+    },
+    "obs_layers": [
+     "met1",
+     "met2"
+    ]
+   },
+   "text": {
+    "n_pins": 1,
+    "n_ports": 1,
+    "n_obs": 13,
+    "obs_per_layer": {
+     "met1": 7,
+     "met2": 6
+    }
+   },
+   "verdict": "PASS"
+  },
+  {
+   "cell": "research_near",
+   "odb": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 1,
+    "obs_per_layer": {
+     "met1": 1
+    },
+    "obs_layers": [
+     "met1"
+    ]
+   },
+   "text": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 1,
+    "obs_per_layer": {
+     "met1": 1
+    }
+   },
+   "verdict": "PASS"
+  },
+  {
+   "cell": "research_cross",
+   "odb": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 2,
+    "obs_per_layer": {
+     "met1": 1,
+     "met2": 1
+    },
+    "obs_layers": [
+     "met1",
+     "met2"
+    ]
+   },
+   "text": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 2,
+    "obs_per_layer": {
+     "met1": 1,
+     "met2": 1
+    }
+   },
+   "verdict": "PASS"
+  },
+  {
+   "cell": "research_dense",
+   "odb": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 3,
+    "obs_per_layer": {
+     "met1": 1,
+     "met2": 1,
+     "met3": 1
+    },
+    "obs_layers": [
+     "met1",
+     "met2",
+     "met3"
+    ]
+   },
+   "text": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 3,
+    "obs_per_layer": {
+     "met1": 1,
+     "met2": 1,
+     "met3": 1
+    }
+   },
+   "verdict": "PASS"
+  },
+  {
+   "cell": "research_fiducial",
+   "odb": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 2,
+    "obs_per_layer": {
+     "met1": 1,
+     "met2": 1
+    },
+    "obs_layers": [
+     "met1",
+     "met2"
+    ]
+   },
+   "text": {
+    "n_pins": 0,
+    "n_ports": 0,
+    "n_obs": 2,
+    "obs_per_layer": {
+     "met1": 1,
+     "met2": 1
+    }
+   },
+   "verdict": "PASS"
+  }
+ ],
+ "scope": "Local LEF/GDS consistency only. Nothing here shows that a router honours the OBS, that pin access succeeds, or that DRC/LVS pass — all three need the official CI."
+}

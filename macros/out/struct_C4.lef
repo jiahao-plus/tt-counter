@@ -1,4 +1,4 @@
-VERSION 5.7 ;
+VERSION 5.8 ;
 BUSBITCHARS "[]" ;
 DIVIDERCHAR "/" ;
 MACRO research_cross
@@ -6,5 +6,11 @@ MACRO research_cross
   ORIGIN 0.930 0.930 ;
   SIZE 10.140 BY 8.140 ;
   SYMMETRY X Y ;
+  OBS
+      LAYER met1 ;
+        RECT 0.000 0.000 10.140 8.140 ;
+      LAYER met2 ;
+        RECT 0.000 0.000 10.140 8.140 ;
+  END
 END research_cross
 END LIBRARY

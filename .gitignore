@@ -14,3 +14,8 @@ lfsr_cmp.vcd
 __pycache__/
 
 v2_validation/v1_pages_backup/
+
+# Scratch directories written by the local check scripts and by one-off
+# probing. They are regenerated on demand (p3_gds_identity.py re-extracts the
+# HEAD GDS through _prefetch_head_gds.py), so they must never be committed.
+_tmp_*/

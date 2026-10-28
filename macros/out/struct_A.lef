@@ -1,4 +1,4 @@
-VERSION 5.7 ;
+VERSION 5.8 ;
 BUSBITCHARS "[]" ;
 DIVIDERCHAR "/" ;
 MACRO research_via1
@@ -6,21 +6,26 @@ MACRO research_via1
   ORIGIN 0.930 1.930 ;
   SIZE 8.140 BY 4.940 ;
   SYMMETRY X Y ;
-  PIN A
+  PIN net
     DIRECTION INOUT ;
     USE SIGNAL ;
     PORT
       LAYER met1 ;
-        RECT -0.000 0.000 0.140 0.140 ;
-    END
-  END A
-  PIN B
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
+        RECT 0.000 0.000 0.140 0.140 ;
       LAYER met2 ;
         RECT 8.000 2.000 8.140 2.140 ;
     END
-  END B
+  END net
+  OBS
+      LAYER met1 ;
+        RECT 0.140 0.000 5.140 0.140 ;
+        RECT 5.000 0.140 5.140 1.940 ;
+        RECT 4.940 1.940 5.200 2.200 ;
+        RECT 0.000 4.800 8.140 4.940 ;
+      LAYER met2 ;
+        RECT 4.940 1.940 5.200 2.000 ;
+        RECT 4.940 2.000 8.000 2.140 ;
+        RECT 4.940 2.140 5.200 2.200 ;
+  END
 END research_via1
 END LIBRARY

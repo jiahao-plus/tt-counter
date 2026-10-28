@@ -1,0 +1,1482 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.69+ (git sha1 9f09efcdb-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/bld/rattler-build_yosys_1788957668/build_env/bin/x86_64-conda-linux-gnu-c++ 15.3.0) [github.com/conda-forge/yosys-feedstock at main]
+
+-- Running command `
+read_verilog -sv src/project.v src/pwm.v src/LFSR_Design.v src/research_macros.v
+synth -top tt_um_jiahao_plus_counter
+flatten
+opt
+write_verilog -noattr /mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/v2_validation/synth_netlist.v
+stat
+' --
+
+1. Executing Verilog-2005 frontend: src/project.v
+Parsing SystemVerilog input from `src/project.v' to AST representation.
+Generating RTLIL representation for module `\tt_um_jiahao_plus_counter'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: src/pwm.v
+Parsing SystemVerilog input from `src/pwm.v' to AST representation.
+Generating RTLIL representation for module `\pwm'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: src/LFSR_Design.v
+Parsing SystemVerilog input from `src/LFSR_Design.v' to AST representation.
+Generating RTLIL representation for module `\LFSR_Design'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: src/research_macros.v
+Parsing SystemVerilog input from `src/research_macros.v' to AST representation.
+Generating RTLIL representation for module `\research_via1'.
+Generating RTLIL representation for module `\research_via2'.
+Generating RTLIL representation for module `\research_branch'.
+Generating RTLIL representation for module `\research_near'.
+Generating RTLIL representation for module `\research_cross'.
+Generating RTLIL representation for module `\research_dense'.
+Generating RTLIL representation for module `\research_fiducial'.
+Successfully finished Verilog frontend.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \tt_um_jiahao_plus_counter
+Used module:     \LFSR_Design
+Used module:     \pwm
+Parameter \width_in = 8
+Parameter \width_out = 8
+Parameter \countwidth = 4
+
+5.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\LFSR_Design'.
+Parameter \width_in = 8
+Parameter \width_out = 8
+Parameter \countwidth = 4
+Generating RTLIL representation for module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+
+5.1.3. Analyzing design hierarchy..
+Top module:  \tt_um_jiahao_plus_counter
+Used module:     $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design
+Used module:     \pwm
+
+5.1.4. Analyzing design hierarchy..
+Top module:  \tt_um_jiahao_plus_counter
+Used module:     $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design
+Used module:     \pwm
+Removing unused module `\LFSR_Design'.
+Removed 1 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 4 switch rules as full_case in process $proc$src/LFSR_Design.v:29$31 in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Marked 1 switch rules as full_case in process $proc$src/pwm.v:8$11 in module pwm.
+Marked 1 switch rules as full_case in process $proc$src/project.v:104$10 in module tt_um_jiahao_plus_counter.
+Marked 2 switch rules as full_case in process $proc$src/project.v:53$1 in module tt_um_jiahao_plus_counter.
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 5 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~9 debug messages>
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+     1/8: $0\done[0:0]
+     2/8: $0\out_count[3:0]
+     3/8: $0\cycle_count[3:0]
+     4/8: $0\out_reg[7:0]
+     5/8: $0\lfsr_reg[7:0]
+     6/8: $0\lfsr_out[7:0]
+     7/8: $0\Out[0:0]
+     8/8: $0\valid[0:0]
+Creating decoders for process `\pwm.$proc$src/pwm.v:8$11'.
+     1/1: $0\counter[7:0]
+Creating decoders for process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+     1/5: $1\uio_oe_r[1:0] [1]
+     2/5: $1\uio_o[1:0] [1]
+     3/5: $1\uio_oe_r[1:0] [0]
+     4/5: $1\uio_o[1:0] [0]
+     5/5: $1\uo[7:0]
+Creating decoders for process `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+     1/1: $0\count[7:0]
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\tt_um_jiahao_plus_counter.\uo' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+No latch inferred for signal `\tt_um_jiahao_plus_counter.\uio_o' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+No latch inferred for signal `\tt_um_jiahao_plus_counter.\uio_oe_r' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\valid' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$158' with positive edge clock.
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\Out' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$159' with positive edge clock.
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\lfsr_out' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$160' with positive edge clock.
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\lfsr_reg' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$161' with positive edge clock.
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\out_reg' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$162' with positive edge clock.
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\cycle_count' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$163' with positive edge clock.
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\out_count' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$164' with positive edge clock.
+Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\done' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+  created $dff cell `$procdff$165' with positive edge clock.
+Creating register for signal `\pwm.\counter' using process `\pwm.$proc$src/pwm.v:8$11'.
+  created $dff cell `$procdff$166' with positive edge clock.
+Creating register for signal `\tt_um_jiahao_plus_counter.\count' using process `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+  created $adff cell `$procdff$171' with positive edge clock and positive level reset.
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 5 empty switches in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+Removing empty process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
+Found and cleaned up 1 empty switch in `\pwm.$proc$src/pwm.v:8$11'.
+Removing empty process `pwm.$proc$src/pwm.v:8$11'.
+Found and cleaned up 1 empty switch in `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+Removing empty process `tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+Found and cleaned up 2 empty switches in `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+Removing empty process `tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+Cleaned up 9 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+<suppressed ~1 debug messages>
+Optimizing module pwm.
+<suppressed ~1 debug messages>
+Optimizing module tt_um_jiahao_plus_counter.
+<suppressed ~4 debug messages>
+
+5.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 2 unused cells and 61 unused wires.
+<suppressed ~5 debug messages>
+
+5.5. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design...
+Checking module pwm...
+Checking module tt_um_jiahao_plus_counter...
+Found and reported 0 problems.
+
+5.6. Executing OPT pass (performing simple optimizations).
+
+5.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 49 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 5 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 32 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Computing hashes of 25 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+<suppressed ~21 debug messages>
+Removed a total of 7 cells.
+
+5.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~56 debug messages>
+
+5.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+    New ctrl vector for $pmux cell $procmux$142: $auto$opt_reduce.cc:137:opt_pmux$173
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 1 changes.
+
+5.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 49 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 5 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 26 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 0 unused cells and 7 unused wires.
+<suppressed ~1 debug messages>
+
+5.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~56 debug messages>
+
+5.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 49 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 5 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 26 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5.7. Executing FSM pass (extract and optimize FSM).
+
+5.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.8. Executing OPT pass (performing simple optimizations).
+
+5.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 49 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 5 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 26 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~56 debug messages>
+
+5.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 49 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 5 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 26 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$165 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$49_Y, Q = \done, rval = 1'0).
+Adding EN signal on $auto$ff.cc:337:slice$174 ($sdff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$49_Y, Q = \done).
+Adding SRST signal on $procdff$158 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$122_Y, Q = \valid, rval = 1'0).
+Adding EN signal on $auto$ff.cc:337:slice$184 ($sdff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$120_Y, Q = \valid).
+Adding SRST signal on $procdff$159 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$109_Y, Q = \Out, rval = 1'0).
+Adding EN signal on $auto$ff.cc:337:slice$188 ($sdff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$107_Y, Q = \Out).
+Adding EN signal on $procdff$160 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $0\lfsr_out[7:0], Q = \lfsr_out).
+Adding EN signal on $procdff$161 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $0\lfsr_reg[7:0], Q = \lfsr_reg).
+Adding SRST signal on $procdff$162 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$83_Y, Q = \out_reg, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:337:slice$206 ($sdff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$83_Y, Q = \out_reg).
+Adding SRST signal on $procdff$163 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$69_Y, Q = \cycle_count, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:337:slice$216 ($sdff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$67_Y, Q = \cycle_count).
+Adding SRST signal on $procdff$164 ($dff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$60_Y, Q = \out_count, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:337:slice$218 ($sdff) from module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design (D = $procmux$55_Y, Q = \out_count).
+Adding SRST signal on $procdff$166 ($dff) from module pwm (D = $add$src/pwm.v:10$13_Y [7:0], Q = \counter, rval = 8'00000000).
+Adding EN signal on $procdff$171 ($adff) from module tt_um_jiahao_plus_counter (D = $procmux$154_Y, Q = \count).
+
+5.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 15 unused cells and 15 unused wires.
+<suppressed ~18 debug messages>
+
+5.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+<suppressed ~6 debug messages>
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~40 debug messages>
+
+5.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 54 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 49 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+<suppressed ~15 debug messages>
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 25 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 5 cells.
+
+5.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 0 unused cells and 5 unused wires.
+<suppressed ~1 debug messages>
+
+5.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~42 debug messages>
+
+5.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 49 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 25 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.8.23. Finished fast OPT passes. (There is nothing left to do.)
+
+5.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 28 bits (of 32) from port B of cell $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$lt$src/LFSR_Design.v:45$34 ($lt).
+Removed top 31 bits (of 32) from port B of cell $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$add$src/LFSR_Design.v:48$35 ($add).
+Removed top 28 bits (of 32) from port Y of cell $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$add$src/LFSR_Design.v:48$35 ($add).
+Removed top 28 bits (of 32) from port B of cell $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$lt$src/LFSR_Design.v:64$37 ($lt).
+Removed top 31 bits (of 32) from port B of cell $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$add$src/LFSR_Design.v:68$39 ($add).
+Removed top 28 bits (of 32) from port Y of cell $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$add$src/LFSR_Design.v:68$39 ($add).
+Removed top 28 bits (of 32) from wire $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$add$src/LFSR_Design.v:68$39_Y.
+Removed top 28 bits (of 32) from wire $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$add$src/LFSR_Design.v:48$35_Y.
+Removed top 31 bits (of 32) from port B of cell pwm.$add$src/pwm.v:10$13 ($add).
+Removed top 24 bits (of 32) from port Y of cell pwm.$add$src/pwm.v:10$13 ($add).
+Removed top 31 bits (of 32) from mux cell pwm.$ternary$src/pwm.v:12$15 ($mux).
+Removed top 24 bits (of 32) from wire pwm.$add$src/pwm.v:10$13_Y.
+Removed top 7 bits (of 8) from port B of cell tt_um_jiahao_plus_counter.$add$src/project.v:58$6 ($add).
+Removed top 7 bits (of 8) from port B of cell tt_um_jiahao_plus_counter.$sub$src/project.v:60$7 ($sub).
+Removed top 5 bits (of 6) from port B of cell tt_um_jiahao_plus_counter.$procmux$148_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell tt_um_jiahao_plus_counter.$procmux$151_CMP0 ($eq).
+Removed top 6 bits (of 8) from wire tt_um_jiahao_plus_counter.uio_oe_r.
+Removed top 6 bits (of 8) from wire tt_um_jiahao_plus_counter.uio_o.
+
+5.10. Executing PEEPOPT pass (run peephole optimizers).
+
+5.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~3 debug messages>
+
+5.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design:
+  creating $macc model for $add$src/LFSR_Design.v:68$39 ($add).
+  creating $macc model for $add$src/LFSR_Design.v:48$35 ($add).
+  creating $alu model for $macc $add$src/LFSR_Design.v:48$35.
+  creating $alu model for $macc $add$src/LFSR_Design.v:68$39.
+  creating $alu model for $lt$src/LFSR_Design.v:64$37 ($lt): new $alu
+  creating $alu model for $lt$src/LFSR_Design.v:45$34 ($lt): new $alu
+  creating $alu cell for $lt$src/LFSR_Design.v:45$34: $auto$alumacc.cc:548:replace_alu$233
+  creating $alu cell for $lt$src/LFSR_Design.v:64$37: $auto$alumacc.cc:548:replace_alu$238
+  creating $alu cell for $add$src/LFSR_Design.v:68$39: $auto$alumacc.cc:548:replace_alu$243
+  creating $alu cell for $add$src/LFSR_Design.v:48$35: $auto$alumacc.cc:548:replace_alu$246
+  created 4 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module pwm:
+  creating $macc model for $add$src/pwm.v:10$13 ($add).
+  creating $alu model for $macc $add$src/pwm.v:10$13.
+  creating $alu model for $lt$src/pwm.v:12$14 ($lt): new $alu
+  creating $alu cell for $lt$src/pwm.v:12$14: $auto$alumacc.cc:548:replace_alu$250
+  creating $alu cell for $add$src/pwm.v:10$13: $auto$alumacc.cc:548:replace_alu$255
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module tt_um_jiahao_plus_counter:
+  creating $macc model for $sub$src/project.v:60$7 ($sub).
+  creating $macc model for $add$src/project.v:58$6 ($add).
+  creating $alu model for $macc $add$src/project.v:58$6.
+  creating $alu model for $macc $sub$src/project.v:60$7.
+  creating $alu cell for $sub$src/project.v:60$7: $auto$alumacc.cc:548:replace_alu$258
+  creating $alu cell for $add$src/project.v:58$6: $auto$alumacc.cc:548:replace_alu$261
+  created 2 $alu and 0 $macc cells.
+
+5.13. Executing SHARE pass (SAT-based resource sharing).
+
+5.14. Executing OPT pass (performing simple optimizations).
+
+5.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+<suppressed ~9 debug messages>
+Optimizing module pwm.
+<suppressed ~1 debug messages>
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 51 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 5 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 25 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~42 debug messages>
+
+5.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 51 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 5 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 25 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 1 unused cells and 4 unused wires.
+<suppressed ~3 debug messages>
+
+5.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~42 debug messages>
+
+5.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 51 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 25 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5.15. Executing MEMORY pass.
+
+5.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.17. Executing OPT pass (performing simple optimizations).
+
+5.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+<suppressed ~12 debug messages>
+Optimizing module pwm.
+<suppressed ~1 debug messages>
+Optimizing module tt_um_jiahao_plus_counter.
+<suppressed ~3 debug messages>
+
+5.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 46 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 45 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 23 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 1 cells.
+
+5.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 4 unused cells and 16 unused wires.
+<suppressed ~6 debug messages>
+
+5.17.5. Finished fast OPT passes.
+
+5.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5.19. Executing OPT pass (performing simple optimizations).
+
+5.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+<suppressed ~1 debug messages>
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 40 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 23 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+5.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 40 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 23 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.19.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $mux $procmux$154 in front of them:
+        $auto$alumacc.cc:548:replace_alu$261
+        $auto$alumacc.cc:548:replace_alu$258
+
+5.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 0 unused cells and 7 unused wires.
+<suppressed ~2 debug messages>
+
+5.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+<suppressed ~2 debug messages>
+
+5.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~18 debug messages>
+
+5.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+    Consolidated identical input bits for $mux cell $auto$opt_share.cc:244:merge_operators$275:
+      Old ports: A=8'11111111, B=8'00000001, Y=$auto$rtlil.cc:3386:Mux$276
+      New ports: A=1'1, B=1'0, Y=$auto$rtlil.cc:3386:Mux$276 [1]
+      New connections: { $auto$rtlil.cc:3386:Mux$276 [7:2] $auto$rtlil.cc:3386:Mux$276 [0] } = { $auto$rtlil.cc:3386:Mux$276 [1] $auto$rtlil.cc:3386:Mux$276 [1] $auto$rtlil.cc:3386:Mux$276 [1] $auto$rtlil.cc:3386:Mux$276 [1] $auto$rtlil.cc:3386:Mux$276 [1] $auto$rtlil.cc:3386:Mux$276 [1] 1'1 }
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 1 changes.
+
+5.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 40 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 22 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.19.14. Executing OPT_SHARE pass.
+
+5.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+5.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+<suppressed ~1 debug messages>
+
+5.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \pwm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+5.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+  Optimizing cells in module \pwm.
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+5.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 40 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding identical cells in module `\pwm'.
+Computing hashes of 4 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 22 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+5.19.22. Executing OPT_SHARE pass.
+
+5.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+5.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.19.26. Finished fast OPT passes. (There is nothing left to do.)
+
+5.20. Executing TECHMAP pass (map to technology primitives).
+
+5.20.1. Executing Verilog-2005 frontend: /root/eda/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/root/eda/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $pmux.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$c3cd1564c35d873179656addd6052d7ea8b6d991\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdff.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using template $paramod$fc972a7a46956c1788f3cb5257b53c8f1df2d0cc\_90_alu for cells of type $alu.
+Using template $paramod$78e969f2586efcf3a5b0b0440bcca0db83d5cca2\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $ne.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000100 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000001 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000001 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000011 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~813 debug messages>
+
+5.21. Executing OPT pass (performing simple optimizations).
+
+5.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+<suppressed ~112 debug messages>
+Optimizing module pwm.
+<suppressed ~102 debug messages>
+Optimizing module tt_um_jiahao_plus_counter.
+<suppressed ~50 debug messages>
+
+5.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 125 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 117 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+<suppressed ~24 debug messages>
+Finding identical cells in module `\pwm'.
+Computing hashes of 95 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Computing hashes of 94 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 137 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Computing hashes of 131 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+<suppressed ~18 debug messages>
+Removed a total of 15 cells.
+
+5.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 52 unused cells and 357 unused wires.
+<suppressed ~55 debug messages>
+
+5.21.5. Finished fast OPT passes.
+
+5.22. Executing ABC pass (technology mapping using ABC).
+
+5.22.1. Extracting gate netlist of module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design' to `<abc-temp-dir>/input.blif'..
+
+5.22.1.1. Executed ABC.
+Extracted 72 gates and 109 wires to a netlist network with 36 inputs and 42 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Sep  9 2026 12:41:08)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+5.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       13
+ABC RESULTS:            ANDNOT cells:        4
+ABC RESULTS:               MUX cells:       23
+ABC RESULTS:              NAND cells:        7
+ABC RESULTS:               NOR cells:        4
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        6
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:              XNOR cells:        2
+ABC RESULTS:               XOR cells:        2
+ABC RESULTS:        internal signals:       31
+ABC RESULTS:           input signals:       36
+ABC RESULTS:          output signals:       42
+Removing temp directory.
+
+5.22.2. Extracting gate netlist of module `\pwm' to `<abc-temp-dir>/input.blif'..
+
+5.22.2.1. Executed ABC.
+Extracted 60 gates and 76 wires to a netlist network with 16 inputs and 9 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Sep  9 2026 12:41:08)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+5.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       10
+ABC RESULTS:            ANDNOT cells:        2
+ABC RESULTS:              NAND cells:       11
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:             ORNOT cells:       13
+ABC RESULTS:              XNOR cells:        2
+ABC RESULTS:               XOR cells:        4
+ABC RESULTS:        internal signals:       51
+ABC RESULTS:           input signals:       16
+ABC RESULTS:          output signals:        9
+Removing temp directory.
+
+5.22.3. Extracting gate netlist of module `\tt_um_jiahao_plus_counter' to `<abc-temp-dir>/input.blif'..
+
+5.22.3.1. Executed ABC.
+Extracted 98 gates and 128 wires to a netlist network with 29 inputs and 22 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Sep  9 2026 12:41:08)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+5.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       12
+ABC RESULTS:            ANDNOT cells:        2
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:              NAND cells:       37
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:               NOT cells:        2
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:             ORNOT cells:        7
+ABC RESULTS:              XNOR cells:        8
+ABC RESULTS:               XOR cells:        2
+ABC RESULTS:        internal signals:       77
+ABC RESULTS:           input signals:       29
+ABC RESULTS:          output signals:       22
+Removing temp directory.
+Removing global temp directory.
+
+5.23. Executing OPT pass (performing simple optimizations).
+
+5.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Optimizing module pwm.
+Optimizing module tt_um_jiahao_plus_counter.
+
+5.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 98 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Computing hashes of 97 cells of `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+Finding duplicate cells in `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\pwm'.
+Computing hashes of 52 cells of `\pwm'.
+Finding duplicate cells in `\pwm'.
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 92 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 1 cells.
+
+5.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design..
+Finding unused cells or wires in module \pwm..
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 0 unused cells and 244 unused wires.
+<suppressed ~4 debug messages>
+
+5.23.5. Finished fast OPT passes.
+
+5.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `tt_um_jiahao_plus_counter'. Setting top module to tt_um_jiahao_plus_counter.
+
+5.24.1. Analyzing design hierarchy..
+Top module:  \tt_um_jiahao_plus_counter
+Used module:     $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design
+Used module:     \pwm
+
+5.24.2. Analyzing design hierarchy..
+Top module:  \tt_um_jiahao_plus_counter
+Used module:     $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design
+Used module:     \pwm
+Removed 0 unused modules.
+
+5.25. Printing statistics.
+
+=== $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       61 wires
+      109 wire bits
+       13 public wires
+       47 public wire bits
+        8 ports
+       22 port bits
+       97 cells
+        4   $_ANDNOT_
+       12   $_AND_
+       16   $_DFFE_PP_
+       23   $_MUX_
+        7   $_NAND_
+        4   $_NOR_
+        1   $_NOT_
+        1   $_ORNOT_
+        6   $_OR_
+       19   $_SDFFE_PP0P_
+        2   $_XNOR_
+        2   $_XOR_
+
+=== pwm ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       42 wires
+       70 wire bits
+        5 public wires
+       19 public wire bits
+        4 ports
+       11 port bits
+       52 cells
+        2   $_ANDNOT_
+       10   $_AND_
+       11   $_NAND_
+        1   $_NOR_
+        1   $_NOT_
+       13   $_ORNOT_
+        8   $_SDFF_PP0_
+        2   $_XNOR_
+        4   $_XOR_
+
+=== tt_um_jiahao_plus_counter ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       76 wires
+      153 wire bits
+       19 public wires
+       82 public wire bits
+        8 ports
+       43 port bits
+       90 cells
+        2   $_ANDNOT_
+       12   $_AND_
+        8   $_DFFE_PN0P_
+        1   $_MUX_
+       37   $_NAND_
+        2   $_NOR_
+        2   $_NOT_
+        7   $_ORNOT_
+        2   $_OR_
+        8   $_XNOR_
+        2   $_XOR_
+        1   research_branch
+        1   research_cross
+        1   research_dense
+        1   research_fiducial
+        1   research_near
+        1   research_via1
+        1   research_via2
+        2 submodules
+        1   $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design
+        1   pwm
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      239 tt_um_jiahao_plus_counter
+       97 $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design
+       52 pwm
+
+        +----------Count including submodules.
+        | 
+      179 wires
+      332 wire bits
+       37 public wires
+      148 public wire bits
+       20 ports
+       76 port bits
+        - memories
+        - memory bits
+        - processes
+      239 cells
+        8   $_ANDNOT_
+       34   $_AND_
+        8   $_DFFE_PN0P_
+       16   $_DFFE_PP_
+       24   $_MUX_
+       55   $_NAND_
+        7   $_NOR_
+        4   $_NOT_
+       21   $_ORNOT_
+        8   $_OR_
+       19   $_SDFFE_PP0P_
+        8   $_SDFF_PP0_
+       12   $_XNOR_
+        8   $_XOR_
+        1   research_branch
+        1   research_cross
+        1   research_dense
+        1   research_fiducial
+        1   research_near
+        1   research_via1
+        1   research_via2
+        2 submodules
+        1   $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design
+        1   pwm
+
+5.26. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design...
+Checking module pwm...
+Checking module tt_um_jiahao_plus_counter...
+Found and reported 0 problems.
+
+6. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
+Deleting now unused module pwm.
+<suppressed ~2 debug messages>
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_jiahao_plus_counter.
+<suppressed ~16 debug messages>
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 241 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 241 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_jiahao_plus_counter.
+
+7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tt_um_jiahao_plus_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tt_um_jiahao_plus_counter.
+Performed a total of 0 changes.
+
+7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tt_um_jiahao_plus_counter'.
+Computing hashes of 241 cells of `\tt_um_jiahao_plus_counter'.
+Finding duplicate cells in `\tt_um_jiahao_plus_counter'.
+Removed a total of 0 cells.
+
+7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tt_um_jiahao_plus_counter..
+
+7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tt_um_jiahao_plus_counter.
+
+7.16. Finished fast OPT passes. (There is nothing left to do.)
+
+8. Executing Verilog backend.
+
+8.1. Executing BMUXMAP pass.
+
+8.2. Executing DEMUXMAP pass.
+Dumping module `\tt_um_jiahao_plus_counter'.
+
+9. Printing statistics.
+
+=== tt_um_jiahao_plus_counter ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      178 wires
+      331 wire bits
+       37 public wires
+      148 public wire bits
+        8 ports
+       43 port bits
+      241 cells
+        8   $_ANDNOT_
+       34   $_AND_
+        8   $_DFFE_PN0P_
+       16   $_DFFE_PP_
+       24   $_MUX_
+       55   $_NAND_
+        7   $_NOR_
+        4   $_NOT_
+       21   $_ORNOT_
+        8   $_OR_
+       19   $_SDFFE_PP0P_
+        8   $_SDFF_PP0_
+       12   $_XNOR_
+        8   $_XOR_
+        2   $scopeinfo
+        1   research_branch
+        1   research_cross
+        1   research_dense
+        1   research_fiducial
+        1   research_near
+        1   research_via1
+        1   research_via2
+
+End of script. Logfile hash: 732736a214, time: 0.21s, user: 0.05s, system: 0.04s, MEM: 29.43 MB peak
+Yosys 0.69+ (git sha1 9f09efcdb-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/bld/rattler-build_yosys_1788957668/build_env/bin/x86_64-conda-linux-gnu-c++ 15.3.0) [github.com/conda-forge/yosys-feedstock at main]
+Time spent: 64% 1x abc (0 sec), 7% 25x opt_clean (0 sec), ...

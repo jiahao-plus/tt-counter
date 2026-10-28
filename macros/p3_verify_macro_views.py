@@ -32,7 +32,7 @@ PRB = (235, 4)
 LEF_LAYER = {'M1': 'met1', 'M2': 'met2', 'M3': 'met3', 'M4': 'met4'}
 
 TAGS = ['A', 'B', 'C1', 'C3', 'C4', 'D', 'E']
-NON_ELEC = {'C4', 'D', 'E'}
+NON_ELEC = {'C3', 'C4', 'D', 'E'}
 
 
 def shape_bbox(sh):

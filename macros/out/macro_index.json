@@ -23,22 +23,56 @@
   },
   "pins": [
    {
-    "name": "A",
+    "pin": "net",
     "layer": "M1",
     "x": 1.0,
     "y": 2.0,
     "on_metal": true
    },
    {
-    "name": "B",
+    "pin": "net",
     "layer": "M2",
     "x": 9.0,
     "y": 4.0,
     "on_metal": true
    }
   ],
+  "pin_names": [
+   "net"
+  ],
+  "n_ports": 1,
+  "n_access_points": 2,
   "pins_all_on_metal": true,
-  "electrical": true
+  "electrical": true,
+  "obs_rule": "E",
+  "obs": {
+   "rule": "E",
+   "n_rects": {
+    "met1": 4,
+    "met2": 3
+   },
+   "area_obs": {
+    "met1": 2159200,
+    "met2": 459600
+   },
+   "area_metal": {
+    "met1": 2178800,
+    "met2": 479200
+   },
+   "obs_pin_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "obs_not_metal": {
+    "met1": 0,
+    "met2": 0
+   },
+   "obs_self_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "all_ok": true
+  }
  },
  "B": {
   "cell": "research_via2",
@@ -64,22 +98,56 @@
   },
   "pins": [
    {
-    "name": "A",
+    "pin": "net",
     "layer": "M2",
     "x": 1.0,
     "y": 2.0,
     "on_metal": true
    },
    {
-    "name": "B",
+    "pin": "net",
     "layer": "M3",
     "x": 11.0,
     "y": 5.0,
     "on_metal": true
    }
   ],
+  "pin_names": [
+   "net"
+  ],
+  "n_ports": 1,
+  "n_access_points": 2,
   "pins_all_on_metal": true,
-  "electrical": true
+  "electrical": true,
+  "obs_rule": "E",
+  "obs": {
+   "rule": "E",
+   "n_rects": {
+    "met2": 3,
+    "met3": 3
+   },
+   "area_obs": {
+    "met2": 1169000,
+    "met3": 1514400
+   },
+   "area_metal": {
+    "met2": 1188600,
+    "met3": 1604400
+   },
+   "obs_pin_overlap": {
+    "met2": 0,
+    "met3": 0
+   },
+   "obs_not_metal": {
+    "met2": 0,
+    "met3": 0
+   },
+   "obs_self_overlap": {
+    "met2": 0,
+    "met3": 0
+   },
+   "all_ok": true
+  }
  },
  "C1": {
   "cell": "research_branch",
@@ -105,22 +173,70 @@
   },
   "pins": [
    {
-    "name": "IN",
+    "pin": "net",
     "layer": "M1",
     "x": 1.0,
     "y": 5.0,
     "on_metal": true
    },
    {
-    "name": "TAP",
+    "pin": "net",
+    "layer": "M2",
+    "x": 2.0,
+    "y": 7.0,
+    "on_metal": true
+   },
+   {
+    "pin": "net",
     "layer": "M2",
     "x": 6.0,
     "y": 7.5,
     "on_metal": true
+   },
+   {
+    "pin": "net",
+    "layer": "M2",
+    "x": 10.0,
+    "y": 8.0,
+    "on_metal": true
    }
   ],
+  "pin_names": [
+   "net"
+  ],
+  "n_ports": 1,
+  "n_access_points": 4,
   "pins_all_on_metal": true,
-  "electrical": true
+  "electrical": true,
+  "obs_rule": "E",
+  "obs": {
+   "rule": "E",
+   "n_rects": {
+    "met1": 7,
+    "met2": 6
+   },
+   "area_obs": {
+    "met1": 1493600,
+    "met2": 1168800
+   },
+   "area_metal": {
+    "met1": 1513200,
+    "met2": 1227600
+   },
+   "obs_pin_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "obs_not_metal": {
+    "met1": 0,
+    "met2": 0
+   },
+   "obs_self_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "all_ok": true
+  }
  },
  "C3": {
   "cell": "research_near",
@@ -144,66 +260,35 @@
    "M3": 0,
    "M4": 0
   },
-  "pins": [
-   {
-    "name": "P0",
-    "layer": "M1",
-    "x": 1.0,
-    "y": 1.0,
-    "on_metal": true
-   },
-   {
-    "name": "Q0",
-    "layer": "M1",
-    "x": 10.0,
-    "y": 1.28,
-    "on_metal": true
-   },
-   {
-    "name": "P1",
-    "layer": "M1",
-    "x": 1.0,
-    "y": 3.42,
-    "on_metal": true
-   },
-   {
-    "name": "Q1",
-    "layer": "M1",
-    "x": 10.0,
-    "y": 3.76,
-    "on_metal": true
-   },
-   {
-    "name": "P2",
-    "layer": "M1",
-    "x": 1.0,
-    "y": 5.9,
-    "on_metal": true
-   },
-   {
-    "name": "Q2",
-    "layer": "M1",
-    "x": 10.0,
-    "y": 6.32,
-    "on_metal": true
-   },
-   {
-    "name": "P3",
-    "layer": "M1",
-    "x": 1.0,
-    "y": 8.46,
-    "on_metal": true
-   },
-   {
-    "name": "Q3",
-    "layer": "M1",
-    "x": 10.0,
-    "y": 9.1,
-    "on_metal": true
-   }
-  ],
+  "pins": [],
+  "pin_names": [],
+  "n_ports": 0,
+  "n_access_points": 0,
   "pins_all_on_metal": true,
-  "electrical": true
+  "electrical": false,
+  "obs_rule": "G",
+  "obs": {
+   "rule": "G",
+   "n_rects": {
+    "met1": 1
+   },
+   "area_obs": {
+    "met1": 83553600
+   },
+   "area_metal": {
+    "met1": 11356800
+   },
+   "obs_pin_overlap": {
+    "met1": 0
+   },
+   "obs_not_metal": {
+    "met1": 72196800
+   },
+   "obs_self_overlap": {
+    "met1": 0
+   },
+   "all_ok": true
+  }
  },
  "C4": {
   "cell": "research_cross",
@@ -228,8 +313,40 @@
    "M4": 0
   },
   "pins": [],
+  "pin_names": [],
+  "n_ports": 0,
+  "n_access_points": 0,
   "pins_all_on_metal": true,
-  "electrical": false
+  "electrical": false,
+  "obs_rule": "G",
+  "obs": {
+   "rule": "G",
+   "n_rects": {
+    "met1": 1,
+    "met2": 1
+   },
+   "area_obs": {
+    "met1": 82539600,
+    "met2": 82539600
+   },
+   "area_metal": {
+    "met1": 1419600,
+    "met2": 1139600
+   },
+   "obs_pin_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "obs_not_metal": {
+    "met1": 81120000,
+    "met2": 81400000
+   },
+   "obs_self_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "all_ok": true
+  }
  },
  "D": {
   "cell": "research_dense",
@@ -254,8 +371,46 @@
    "M4": 0
   },
   "pins": [],
+  "pin_names": [],
+  "n_ports": 0,
+  "n_access_points": 0,
   "pins_all_on_metal": true,
-  "electrical": false
+  "electrical": false,
+  "obs_rule": "G",
+  "obs": {
+   "rule": "G",
+   "n_rects": {
+    "met1": 1,
+    "met2": 1,
+    "met3": 1
+   },
+   "area_obs": {
+    "met1": 202650000,
+    "met2": 202650000,
+    "met3": 202650000
+   },
+   "area_metal": {
+    "met1": 22799600,
+    "met2": 22799600,
+    "met3": 19340000
+   },
+   "obs_pin_overlap": {
+    "met1": 0,
+    "met2": 0,
+    "met3": 0
+   },
+   "obs_not_metal": {
+    "met1": 179850400,
+    "met2": 179850400,
+    "met3": 183310000
+   },
+   "obs_self_overlap": {
+    "met1": 0,
+    "met2": 0,
+    "met3": 0
+   },
+   "all_ok": true
+  }
  },
  "E": {
   "cell": "research_fiducial",
@@ -280,7 +435,39 @@
    "M4": 0
   },
   "pins": [],
+  "pin_names": [],
+  "n_ports": 0,
+  "n_access_points": 0,
   "pins_all_on_metal": true,
-  "electrical": false
+  "electrical": false,
+  "obs_rule": "G",
+  "obs": {
+   "rule": "G",
+   "n_rects": {
+    "met1": 1,
+    "met2": 1
+   },
+   "area_obs": {
+    "met1": 16000000,
+    "met2": 16000000
+   },
+   "area_metal": {
+    "met1": 4110000,
+    "met2": 4110000
+   },
+   "obs_pin_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "obs_not_metal": {
+    "met1": 11890000,
+    "met2": 11890000
+   },
+   "obs_self_overlap": {
+    "met1": 0,
+    "met2": 0
+   },
+   "all_ok": true
+  }
  }
 }

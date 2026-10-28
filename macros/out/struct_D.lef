@@ -1,4 +1,4 @@
-VERSION 5.7 ;
+VERSION 5.8 ;
 BUSBITCHARS "[]" ;
 DIVIDERCHAR "/" ;
 MACRO research_dense
@@ -6,5 +6,13 @@ MACRO research_dense
   ORIGIN 0.500 0.850 ;
   SIZE 35.000 BY 5.790 ;
   SYMMETRY X Y ;
+  OBS
+      LAYER met1 ;
+        RECT 0.000 0.000 35.000 5.790 ;
+      LAYER met2 ;
+        RECT 0.000 0.000 35.000 5.790 ;
+      LAYER met3 ;
+        RECT 0.000 0.000 35.000 5.790 ;
+  END
 END research_dense
 END LIBRARY

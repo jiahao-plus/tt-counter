@@ -1,0 +1,236 @@
+{
+ "interface": "alpha-prime: one PIN, one PORT, several cross-layer geometries in the same GDS component",
+ "all_pass": true,
+ "synth_status": "RUN",
+ "problems": [],
+ "macros": [
+  {
+   "tag": "A",
+   "cell": "research_via1",
+   "n_pins": 1,
+   "n_verilog_ports": 1,
+   "n_components": 2,
+   "n_unpinned": 1,
+   "pins": [
+    {
+     "name": "net",
+     "n_ports": 1,
+     "geometries": [
+      {
+       "layer": "met1",
+       "rect": [
+        0.0,
+        0.0,
+        0.14,
+        0.14
+       ],
+       "n_roots": 1
+      },
+      {
+       "layer": "met2",
+       "rect": [
+        8.0,
+        2.0,
+        8.14,
+        2.14
+       ],
+       "n_roots": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "tag": "B",
+   "cell": "research_via2",
+   "n_pins": 1,
+   "n_verilog_ports": 1,
+   "n_components": 1,
+   "n_unpinned": 0,
+   "pins": [
+    {
+     "name": "net",
+     "n_ports": 1,
+     "geometries": [
+      {
+       "layer": "met2",
+       "rect": [
+        0.0,
+        0.0,
+        0.14,
+        0.14
+       ],
+       "n_roots": 1
+      },
+      {
+       "layer": "met3",
+       "rect": [
+        9.92,
+        2.92,
+        10.22,
+        3.22
+       ],
+       "n_roots": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "tag": "C1",
+   "cell": "research_branch",
+   "n_pins": 1,
+   "n_verilog_ports": 1,
+   "n_components": 1,
+   "n_unpinned": 0,
+   "pins": [
+    {
+     "name": "net",
+     "n_ports": 1,
+     "geometries": [
+      {
+       "layer": "met1",
+       "rect": [
+        0.0,
+        0.06,
+        0.14,
+        0.2
+       ],
+       "n_roots": 1
+      },
+      {
+       "layer": "met2",
+       "rect": [
+        1.0,
+        2.06,
+        1.14,
+        2.2
+       ],
+       "n_roots": 1
+      },
+      {
+       "layer": "met2",
+       "rect": [
+        5.0,
+        2.56,
+        5.14,
+        2.7
+       ],
+       "n_roots": 1
+      },
+      {
+       "layer": "met2",
+       "rect": [
+        9.0,
+        3.06,
+        9.14,
+        3.2
+       ],
+       "n_roots": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "tag": "C3",
+   "cell": "research_near",
+   "n_pins": 0,
+   "n_verilog_ports": 0,
+   "n_components": 8,
+   "n_unpinned": 8,
+   "pins": []
+  },
+  {
+   "tag": "C4",
+   "cell": "research_cross",
+   "n_pins": 0,
+   "n_verilog_ports": 0,
+   "n_components": 2,
+   "n_unpinned": 2,
+   "pins": []
+  },
+  {
+   "tag": "D",
+   "cell": "research_dense",
+   "n_pins": 0,
+   "n_verilog_ports": 0,
+   "n_components": 13,
+   "n_unpinned": 13,
+   "pins": []
+  },
+  {
+   "tag": "E",
+   "cell": "research_fiducial",
+   "n_pins": 0,
+   "n_verilog_ports": 0,
+   "n_components": 4,
+   "n_unpinned": 4,
+   "pins": []
+  }
+ ],
+ "synth": [
+  {
+   "instance": "u_rs_via1",
+   "tag": "A",
+   "cell": "research_via1",
+   "ports": {
+    "net": "pwm_out"
+   }
+  },
+  {
+   "instance": "u_rs_via2",
+   "tag": "B",
+   "cell": "research_via2",
+   "ports": {
+    "net": "pwm_out"
+   }
+  },
+  {
+   "instance": "u_rs_branch",
+   "tag": "C1",
+   "cell": "research_branch",
+   "ports": {
+    "net": "pwm_out"
+   }
+  },
+  {
+   "instance": "u_rs_near",
+   "tag": "C3",
+   "cell": "research_near",
+   "ports": {}
+  },
+  {
+   "instance": "u_rs_cross",
+   "tag": "C4",
+   "cell": "research_cross",
+   "ports": {}
+  },
+  {
+   "instance": "u_rs_dense",
+   "tag": "D",
+   "cell": "research_dense",
+   "ports": {}
+  },
+  {
+   "instance": "u_rs_fiducial",
+   "tag": "E",
+   "cell": "research_fiducial",
+   "ports": {}
+  }
+ ],
+ "scope": "DESIGN-STAGE five-view contract. Covers views 1-4 (GDS component, LEF PIN, Verilog port, synthesized net). View 5 (final GDS) requires the official CI and is NOT verified here. Nothing in this file demonstrates pin access, routing, or LVS.",
+ "checks": [
+  "C1 LEF PIN name == Verilog port name (character-exact)",
+  "C2 LEF PIN count == Verilog port count",
+  "C3 exactly one PORT per PIN (strong connectivity)",
+  "C4 all PORT geometries of a PIN in one GDS component",
+  "C5 that component contains at least one via cut",
+  "C6 LEF DIRECTION matches Verilog direction",
+  "C7 geometry-only macros declare zero PINs",
+  "C8 un-pinned component count matches physics; none holds a via",
+  "C9 synthesized instance port names == LEF PIN names",
+  "C10 every port connects to exactly one non-constant net",
+  "C11 A/B/C1 land on the same net"
+ ]
+}

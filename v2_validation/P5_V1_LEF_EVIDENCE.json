@@ -1,0 +1,163 @@
+{
+ "v1_root": "/mnt/c/Users/Lenovo/DoubaoWork/chats/2026-10-13/new-chat/tt-counter-exp/official_ci/GDS_logs/runs/wokwi",
+ "scope": "Re-measures the V1 official artefacts that gen_lef.py's OBS rules are derived from. Read-only; nothing here is a V2 design claim.",
+ "lef": {
+  "path": "/mnt/c/Users/Lenovo/DoubaoWork/chats/2026-10-13/new-chat/tt-counter-exp/official_ci/GDS_logs/runs/wokwi/final/lef/tt_um_jiahao_plus_counter.lef",
+  "n_pins_total": 51,
+  "n_obs_total": 55,
+  "layers": [
+   {
+    "layer": "li1",
+    "n_pin": 0,
+    "n_obs": 1,
+    "overlap_area_um2": 0,
+    "pin_less_single_rect": true
+   },
+   {
+    "layer": "met1",
+    "n_pin": 0,
+    "n_obs": 1,
+    "overlap_area_um2": 0,
+    "pin_less_single_rect": true
+   },
+   {
+    "layer": "met2",
+    "n_pin": 0,
+    "n_obs": 1,
+    "overlap_area_um2": 0,
+    "pin_less_single_rect": true
+   },
+   {
+    "layer": "met3",
+    "n_pin": 0,
+    "n_obs": 1,
+    "overlap_area_um2": 0,
+    "pin_less_single_rect": true
+   },
+   {
+    "layer": "met4",
+    "n_pin": 51,
+    "n_obs": 50,
+    "overlap_area_um2": 0.0,
+    "pin_less_single_rect": false
+   },
+   {
+    "layer": "nwell",
+    "n_pin": 0,
+    "n_obs": 1,
+    "overlap_area_um2": 0,
+    "pin_less_single_rect": true
+   }
+  ],
+  "problems": [],
+  "status": "RUN"
+ },
+ "flow": {
+  "path": "/mnt/c/Users/Lenovo/DoubaoWork/chats/2026-10-13/new-chat/tt-counter-exp/official_ci/GDS_logs/runs/wokwi/flow.log",
+  "facts": {
+   "PDN_OBSTRUCTIONS": {
+    "skip_lines": [
+     "Odb.AddPDNObstructions",
+     "Odb.RemovePDNObstructions"
+    ],
+    "appears_at_all": true,
+    "looks_assigned": false
+   },
+   "ROUTING_OBSTRUCTIONS": {
+    "skip_lines": [
+     "Odb.AddRoutingObstructions",
+     "Odb.RemoveRoutingObstructions"
+    ],
+    "appears_at_all": true,
+    "looks_assigned": false
+   },
+   "FP_OBSTRUCTIONS": {
+    "skip_lines": [],
+    "appears_at_all": false,
+    "looks_assigned": false
+   },
+   "steps_seen": {
+    "verilator-lint": 1,
+    "checker-linttimingconstructs": 2,
+    "checker-linterrors": 3,
+    "checker-lintwarnings": 4,
+    "yosys-jsonheader": 5,
+    "yosys-synthesis": 6,
+    "checker-yosysunmappedcells": 7,
+    "checker-yosyssynthchecks": 8,
+    "checker-netlistassignstatements": 9,
+    "openroad-checksdcfiles": 10,
+    "openroad-checkmacroinstances": 11,
+    "openroad-staprepnr": 12,
+    "openroad-floorplan": 13,
+    "openroad-dumprcvalues": 14,
+    "odb-checkmacroantennaproperties": 15,
+    "odb-setpowerconnections": 16,
+    "odb-manualmacroplacement": 17,
+    "openroad-cutrows": 18,
+    "openroad-tapendcapinsertion": 19,
+    "odb-addpdnobstructions": 20,
+    "openroad-generatepdn": 21,
+    "odb-removepdnobstructions": 22,
+    "odb-addroutingobstructions": 23,
+    "openroad-globalplacementskipio": 24,
+    "openroad-ioplacement": 25,
+    "odb-customioplacement": 26,
+    "odb-applydeftemplate": 27,
+    "openroad-globalplacement": 28,
+    "odb-writeverilogheader": 29,
+    "checker-powergridviolations": 30,
+    "openroad-stamidpnr": 31,
+    "openroad-repairdesignpostgpl": 32,
+    "odb-manualglobalplacement": 33,
+    "openroad-detailedplacement": 34,
+    "openroad-cts": 35,
+    "openroad-stamidpnr-1": 36,
+    "openroad-resizertimingpostcts": 37,
+    "openroad-stamidpnr-2": 38,
+    "openroad-globalrouting": 39,
+    "openroad-checkantennas": 40,
+    "odb-diodesonports": 41,
+    "openroad-repairantennas": 42,
+    "openroad-stamidpnr-3": 43,
+    "openroad-detailedrouting": 44,
+    "odb-removeroutingobstructions": 45,
+    "openroad-checkantennas-1": 46,
+    "checker-trdrc": 47,
+    "odb-reportdisconnectedpins": 48,
+    "checker-disconnectedpins": 49,
+    "odb-reportwirelength": 50,
+    "checker-wirelength": 51,
+    "openroad-fillinsertion": 52,
+    "odb-cellfrequencytables": 53,
+    "openroad-rcx": 54,
+    "openroad-stapostpnr": 55,
+    "openroad-irdropreport": 56,
+    "magic-streamout": 57,
+    "klayout-streamout": 58,
+    "klayout-render": 59,
+    "magic-writelef": 60,
+    "odb-checkdesignantennaproperties": 61,
+    "magic-drc": 62,
+    "checker-magicdrc": 63,
+    "magic-spiceextraction": 64,
+    "checker-illegaloverlap": 65,
+    "netgen-lvs": 66,
+    "checker-lvs": 67,
+    "checker-setupviolations": 68,
+    "checker-holdviolations": 69,
+    "checker-maxslewviolations": 70,
+    "checker-maxcapviolations": 71,
+    "misc-reportmanufacturability": 72
+   },
+   "cut_rows_step": 18,
+   "pdn_step": 21,
+   "cut_rows_cmd": "cut_rows -halo_width_x 10.0 -halo_width_y 10.0 -endcap_master sky130_fd_sc_hd__decap_3",
+   "cut_rows_has_halo": true
+  },
+  "problems": [],
+  "status": "RUN"
+ },
+ "all_pass": true,
+ "problems": []
+}

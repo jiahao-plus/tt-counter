@@ -1,0 +1,525 @@
+{
+ "A": {
+  "n_components_total": 2,
+  "components": [
+   [
+    {
+     "layer": "M1",
+     "idx": 0,
+     "bbox_um": [
+      0.93,
+      1.93,
+      6.07,
+      2.07
+     ]
+    },
+    {
+     "layer": "M1",
+     "idx": 1,
+     "bbox_um": [
+      5.93,
+      1.93,
+      6.07,
+      4.07
+     ]
+    },
+    {
+     "layer": "M1",
+     "idx": 2,
+     "bbox_um": [
+      5.87,
+      3.87,
+      6.13,
+      4.13
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 0,
+     "bbox_um": [
+      5.87,
+      3.87,
+      6.13,
+      4.13
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 1,
+     "bbox_um": [
+      5.93,
+      3.93,
+      9.07,
+      4.07
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 3,
+     "bbox_um": [
+      0.93,
+      6.73,
+      9.07,
+      6.87
+     ]
+    }
+   ]
+  ],
+  "pins": [
+   {
+    "pin": "A",
+    "layer": "met1",
+    "component": 0,
+    "probe_um": [
+     0.93,
+     1.93,
+     1.07,
+     2.07
+    ]
+   },
+   {
+    "pin": "B",
+    "layer": "met2",
+    "component": 0,
+    "probe_um": [
+     8.93,
+     3.93,
+     9.07,
+     4.07
+    ]
+   }
+  ],
+  "distinct_pin_components": [
+   0
+  ],
+  "pins_without_metal": 0,
+  "all_pins_same_component": true
+ },
+ "B": {
+  "n_components_total": 1,
+  "components": [
+   [
+    {
+     "layer": "M2",
+     "idx": 0,
+     "bbox_um": [
+      0.93,
+      1.93,
+      6.07,
+      2.07
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 1,
+     "bbox_um": [
+      5.93,
+      1.93,
+      6.07,
+      5.07
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 2,
+     "bbox_um": [
+      5.86,
+      4.86,
+      6.14,
+      5.14
+     ]
+    },
+    {
+     "layer": "M3",
+     "idx": 0,
+     "bbox_um": [
+      5.835,
+      4.835,
+      6.165,
+      5.165
+     ]
+    },
+    {
+     "layer": "M3",
+     "idx": 1,
+     "bbox_um": [
+      5.85,
+      4.85,
+      11.15,
+      5.15
+     ]
+    }
+   ]
+  ],
+  "pins": [
+   {
+    "pin": "A",
+    "layer": "met2",
+    "component": 0,
+    "probe_um": [
+     0.93,
+     1.93,
+     1.07,
+     2.07
+    ]
+   },
+   {
+    "pin": "B",
+    "layer": "met3",
+    "component": 0,
+    "probe_um": [
+     10.85,
+     4.8500000000000005,
+     11.15,
+     5.15
+    ]
+   }
+  ],
+  "distinct_pin_components": [
+   0
+  ],
+  "pins_without_metal": 0,
+  "all_pins_same_component": true
+ },
+ "C1": {
+  "n_components_total": 1,
+  "components": [
+   [
+    {
+     "layer": "M1",
+     "idx": 0,
+     "bbox_um": [
+      0.93,
+      4.93,
+      11.07,
+      5.07
+     ]
+    },
+    {
+     "layer": "M1",
+     "idx": 1,
+     "bbox_um": [
+      1.87,
+      4.87,
+      2.13,
+      5.13
+     ]
+    },
+    {
+     "layer": "M1",
+     "idx": 2,
+     "bbox_um": [
+      5.87,
+      4.87,
+      6.13,
+      5.13
+     ]
+    },
+    {
+     "layer": "M1",
+     "idx": 3,
+     "bbox_um": [
+      9.87,
+      4.87,
+      10.13,
+      5.13
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 0,
+     "bbox_um": [
+      1.87,
+      4.87,
+      2.13,
+      5.13
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 1,
+     "bbox_um": [
+      1.93,
+      4.93,
+      2.07,
+      7.07
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 2,
+     "bbox_um": [
+      5.87,
+      4.87,
+      6.13,
+      5.13
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 3,
+     "bbox_um": [
+      5.93,
+      4.93,
+      6.07,
+      7.57
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 4,
+     "bbox_um": [
+      9.87,
+      4.87,
+      10.13,
+      5.13
+     ]
+    },
+    {
+     "layer": "M2",
+     "idx": 5,
+     "bbox_um": [
+      9.93,
+      4.93,
+      10.07,
+      8.07
+     ]
+    }
+   ]
+  ],
+  "pins": [
+   {
+    "pin": "IN",
+    "layer": "met1",
+    "component": 0,
+    "probe_um": [
+     0.93,
+     4.93,
+     1.07,
+     5.07
+    ]
+   },
+   {
+    "pin": "TAP",
+    "layer": "met2",
+    "component": 0,
+    "probe_um": [
+     5.93,
+     7.43,
+     6.07,
+     7.57
+    ]
+   }
+  ],
+  "distinct_pin_components": [
+   0
+  ],
+  "pins_without_metal": 0,
+  "all_pins_same_component": true
+ },
+ "C3": {
+  "n_components_total": 8,
+  "components": [
+   [
+    {
+     "layer": "M1",
+     "idx": 0,
+     "bbox_um": [
+      0.93,
+      0.93,
+      11.07,
+      1.07
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 1,
+     "bbox_um": [
+      0.93,
+      1.21,
+      11.07,
+      1.35
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 2,
+     "bbox_um": [
+      0.93,
+      3.35,
+      11.07,
+      3.49
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 3,
+     "bbox_um": [
+      0.93,
+      3.69,
+      11.07,
+      3.83
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 4,
+     "bbox_um": [
+      0.93,
+      5.83,
+      11.07,
+      5.97
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 5,
+     "bbox_um": [
+      0.93,
+      6.25,
+      11.07,
+      6.39
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 6,
+     "bbox_um": [
+      0.93,
+      8.39,
+      11.07,
+      8.53
+     ]
+    }
+   ],
+   [
+    {
+     "layer": "M1",
+     "idx": 7,
+     "bbox_um": [
+      0.93,
+      9.03,
+      11.07,
+      9.17
+     ]
+    }
+   ]
+  ],
+  "pins": [
+   {
+    "pin": "P0",
+    "layer": "met1",
+    "component": 0,
+    "probe_um": [
+     0.93,
+     0.93,
+     1.07,
+     1.07
+    ]
+   },
+   {
+    "pin": "Q0",
+    "layer": "met1",
+    "component": 1,
+    "probe_um": [
+     9.93,
+     1.21,
+     10.07,
+     1.35
+    ]
+   },
+   {
+    "pin": "P1",
+    "layer": "met1",
+    "component": 2,
+    "probe_um": [
+     0.93,
+     3.35,
+     1.07,
+     3.49
+    ]
+   },
+   {
+    "pin": "Q1",
+    "layer": "met1",
+    "component": 3,
+    "probe_um": [
+     9.93,
+     3.69,
+     10.07,
+     3.83
+    ]
+   },
+   {
+    "pin": "P2",
+    "layer": "met1",
+    "component": 4,
+    "probe_um": [
+     0.93,
+     5.83,
+     1.07,
+     5.97
+    ]
+   },
+   {
+    "pin": "Q2",
+    "layer": "met1",
+    "component": 5,
+    "probe_um": [
+     9.93,
+     6.25,
+     10.07,
+     6.390000000000001
+    ]
+   },
+   {
+    "pin": "P3",
+    "layer": "met1",
+    "component": 6,
+    "probe_um": [
+     0.93,
+     8.39,
+     1.07,
+     8.53
+    ]
+   },
+   {
+    "pin": "Q3",
+    "layer": "met1",
+    "component": 7,
+    "probe_um": [
+     9.93,
+     9.03,
+     10.07,
+     9.17
+    ]
+   }
+  ],
+  "distinct_pin_components": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "pins_without_metal": 0,
+  "all_pins_same_component": false
+ }
+}

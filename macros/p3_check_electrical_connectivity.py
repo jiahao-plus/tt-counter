@@ -38,9 +38,17 @@ LEF2INT = {'met1': 'M1', 'met2': 'M2', 'met3': 'M3', 'met4': 'M4'}
 #   B  : single M2-Via2-M3 net                                    = 1
 #   C1 : single net with three via branches (one node)            = 1
 #   C3 : 4 pairs = 8 independent wires                            = 8
+#
+# The component count is a PHYSICS fact and is checked for all four structures
+# whether or not they carry a port. In particular C3's 8 components are the
+# research result itself: the spacing ladder only means something if the wires
+# really are separate.
 EXPECTED_COMPONENTS = {'A': 2, 'B': 1, 'C1': 1, 'C3': 8}
-ELECTRICAL = ['A', 'B', 'C1', 'C3']
-NON_ELECTRICAL = ['C4', 'D', 'E']
+
+# α′ interface: A / B / C1 expose one `net` port each; C3 / C4 / D / E have
+# no ports at all and are exempted in IGNORE_DISCONNECTED_MODULES.
+ELECTRICAL = ['A', 'B', 'C1']
+NON_ELECTRICAL = ['C3', 'C4', 'D', 'E']
 
 
 def region_of(top, li):
@@ -138,20 +146,25 @@ def count_components(top, L, dbu):
 
 def check_rtl_ports():
     """Every electrical macro instance in project.v must have all its ports
-    connected to a named wire (not left open)."""
+    connected to a named wire (not left open), and the instance count must
+    match the port count the LEF declares."""
     proj = open(os.path.join(ROOT, 'src', 'project.v'), encoding='utf-8').read()
     issues = []
     for tag, cell in (('A', 'research_via1'), ('B', 'research_via2'),
-                      ('C1', 'research_branch'), ('C3', 'research_near')):
+                      ('C1', 'research_branch')):
         m = re.search(r'%s\s+(\w+)\s*\((.*?)\);' % re.escape(cell), proj, re.S)
         if not m:
             issues.append('%s: instance of %s not found in project.v' % (tag, cell))
             continue
         inst, body = m.group(1), m.group(2)
         ports = re.findall(r'\.(\w+)\s*\(\s*([^)]*?)\s*\)', body)
-        if not ports:
-            issues.append('%s (%s): no port connections found' % (tag, inst))
+        if len(ports) != 1:
+            issues.append('%s (%s): expected exactly 1 port connection (alpha-prime '
+                          'single-PIN interface), found %d' % (tag, inst, len(ports)))
         for pname, pwire in ports:
+            if pname != 'net':
+                issues.append('%s (%s): port name is .%s, expected .net'
+                              % (tag, inst, pname))
             if not pwire.strip():
                 issues.append('%s (%s): port .%s left open' % (tag, inst, pname))
     return issues

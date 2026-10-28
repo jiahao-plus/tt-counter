@@ -47,8 +47,8 @@
    "structure_id": "A",
    "macro_name": "research_via1",
    "x_range_um": [
-    31.0,
-    39.14
+    33.5,
+    41.64
    ],
    "n_straps_crossing": 0,
    "straps": [],
@@ -71,8 +71,8 @@
    "structure_id": "C1",
    "macro_name": "research_branch",
    "x_range_um": [
-    64.0,
-    74.14
+    79.32,
+    89.46
    ],
    "n_straps_crossing": 0,
    "straps": [],
@@ -83,8 +83,8 @@
    "structure_id": "C3",
    "macro_name": "research_near",
    "x_range_um": [
-    78.0,
-    88.14
+    64.0,
+    74.14
    ],
    "n_straps_crossing": 0,
    "straps": [],
@@ -107,13 +107,18 @@
    "structure_id": "D",
    "macro_name": "research_dense",
    "x_range_um": [
-    25.0,
-    30.79
+    23.5,
+    58.5
    ],
-   "n_straps_crossing": 0,
-   "straps": [],
-   "width_fraction_covered": 0.0,
-   "obstruction": "NONE"
+   "n_straps_crossing": 1,
+   "straps": [
+    {
+     "strap_x": 57.95,
+     "overlap_um": 1.35
+    }
+   ],
+   "width_fraction_covered": 0.0386,
+   "obstruction": "LOW"
   }
  ],
  "note": "M4 sits above the macro M1/M2/M3 geometry, so a crossing is NOT an electrical short. It matters because M4 is opaque and would obscure SEM imaging of the structures underneath."

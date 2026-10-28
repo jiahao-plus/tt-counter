@@ -1,75 +1,83 @@
 // research_macros.v — Verilog views for the seven V2 research structures.
 //
-// TWO DIFFERENT TREATMENTS, for two different kinds of structure:
+// THE SHAPE OF THIS FILE
+// ----------------------
+// Every module is (* blackbox *) (* keep *) with explicit ports and NO body.
+// Two independent reasons, both reproduced locally:
 //
-// 1. ELECTRICAL structures (A, B, C1, C3) carry real signal nets. Their model
-//    is a truthful pass-through: the structure IS one net (or a set of
-//    independent nets, for research_near) running from one layer to another
-//    through a via, so a wire is the correct behaviour. This also keeps the
-//    instance alive through `opt` and gives the router real pins to reach.
+//   1. `synth` -> `flatten` -> `opt` deletes an instance whose outputs reach
+//      only a constant-folded sink such as `wire _unused = &{1'b0, ...}`.
+//      `(* keep *)` stops that.
+//   2. `write_verilog` inlines a module that has a body, so even a kept
+//      instance never reaches the written netlist. A blackbox has no body to
+//      inline and is emitted as a real instance.
 //
-// 2. NON_ELECTRICAL structures (C4, D, E) carry no nets by design. They use
-//    the official Tiny Tapeout pattern for geometry-only macros:
-//        (* blackbox *) (* keep *) module NAME (); endmodule
-//    with the instance name and module name listed in
-//    IGNORE_DISCONNECTED_MODULES in src/config.json.
+// WHY ONE PORT CALLED `net` FOR A/B/C1
+// ------------------------------------
+// The physical fact (measured, see v2_validation/P4_PIN_COMPONENT_AUDIT.json)
+// is that each of A, B and C1 has its two metal access points joined by a via
+// INSIDE the macro: one continuous node. Declaring two ports made the netlist
+// carry two nets across one conductor, which is the contradiction that stalled
+// the earlier integration rounds.
 //
-//    Verified locally: `(* blackbox *)` ALONE is deleted by yosys `opt`;
-//    adding `(* keep *)` keeps it. That is why both attributes are required.
-//    (An earlier V2 revision used pass-through models for these three; that
-//    implies signal semantics the structures do not have, so it was wrong.)
+// The LEF therefore declares one PIN (`net`) whose single PORT lists both the
+// M1 and the M2 access rectangles. One PORT means strong connectivity in
+// LEF/DEF; multiple PORTs would only be weak connectivity, which is not what
+// routing a signal needs.
 //
-// Naming rule: module name == LEF MACRO name == GDS cell name.
+// The direction is `inout`: these are passive metal taps, with no source or
+// sink semantics. `input`/`output` would imply an active device.
+//
+// WHAT `keep` DOES NOT BUY
+// ------------------------
+// It preserves the instance, its name, its cell type and its port
+// connections. It does NOT prove the physical macro is wired correctly, and
+// it says nothing about whether LVS accepts an internally-shorted passive.
+// Those are open questions for the official flow.
+//
+// C3 / C4 / D / E carry no nets. They are geometry-only samples; their truth
+// is purely geometric. C3 could legally have eight pins (eight isolated
+// conductors, eight nets) but is kept pin-free on purpose: routing to it would
+// add vias and wires next to the 0.14/0.20/0.28/0.50 um gap ladder and spoil
+// exactly the spacing measurement it exists to provide.
+//
+// Naming rule: module name == LEF MACRO name == GDS cell name,
+// and pin name == port name, character for character.
 
 `default_nettype none
 
 // ---------------------------------------------------------------- electrical
+//
+// A / B / C1 are passive metal taps. The single `net` port is the whole
+// connectivity contract; the connection itself is made by metal and via inside
+// the GDS, not by RTL.
 
-// A: M1 -> Via1 -> M2
-module research_via1 (
-    input  wire a,
-    output wire b
-);
-    assign b = a;
+// A: M1 access point and M2 access point, joined by Via1 inside the macro.
+(* blackbox *) (* keep *) module research_via1 (inout wire net);
 endmodule
 
-// B: M2 -> Via2 -> M3
-module research_via2 (
-    input  wire a,
-    output wire b
-);
-    assign b = a;
+// B: M2 access point and M3 access point, joined by Via2 inside the macro.
+(* blackbox *) (* keep *) module research_via2 (inout wire net);
 endmodule
 
-// C1: single net, three branches through vias
-module research_branch (
-    input  wire in,
-    output wire tap
-);
-    assign tap = in;
-endmodule
-
-// C3: four independent pairs of parallel wires at legal gaps
-module research_near (
-    input  wire p0, output wire q0,
-    input  wire p1, output wire q1,
-    input  wire p2, output wire q2,
-    input  wire p3, output wire q3
-);
-    assign q0 = p0;
-    assign q1 = p1;
-    assign q2 = p2;
-    assign q3 = p3;
+// C1: one trunk plus three branch stubs, all one node, four access points.
+(* blackbox *) (* keep *) module research_branch (inout wire net);
 endmodule
 
 // ------------------------------------------------------------ non-electrical
+//
+// No ports at all: these must not join any net.
 
-// C4: M1 and M2 cross in projection, no via, deliberately NOT connected.
-// No ports: this is a negative sample, it must not join any net.
+// C3: eight isolated parallel wires at the 0.14 / 0.20 / 0.28 / 0.50 um gap
+// ladder. Geometry-only truth: what exists, how wide, how far apart.
+(* blackbox *) (* keep *) module research_near ();
+endmodule
+
+// C4: M1 and M2 cross in projection with no via — the negative sample.
 (* blackbox *) (* keep *) module research_cross ();
 endmodule
 
-// D: width / density ladder, pure geometry.
+// D: width / density ladder, 0.14 to 1.00 um.
 (* blackbox *) (* keep *) module research_dense ();
 endmodule
 

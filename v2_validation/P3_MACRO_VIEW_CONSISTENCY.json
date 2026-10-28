@@ -34,19 +34,19 @@
    "n_pins": 2,
    "pins": [
     {
-     "name": "A",
+     "name": "net",
      "layer": "met1",
      "covered_by_metal": true
     },
     {
-     "name": "B",
+     "name": "net",
      "layer": "met2",
      "covered_by_metal": true
     }
    ],
    "electrical": true,
    "lef_has_symmetry": true,
-   "lef_has_obs": false
+   "lef_has_obs": true
   },
   {
    "structure_id": "B",
@@ -80,19 +80,19 @@
    "n_pins": 2,
    "pins": [
     {
-     "name": "A",
+     "name": "net",
      "layer": "met2",
      "covered_by_metal": true
     },
     {
-     "name": "B",
+     "name": "net",
      "layer": "met3",
      "covered_by_metal": true
     }
    ],
    "electrical": true,
    "lef_has_symmetry": true,
-   "lef_has_obs": false
+   "lef_has_obs": true
   },
   {
    "structure_id": "C1",
@@ -123,22 +123,32 @@
    "prb_equals_metal": true,
    "lef_equals_prb": true,
    "origin_match": true,
-   "n_pins": 2,
+   "n_pins": 4,
    "pins": [
     {
-     "name": "IN",
+     "name": "net",
      "layer": "met1",
      "covered_by_metal": true
     },
     {
-     "name": "TAP",
+     "name": "net",
+     "layer": "met2",
+     "covered_by_metal": true
+    },
+    {
+     "name": "net",
+     "layer": "met2",
+     "covered_by_metal": true
+    },
+    {
+     "name": "net",
      "layer": "met2",
      "covered_by_metal": true
     }
    ],
    "electrical": true,
    "lef_has_symmetry": true,
-   "lef_has_obs": false
+   "lef_has_obs": true
   },
   {
    "structure_id": "C3",
@@ -169,52 +179,11 @@
    "prb_equals_metal": true,
    "lef_equals_prb": true,
    "origin_match": true,
-   "n_pins": 8,
-   "pins": [
-    {
-     "name": "P0",
-     "layer": "met1",
-     "covered_by_metal": true
-    },
-    {
-     "name": "Q0",
-     "layer": "met1",
-     "covered_by_metal": true
-    },
-    {
-     "name": "P1",
-     "layer": "met1",
-     "covered_by_metal": true
-    },
-    {
-     "name": "Q1",
-     "layer": "met1",
-     "covered_by_metal": true
-    },
-    {
-     "name": "P2",
-     "layer": "met1",
-     "covered_by_metal": true
-    },
-    {
-     "name": "Q2",
-     "layer": "met1",
-     "covered_by_metal": true
-    },
-    {
-     "name": "P3",
-     "layer": "met1",
-     "covered_by_metal": true
-    },
-    {
-     "name": "Q3",
-     "layer": "met1",
-     "covered_by_metal": true
-    }
-   ],
-   "electrical": true,
+   "n_pins": 0,
+   "pins": [],
+   "electrical": false,
    "lef_has_symmetry": true,
-   "lef_has_obs": false
+   "lef_has_obs": true
   },
   {
    "structure_id": "C4",
@@ -249,7 +218,7 @@
    "pins": [],
    "electrical": false,
    "lef_has_symmetry": true,
-   "lef_has_obs": false
+   "lef_has_obs": true
   },
   {
    "structure_id": "D",
@@ -284,7 +253,7 @@
    "pins": [],
    "electrical": false,
    "lef_has_symmetry": true,
-   "lef_has_obs": false
+   "lef_has_obs": true
   },
   {
    "structure_id": "E",
@@ -319,7 +288,7 @@
    "pins": [],
    "electrical": false,
    "lef_has_symmetry": true,
-   "lef_has_obs": false
+   "lef_has_obs": true
   }
  ],
  "note": "PLANNING-stage check on the macro views themselves. This does NOT verify placement in a real 2x2 layout, PDN interaction, or LVS."

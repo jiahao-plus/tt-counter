@@ -8,12 +8,12 @@
    "n_pins": 2,
    "pins": [
     {
-     "name": "A",
+     "name": "net",
      "layer": "met1",
      "on_metal": true
     },
     {
-     "name": "B",
+     "name": "net",
      "layer": "met2",
      "on_metal": true
     }
@@ -27,12 +27,12 @@
    "n_pins": 2,
    "pins": [
     {
-     "name": "A",
+     "name": "net",
      "layer": "met2",
      "on_metal": true
     },
     {
-     "name": "B",
+     "name": "net",
      "layer": "met3",
      "on_metal": true
     }
@@ -43,15 +43,25 @@
   {
    "structure_id": "C1",
    "electrical": true,
-   "n_pins": 2,
+   "n_pins": 4,
    "pins": [
     {
-     "name": "IN",
+     "name": "net",
      "layer": "met1",
      "on_metal": true
     },
     {
-     "name": "TAP",
+     "name": "net",
+     "layer": "met2",
+     "on_metal": true
+    },
+    {
+     "name": "net",
+     "layer": "met2",
+     "on_metal": true
+    },
+    {
+     "name": "net",
      "layer": "met2",
      "on_metal": true
     }
@@ -61,50 +71,9 @@
   },
   {
    "structure_id": "C3",
-   "electrical": true,
-   "n_pins": 8,
-   "pins": [
-    {
-     "name": "P0",
-     "layer": "met1",
-     "on_metal": true
-    },
-    {
-     "name": "Q0",
-     "layer": "met1",
-     "on_metal": true
-    },
-    {
-     "name": "P1",
-     "layer": "met1",
-     "on_metal": true
-    },
-    {
-     "name": "Q1",
-     "layer": "met1",
-     "on_metal": true
-    },
-    {
-     "name": "P2",
-     "layer": "met1",
-     "on_metal": true
-    },
-    {
-     "name": "Q2",
-     "layer": "met1",
-     "on_metal": true
-    },
-    {
-     "name": "P3",
-     "layer": "met1",
-     "on_metal": true
-    },
-    {
-     "name": "Q3",
-     "layer": "met1",
-     "on_metal": true
-    }
-   ],
+   "electrical": false,
+   "n_pins": 0,
+   "pins": [],
    "n_components": 8,
    "expected_components": 8
   },

@@ -71,7 +71,6 @@
 
   "//": "Only export pin area in LEF (without any connected nets)",
   "MAGIC_WRITE_LEF_PINONLY": 1,
-  "_v2_macros_injected": "Added by macros/p3_patch_config.py for the V2 2x2 research structures. ERROR_ON_DISCONNECTED_PINS is deliberately NOT set: only IGNORE_DISCONNECTED_MODULES is used so the four electrical macros keep real pin checks.",
   "MACROS": {
       "research_fiducial": {
           "instances": {
@@ -193,6 +192,6 @@
           ]
       }
   },
-  "IGNORE_DISCONNECTED_MODULES": ["research_fiducial", "u_rs_fiducial", "research_cross", "u_rs_cross", "research_dense", "u_rs_dense"]
+  "IGNORE_DISCONNECTED_MODULES": ["research_fiducial", "u_rs_fiducial", "research_near", "u_rs_near", "research_cross", "u_rs_cross", "research_dense", "u_rs_dense"]
 
 }

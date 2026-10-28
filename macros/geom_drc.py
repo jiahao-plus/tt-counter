@@ -2,9 +2,8 @@
 """geom_drc.py — 用 pya.Region 原生 check API 实现的 SKY130 几何 DRC。
 
 为什么不用 sky130hd.lydrc 本身：
-  KLayout 0.26.2 的 Ruby 解释器在 headless（-b/-r/-rm）下初始化即崩溃
-  （backtrace 见 v2_validation/klayout_headless_crash.txt），且该 deck 是
-  DRC-DSL(Ruby) 宏，pya.DRC 在 Python 模块中不存在。
+  KLayout 0.26.2 的 Ruby 解释器在 headless（-b/-r/-rm）下初始化即崩溃，
+  且该 deck 是 DRC-DSL(Ruby) 宏，pya.DRC 在 Python 模块中不存在。
 
 因此本检查器用 deck 中**精确提取的规则值**（v2_spec/sky130_rules_measured.md），
 调用 pya.Region 的**原生 DRC 检查 API**（width_check / space_check /

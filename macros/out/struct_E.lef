@@ -1,4 +1,4 @@
-VERSION 5.7 ;
+VERSION 5.8 ;
 BUSBITCHARS "[]" ;
 DIVIDERCHAR "/" ;
 MACRO research_fiducial
@@ -6,5 +6,11 @@ MACRO research_fiducial
   ORIGIN 3.000 3.000 ;
   SIZE 4.000 BY 4.000 ;
   SYMMETRY X Y ;
+  OBS
+      LAYER met1 ;
+        RECT 0.000 0.000 4.000 4.000 ;
+      LAYER met2 ;
+        RECT 0.000 0.000 4.000 4.000 ;
+  END
 END research_fiducial
 END LIBRARY

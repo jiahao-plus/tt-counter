@@ -19,8 +19,8 @@
   }
 
 **不设置 ERROR_ON_DISCONNECTED_PINS:false** —— 那是全局开关，会同时掩盖
-A/B/C1/C3 四个电气宏的引脚错误。改用 IGNORE_DISCONNECTED_MODULES 精确豁免
-C4/D/E 三个非电气宏。
+A/B/C1 三个电气宏的引脚错误。改用 IGNORE_DISCONNECTED_MODULES 精确豁免
+C3/C4/D/E 四个无端口几何宏。
 
 也不设置 RUN_LVS / RUN_PDN / ERROR_ON_PDN_VIOLATIONS —— 保持默认（开启）。
 
@@ -36,9 +36,16 @@ ROOT = os.path.dirname(HERE)
 CFG = os.path.join(ROOT, 'src', 'config.json')
 PLACEMENT = os.path.join(ROOT, 'v2_validation', 'p3_placement.json')
 
-NON_ELECTRICAL = {'research_cross', 'research_dense', 'research_fiducial'}
+NON_ELECTRICAL = {'research_near', 'research_cross', 'research_dense',
+                  'research_fiducial'}
 
 MARKER = '"_v2_macros_injected"'
+
+# The marker key is used only for idempotent re-patching. LibreLane warns about
+# unknown keys, so the marker is stripped on the way out; a clean config.json
+# never contains it. Re-running this script is still idempotent because the
+# MACROS block itself is detected and replaced.
+STRIP_MARKER_ON_WRITE = True
 
 
 def build_macros():
@@ -94,12 +101,10 @@ def main():
     print('IGNORE_DISCONNECTED_MODULES: %s' % ignored)
     print('ERROR_ON_DISCONNECTED_PINS: NOT SET (would be a global mute)')
 
+    # No marker key in the written block: LibreLane warns on unknown keys.
+    # The explanation lives here in the script instead.
     block = (
         ',\n'
-        '  "_v2_macros_injected": "Added by macros/p3_patch_config.py for the '
-        'V2 2x2 research structures. ERROR_ON_DISCONNECTED_PINS is deliberately '
-        'NOT set: only IGNORE_DISCONNECTED_MODULES is used so the four '
-        'electrical macros keep real pin checks.",\n'
         '  "MACROS": %s,\n'
         '  "IGNORE_DISCONNECTED_MODULES": %s\n'
         % (json.dumps(macros, indent=4, ensure_ascii=False).replace('\n', '\n  '),
@@ -107,11 +112,57 @@ def main():
     )
 
     # idempotent: strip a previously injected block first
-    if MARKER in text:
-        text = re.sub(r',\n  "_v2_macros_injected".*?\n?$', '\n', text,
-                      flags=re.S)
-        if not text.rstrip().endswith('}'):
-            text = text.rstrip() + '\n}\n'
+    # Idempotency: strip any previously injected block (marker + MACROS +
+    # IGNORE) before re-inserting. The previous version deleted from the marker
+    # to end of file, which would also have eaten MACROS; this version matches
+    # the exact three keys it manages.
+    def _strip_injected(t):
+        """Remove the three keys this script owns, using brace/bracket counting.
+
+        A non-greedy `.*?\\n\\s*}` regex stops at the first nested closing brace
+        and leaves half of the MACROS object behind — that produced invalid JSON
+        on the second run. Counting is the only reliable way here.
+        """
+        def cut_key(text, key):
+            # The key may or may not be preceded by a comma: whichever key lands
+            # first in the injected block has no comma before it. Matching a
+            # required comma is why an earlier attempt left MACROS in place
+            # (it removed 0 chars) and produced invalid JSON.
+            m = re.search(r',?\s*\n\s*"%s"\s*:\s*' % re.escape(key), text)
+            if not m:
+                return text
+            i = m.end()
+            if i >= len(text):
+                return text
+            opener = text[i]
+            if opener not in '{[':
+                # string / scalar: run to end of line
+                j = text.find('\n', i)
+                return text[:m.start()] + text[j if j >= 0 else len(text):]
+            closer = '}' if opener == '{' else ']'
+            depth = 0
+            j = i
+            while j < len(text):
+                c = text[j]
+                if c == opener:
+                    depth += 1
+                elif c == closer:
+                    depth -= 1
+                    if depth == 0:
+                        j += 1
+                        break
+                j += 1
+            return text[:m.start()] + text[j:]
+
+        t = cut_key(t, '_v2_macros_injected')
+        t = cut_key(t, 'MACROS')
+        t = cut_key(t, 'IGNORE_DISCONNECTED_MODULES')
+        # a dangling comma before the closing brace would be invalid
+        t = re.sub(r',\s*(\n\s*\}\s*$)', r'\1', t, flags=re.S)
+        return t
+
+    if MARKER in text or '"MACROS"' in text:
+        text = _strip_injected(text)
 
     # insert before the final closing brace
     idx = text.rstrip().rfind('}')

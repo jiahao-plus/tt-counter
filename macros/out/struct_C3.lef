@@ -1,4 +1,4 @@
-VERSION 5.7 ;
+VERSION 5.8 ;
 BUSBITCHARS "[]" ;
 DIVIDERCHAR "/" ;
 MACRO research_near
@@ -6,69 +6,9 @@ MACRO research_near
   ORIGIN 0.930 0.930 ;
   SIZE 10.140 BY 8.240 ;
   SYMMETRY X Y ;
-  PIN P0
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
+  OBS
       LAYER met1 ;
-        RECT -0.000 -0.000 0.140 0.140 ;
-    END
-  END P0
-  PIN Q0
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
-      LAYER met1 ;
-        RECT 9.000 0.280 9.140 0.420 ;
-    END
-  END Q0
-  PIN P1
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
-      LAYER met1 ;
-        RECT -0.000 2.420 0.140 2.560 ;
-    END
-  END P1
-  PIN Q1
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
-      LAYER met1 ;
-        RECT 9.000 2.760 9.140 2.900 ;
-    END
-  END Q1
-  PIN P2
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
-      LAYER met1 ;
-        RECT -0.000 4.900 0.140 5.040 ;
-    END
-  END P2
-  PIN Q2
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
-      LAYER met1 ;
-        RECT 9.000 5.320 9.140 5.460 ;
-    END
-  END Q2
-  PIN P3
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
-      LAYER met1 ;
-        RECT -0.000 7.460 0.140 7.600 ;
-    END
-  END P3
-  PIN Q3
-    DIRECTION INOUT ;
-    USE SIGNAL ;
-    PORT
-      LAYER met1 ;
-        RECT 9.000 8.100 9.140 8.240 ;
-    END
-  END Q3
+        RECT 0.000 0.000 10.140 8.240 ;
+  END
 END research_near
 END LIBRARY

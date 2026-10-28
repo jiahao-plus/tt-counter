@@ -1,0 +1,81 @@
+{
+ "yosys_version": "Yosys 0.69+ (git sha1 9f09efcdb-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/bld/rattler-build_yosys_1788957668/build_env/bin/x86_64-conda-linux-gnu-c++ 15.3.0) [github.com/conda-forge/yosys-feedstock at main]",
+ "flow": "synth -top ...; flatten; opt; write_verilog -noattr",
+ "equivalence_caveat": "Local yosys differs from the official LibreLane 3.0.14 / yosys 0.62 toolchain. The keep attribute behaves identically in a control experiment, but this is NOT a byte-equivalent reproduction of the official synthesis.",
+ "netlist": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/v2_validation/synth_netlist.v",
+ "stat_counts": {
+  "research_branch": 1,
+  "research_cross": 1,
+  "research_dense": 1,
+  "research_fiducial": 1,
+  "research_near": 1,
+  "research_via1": 1,
+  "research_via2": 1
+ },
+ "instances": [
+  {
+   "instance": "u_rs_via1",
+   "cell": "research_via1",
+   "present": true,
+   "cell_ok": true,
+   "ports_ok": true,
+   "ports": {
+    "net": "pwm_out"
+   }
+  },
+  {
+   "instance": "u_rs_via2",
+   "cell": "research_via2",
+   "present": true,
+   "cell_ok": true,
+   "ports_ok": true,
+   "ports": {
+    "net": "pwm_out"
+   }
+  },
+  {
+   "instance": "u_rs_branch",
+   "cell": "research_branch",
+   "present": true,
+   "cell_ok": true,
+   "ports_ok": true,
+   "ports": {
+    "net": "pwm_out"
+   }
+  },
+  {
+   "instance": "u_rs_near",
+   "cell": "research_near",
+   "present": true,
+   "cell_ok": true,
+   "ports_ok": true,
+   "ports": {}
+  },
+  {
+   "instance": "u_rs_cross",
+   "cell": "research_cross",
+   "present": true,
+   "cell_ok": true,
+   "ports_ok": true,
+   "ports": {}
+  },
+  {
+   "instance": "u_rs_dense",
+   "cell": "research_dense",
+   "present": true,
+   "cell_ok": true,
+   "ports_ok": true,
+   "ports": {}
+  },
+  {
+   "instance": "u_rs_fiducial",
+   "cell": "research_fiducial",
+   "present": true,
+   "cell_ok": true,
+   "ports_ok": true,
+   "ports": {}
+  }
+ ],
+ "problems": [],
+ "all_present": true
+}

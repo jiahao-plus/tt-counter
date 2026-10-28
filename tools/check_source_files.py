@@ -5,7 +5,7 @@
     research_macros.v doesn't exist in the repo
 
 原因是 info.yaml 的 project.source_files 列出的是 **src/ 下的相对文件名**，
-而 research_macros.v 当时放在 v2_rtl/。官方构建只认 src/。
+而 research_macros.v 曾放在别的目录。官方构建只认 src/。
 
 本脚本把这条规则变成可执行断言，今后任何路径错误都会在本地暴露，
 而不是等到 CI 报错。

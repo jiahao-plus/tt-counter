@@ -1,9 +1,0 @@
-# V2 synthesis check. Paths mirror project.source_files in info.yaml —
-# every file listed there must live in src/ and be listed here too.
-# (research_macros.v was in v2_rtl/ during the first CI attempt, which made the
-# official build fail with "research_macros.v doesn't exist in the repo".)
-read_verilog -sv src/project.v src/pwm.v src/LFSR_Design.v src/research_macros.v
-hierarchy -top tt_um_jiahao_plus_counter
-proc
-opt
-stat

@@ -3,11 +3,11 @@
  * V2 2x2 research vehicle (branch exp/v2-2x2-research)
  *
  * Functional behaviour is UNCHANGED from the V1 golden commit 24fc6a5.
- * Added: RTL instances of the V2 electrical research structures
- * (M1-Via1-M2, M2-Via2-M3, single-net branch, near-neighbour pairs).
- * The NON_ELECTRICAL cells (research_cross / research_dense /
- * research_fiducial) carry no nets and are placed by the floorplan, so
- * they are deliberately NOT instantiated here.
+ * Added: instances of all seven V2 research structures.
+ *   ELECTRICAL (A / B / C1)   one `net` port each, tied to pwm_out
+ *   NON_ELECTRICAL (C3 / C4 / D / E)   no ports, geometry-only
+ * All seven are declared (* blackbox *) (* keep *) so synthesis keeps them;
+ * see src/research_macros.v for why `keep` alone is not sufficient.
  *
  * Original (mode 0, ui_in[7:2] == 0):
  *   - ui_in[0] = en    计数使能（1=计数，0=保持）
@@ -131,64 +131,44 @@ module tt_um_jiahao_plus_counter (
 
 
   // ---------------------------------------------------------------
-  // V2 research structures.
+  // V2 research structures (alpha-prime interface).
   //
-  // Only the ELECTRICAL structures are instantiated: they have real pins and
-  // must be reached by the router. The NON_ELECTRICAL cells carry no nets and
-  // are placed by the floorplan instead.
+  // A / B / C1 are passive metal taps. Each exposes exactly ONE port called
+  // `net`, because the physical macro is a single continuous node: its metal
+  // access points are joined by a via INSIDE the GDS. The matching LEF
+  // declares one PIN, one PORT, and several cross-layer RECTs inside that
+  // PORT - strong connectivity, which is what a signal router needs. Multiple
+  // PORTs under one PIN would only be weak connectivity. See
+  // v2_docs/V2_FINAL_INTERFACE_DECISION.md.
   //
-  // Each macro input is tied to pwm_out (a flop-driven signal in mode 1) so the
-  // nets survive synthesis and the router must connect the macro pins.
+  // All three tap pwm_out: a real combinational signal that also drives
+  // uio_out[0] in mode 1, so the net cannot be optimised away and the router
+  // has to reach the macro pin.
+  //
+  // C3 / C4 / D / E carry no ports at all. Their truth is purely geometric.
+  // C3 in particular must stay free of routing, or vias would land next to
+  // the 0.14 / 0.20 / 0.28 / 0.50 um gap ladder it exists to measure.
+  //
+  // Every module in src/research_macros.v is (* blackbox *) (* keep *):
+  // `keep` alone is not enough, because write_verilog inlines modules that
+  // have a body. The four cells with no nets are also listed in
+  // IGNORE_DISCONNECTED_MODULES in src/config.json.
   // ---------------------------------------------------------------
-  wire rs_a_in = pwm_out;
-  wire rs_a_out;
-  wire rs_b_in = pwm_out;
-  wire rs_b_out;
-  wire rs_br_tap;
-  wire rs_near_q0, rs_near_q1, rs_near_q2, rs_near_q3;
-
   research_via1 u_rs_via1 (
-      .a (rs_a_in),
-      .b (rs_a_out)
+      .net (pwm_out)
   );
 
   research_via2 u_rs_via2 (
-      .a (rs_b_in),
-      .b (rs_b_out)
+      .net (pwm_out)
   );
 
   research_branch u_rs_branch (
-      .in  (pwm_out),
-      .tap (rs_br_tap)
+      .net (pwm_out)
   );
 
-  research_near u_rs_near (
-      .p0 (ui_in[0]), .q0 (rs_near_q0),
-      .p1 (ui_in[2]), .q1 (rs_near_q1),
-      .p2 (ui_in[4]), .q2 (rs_near_q2),
-      .p3 (ui_in[6]), .q3 (rs_near_q3)
-  );
-
-  // ---------------------------------------------------------------
-  // NON_ELECTRICAL research structures (C4, D, E).
-  //
-  // These carry no nets by design: C4 is a negative sample (crossing metal
-  // that must NOT connect), D is a geometry ladder, E is a fiducial. They are
-  // declared as (* blackbox *) (* keep *) modules and their names are listed
-  // in IGNORE_DISCONNECTED_MODULES in src/config.json.
-  //
-  // `keep` is required: a blackbox alone is deleted by yosys `opt`.
-  // ---------------------------------------------------------------
+  research_near     u_rs_near     ();
   research_cross    u_rs_cross    ();
   research_dense    u_rs_dense    ();
   research_fiducial u_rs_fiducial ();
-
-  // Keep the electrical macro outputs observable so they are not optimised
-  // away. The NON_ELECTRICAL cells have no outputs and are held by `keep`.
-  wire _rs_obs = rs_a_out ^ rs_b_out ^ rs_br_tap
-               ^ rs_near_q0 ^ rs_near_q1 ^ rs_near_q2 ^ rs_near_q3;
-
-  // Silence unused-input warning
-  wire _unused = &{1'b0, _rs_obs};
 
 endmodule
