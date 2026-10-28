@@ -18,3 +18,6 @@
 *.png       binary
 *.jpg       binary
 *.pdf       binary
+
+# V1 Pages backup is a local safety copy, not a source artefact.
+v2_validation/v1_pages_backup/ export-ignore

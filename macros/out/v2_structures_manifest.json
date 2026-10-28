@@ -39,6 +39,10 @@
   "M4": [
    71,
    20
+  ],
+  "prB": [
+   235,
+   4
   ]
  },
  "structures": {
@@ -49,6 +53,12 @@
     4.94
    ],
    "bbox_um": [
+    0.93,
+    1.93,
+    9.07,
+    6.87
+   ],
+   "prboundary_um": [
     0.93,
     1.93,
     9.07,
@@ -68,6 +78,12 @@
     11.15,
     5.165
    ],
+   "prboundary_um": [
+    0.93,
+    1.93,
+    11.15,
+    5.165
+   ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_B.gds"
   },
   "C1": {
@@ -77,6 +93,12 @@
     3.2
    ],
    "bbox_um": [
+    0.93,
+    4.87,
+    11.07,
+    8.07
+   ],
+   "prboundary_um": [
     0.93,
     4.87,
     11.07,
@@ -96,6 +118,12 @@
     11.07,
     9.17
    ],
+   "prboundary_um": [
+    0.93,
+    0.93,
+    11.07,
+    9.17
+   ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C3.gds"
   },
   "C4": {
@@ -105,6 +133,12 @@
     8.14
    ],
    "bbox_um": [
+    0.93,
+    0.93,
+    11.07,
+    9.07
+   ],
+   "prboundary_um": [
     0.93,
     0.93,
     11.07,
@@ -124,6 +158,12 @@
     35.5,
     6.64
    ],
+   "prboundary_um": [
+    0.5,
+    0.85,
+    35.5,
+    6.64
+   ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_D.gds"
   },
   "E": {
@@ -133,6 +173,12 @@
     4.0
    ],
    "bbox_um": [
+    3.0,
+    3.0,
+    7.0,
+    7.0
+   ],
+   "prboundary_um": [
     3.0,
     3.0,
     7.0,

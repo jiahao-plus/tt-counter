@@ -70,5 +70,129 @@
   "MAGIC_DEF_LABELS": 0,
 
   "//": "Only export pin area in LEF (without any connected nets)",
-  "MAGIC_WRITE_LEF_PINONLY": 1
+  "MAGIC_WRITE_LEF_PINONLY": 1,
+  "_v2_macros_injected": "Added by macros/p3_patch_config.py for the V2 2x2 research structures. ERROR_ON_DISCONNECTED_PINS is deliberately NOT set: only IGNORE_DISCONNECTED_MODULES is used so the four electrical macros keep real pin checks.",
+  "MACROS": {
+      "research_fiducial": {
+          "instances": {
+              "u_rs_fiducial": {
+                  "location": [
+                      24.0,
+                      208.0
+                  ],
+                  "orientation": "N"
+              }
+          },
+          "gds": [
+              "dir::../macros/out/struct_E.gds"
+          ],
+          "lef": [
+              "dir::../macros/out/struct_E.lef"
+          ]
+      },
+      "research_via1": {
+          "instances": {
+              "u_rs_via1": {
+                  "location": [
+                      33.5,
+                      208.0
+                  ],
+                  "orientation": "N"
+              }
+          },
+          "gds": [
+              "dir::../macros/out/struct_A.gds"
+          ],
+          "lef": [
+              "dir::../macros/out/struct_A.lef"
+          ]
+      },
+      "research_via2": {
+          "instances": {
+              "u_rs_via2": {
+                  "location": [
+                      64.0,
+                      208.0
+                  ],
+                  "orientation": "N"
+              }
+          },
+          "gds": [
+              "dir::../macros/out/struct_B.gds"
+          ],
+          "lef": [
+              "dir::../macros/out/struct_B.lef"
+          ]
+      },
+      "research_branch": {
+          "instances": {
+              "u_rs_branch": {
+                  "location": [
+                      79.32,
+                      208.0
+                  ],
+                  "orientation": "N"
+              }
+          },
+          "gds": [
+              "dir::../macros/out/struct_C1.gds"
+          ],
+          "lef": [
+              "dir::../macros/out/struct_C1.lef"
+          ]
+      },
+      "research_near": {
+          "instances": {
+              "u_rs_near": {
+                  "location": [
+                      64.0,
+                      191.57
+                  ],
+                  "orientation": "N"
+              }
+          },
+          "gds": [
+              "dir::../macros/out/struct_C3.gds"
+          ],
+          "lef": [
+              "dir::../macros/out/struct_C3.lef"
+          ]
+      },
+      "research_cross": {
+          "instances": {
+              "u_rs_cross": {
+                  "location": [
+                      102.0,
+                      188.0
+                  ],
+                  "orientation": "N"
+              }
+          },
+          "gds": [
+              "dir::../macros/out/struct_C4.gds"
+          ],
+          "lef": [
+              "dir::../macros/out/struct_C4.lef"
+          ]
+      },
+      "research_dense": {
+          "instances": {
+              "u_rs_dense": {
+                  "location": [
+                      23.5,
+                      150.0
+                  ],
+                  "orientation": "N"
+              }
+          },
+          "gds": [
+              "dir::../macros/out/struct_D.gds"
+          ],
+          "lef": [
+              "dir::../macros/out/struct_D.lef"
+          ]
+      }
+  },
+  "IGNORE_DISCONNECTED_MODULES": ["research_fiducial", "u_rs_fiducial", "research_cross", "u_rs_cross", "research_dense", "u_rs_dense"]
+
 }

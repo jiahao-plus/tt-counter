@@ -1,0 +1,120 @@
+{
+ "status": "ESTIMATE_ONLY",
+ "caveat": "The 2x2 PDN layout is unknown. These straps are the V1 measured pattern tiled across the 2x2 width by its own 27.14 um pitch. The real 2x2 strap positions must be read from the first official CI DEF before any conclusion.",
+ "v1_strap_x_um": [
+  19.08,
+  22.38,
+  57.95,
+  61.25,
+  96.82,
+  100.12,
+  135.69,
+  138.99
+ ],
+ "v1_strap_width_um": 1.6,
+ "v1_pitch_um": 27.14,
+ "assumed_2x2_strap_x_um": [
+  19.08,
+  22.38,
+  57.95,
+  61.25,
+  96.82,
+  100.12,
+  135.69,
+  138.99,
+  166.13,
+  193.27,
+  220.41,
+  247.55,
+  274.69,
+  301.83,
+  328.97
+ ],
+ "macros": [
+  {
+   "structure_id": "E",
+   "macro_name": "research_fiducial",
+   "x_range_um": [
+    24.0,
+    28.0
+   ],
+   "n_straps_crossing": 0,
+   "straps": [],
+   "width_fraction_covered": 0.0,
+   "obstruction": "NONE"
+  },
+  {
+   "structure_id": "A",
+   "macro_name": "research_via1",
+   "x_range_um": [
+    31.0,
+    39.14
+   ],
+   "n_straps_crossing": 0,
+   "straps": [],
+   "width_fraction_covered": 0.0,
+   "obstruction": "NONE"
+  },
+  {
+   "structure_id": "B",
+   "macro_name": "research_via2",
+   "x_range_um": [
+    64.0,
+    74.22
+   ],
+   "n_straps_crossing": 0,
+   "straps": [],
+   "width_fraction_covered": 0.0,
+   "obstruction": "NONE"
+  },
+  {
+   "structure_id": "C1",
+   "macro_name": "research_branch",
+   "x_range_um": [
+    64.0,
+    74.14
+   ],
+   "n_straps_crossing": 0,
+   "straps": [],
+   "width_fraction_covered": 0.0,
+   "obstruction": "NONE"
+  },
+  {
+   "structure_id": "C3",
+   "macro_name": "research_near",
+   "x_range_um": [
+    78.0,
+    88.14
+   ],
+   "n_straps_crossing": 0,
+   "straps": [],
+   "width_fraction_covered": 0.0,
+   "obstruction": "NONE"
+  },
+  {
+   "structure_id": "C4",
+   "macro_name": "research_cross",
+   "x_range_um": [
+    102.0,
+    112.14
+   ],
+   "n_straps_crossing": 0,
+   "straps": [],
+   "width_fraction_covered": 0.0,
+   "obstruction": "NONE"
+  },
+  {
+   "structure_id": "D",
+   "macro_name": "research_dense",
+   "x_range_um": [
+    25.0,
+    30.79
+   ],
+   "n_straps_crossing": 0,
+   "straps": [],
+   "width_fraction_covered": 0.0,
+   "obstruction": "NONE"
+  }
+ ],
+ "note": "M4 sits above the macro M1/M2/M3 geometry, so a crossing is NOT an electrical short. It matters because M4 is opaque and would obscure SEM imaging of the structures underneath."
+}

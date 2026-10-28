@@ -1,0 +1,291 @@
+{
+ "status": "PLAN_ONLY",
+ "version": 3,
+ "caveat": "2x2 PDN and core are UNKNOWN. Strap positions are the V1 measured pattern tiled by its 27.14 um pitch; the core rect is extrapolated from V1 margins. Every check here is a PLANNING-stage check, not a verified physical result.",
+ "min_gap_required_um": 5.0,
+ "die_um": [
+  335.0,
+  226.0
+ ],
+ "margins_um": [
+  2.76,
+  2.72,
+  2.76,
+  5.44
+ ],
+ "core_rect_um": [
+  2.76,
+  2.72,
+  332.24,
+  220.56
+ ],
+ "core_area_um2": 71773.9,
+ "assumed_strap_x_um": [
+  19.08,
+  22.38,
+  57.95,
+  61.25,
+  96.82,
+  100.12,
+  135.69,
+  138.99,
+  166.13,
+  193.27,
+  220.41,
+  247.55,
+  274.69,
+  301.83,
+  328.97
+ ],
+ "placements": [
+  {
+   "structure_id": "E",
+   "macro_name": "research_fiducial",
+   "instance": "u_rs_fiducial",
+   "x_um": 24.0,
+   "y_um": 208.0,
+   "w_um": 4.0,
+   "h_um": 4.0,
+   "x1_um": 28.0,
+   "y1_um": 212.0,
+   "orientation": "N",
+   "electrical": false,
+   "n_pins": 0,
+   "inside_core": true,
+   "strap_crossings": 0,
+   "strap_x_hit": [],
+   "strap_width_fraction_ESTIMATE": 0.0,
+   "note": "gap 23.20-57.20"
+  },
+  {
+   "structure_id": "A",
+   "macro_name": "research_via1",
+   "instance": "u_rs_via1",
+   "x_um": 33.5,
+   "y_um": 208.0,
+   "w_um": 8.14,
+   "h_um": 4.94,
+   "x1_um": 41.64,
+   "y1_um": 212.94,
+   "orientation": "N",
+   "electrical": true,
+   "n_pins": 2,
+   "inside_core": true,
+   "strap_crossings": 0,
+   "strap_x_hit": [],
+   "strap_width_fraction_ESTIMATE": 0.0,
+   "note": "gap 23.20-57.20, 5.5 um from E"
+  },
+  {
+   "structure_id": "B",
+   "macro_name": "research_via2",
+   "instance": "u_rs_via2",
+   "x_um": 64.0,
+   "y_um": 208.0,
+   "w_um": 10.22,
+   "h_um": 3.235,
+   "x1_um": 74.22,
+   "y1_um": 211.235,
+   "orientation": "N",
+   "electrical": true,
+   "n_pins": 2,
+   "inside_core": true,
+   "strap_crossings": 0,
+   "strap_x_hit": [],
+   "strap_width_fraction_ESTIMATE": 0.0,
+   "note": "gap 62.00-96.00"
+  },
+  {
+   "structure_id": "C1",
+   "macro_name": "research_branch",
+   "instance": "u_rs_branch",
+   "x_um": 79.32,
+   "y_um": 208.0,
+   "w_um": 10.14,
+   "h_um": 3.2,
+   "x1_um": 89.46,
+   "y1_um": 211.2,
+   "orientation": "N",
+   "electrical": true,
+   "n_pins": 2,
+   "inside_core": true,
+   "strap_crossings": 0,
+   "strap_x_hit": [],
+   "strap_width_fraction_ESTIMATE": 0.0,
+   "note": "gap 62.00-96.00, 5.1 um from B"
+  },
+  {
+   "structure_id": "C3",
+   "macro_name": "research_near",
+   "instance": "u_rs_near",
+   "x_um": 64.0,
+   "y_um": 191.57,
+   "w_um": 10.14,
+   "h_um": 8.24,
+   "x1_um": 74.14,
+   "y1_um": 199.81,
+   "orientation": "N",
+   "electrical": true,
+   "n_pins": 8,
+   "inside_core": true,
+   "strap_crossings": 0,
+   "strap_x_hit": [],
+   "strap_width_fraction_ESTIMATE": 0.0,
+   "note": "gap 62.00-96.00, below B"
+  },
+  {
+   "structure_id": "C4",
+   "macro_name": "research_cross",
+   "instance": "u_rs_cross",
+   "x_um": 102.0,
+   "y_um": 188.0,
+   "w_um": 10.14,
+   "h_um": 8.14,
+   "x1_um": 112.14,
+   "y1_um": 196.14,
+   "orientation": "N",
+   "electrical": false,
+   "n_pins": 0,
+   "inside_core": true,
+   "strap_crossings": 0,
+   "strap_x_hit": [],
+   "strap_width_fraction_ESTIMATE": 0.0,
+   "note": "gap 100.90-134.90"
+  },
+  {
+   "structure_id": "D",
+   "macro_name": "research_dense",
+   "instance": "u_rs_dense",
+   "x_um": 23.5,
+   "y_um": 150.0,
+   "w_um": 35.0,
+   "h_um": 5.79,
+   "x1_um": 58.5,
+   "y1_um": 155.79,
+   "orientation": "N",
+   "electrical": false,
+   "n_pins": 0,
+   "inside_core": true,
+   "strap_crossings": 1,
+   "strap_x_hit": [
+    57.95
+   ],
+   "strap_width_fraction_ESTIMATE": 0.0386,
+   "note": "35 um, crosses ~1 assumed strap"
+  }
+ ],
+ "all_gaps_um": [
+  [
+   5.1,
+   "B",
+   "C1"
+  ],
+  [
+   5.5,
+   "E",
+   "A"
+  ],
+  [
+   8.19,
+   "B",
+   "C3"
+  ],
+  [
+   9.691,
+   "C1",
+   "C3"
+  ],
+  [
+   17.26,
+   "C1",
+   "C4"
+  ],
+  [
+   22.36,
+   "A",
+   "B"
+  ],
+  [
+   23.813,
+   "A",
+   "C3"
+  ],
+  [
+   27.86,
+   "C3",
+   "C4"
+  ],
+  [
+   30.206,
+   "B",
+   "C4"
+  ],
+  [
+   36.0,
+   "E",
+   "B"
+  ],
+  [
+   36.2,
+   "C3",
+   "D"
+  ],
+  [
+   36.92,
+   "E",
+   "C3"
+  ],
+  [
+   37.68,
+   "A",
+   "C1"
+  ],
+  [
+   51.32,
+   "E",
+   "C1"
+  ],
+  [
+   52.21,
+   "A",
+   "D"
+  ],
+  [
+   52.21,
+   "E",
+   "D"
+  ],
+  [
+   52.499,
+   "B",
+   "D"
+  ],
+  [
+   54.127,
+   "C4",
+   "D"
+  ],
+  [
+   56.208,
+   "C1",
+   "D"
+  ],
+  [
+   61.514,
+   "A",
+   "C4"
+  ],
+  [
+   74.944,
+   "E",
+   "C4"
+  ]
+ ],
+ "min_gap_um": 5.1,
+ "min_gap_pair": [
+  "B",
+  "C1"
+ ],
+ "problems": [],
+ "ok": true
+}

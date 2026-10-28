@@ -13,3 +13,4 @@ logs/
 lfsr_cmp.vcd
 __pycache__/
 
+v2_validation/v1_pages_backup/

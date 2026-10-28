@@ -34,9 +34,11 @@ LEF_LAYER = {'M1': 'met1', 'M2': 'met2', 'M3': 'met3', 'M4': 'met4'}
 PINS = {
     'A': [('A', 'M1', 1.0, 2.0), ('B', 'M2', 9.0, 4.0)],
     'B': [('A', 'M2', 1.0, 2.0), ('B', 'M3', 11.0, 5.0)],
-    # C1: trunk input on the left; TAP is the top of the middle M2 branch stub
-    # (measured from struct_C1.gds: stub at x 5.93..6.07 runs to y 7.57).
-    'C1': [('IN', 'M1', 1.0, 5.0), ('TAP', 'M2', 6.0, 7.55)],
+    # C1: trunk input on the left; TAP is the top of the middle M2 branch stub.
+    # Measured from struct_C1.gds: the stub at x 5.93..6.07 runs to y 7.57, so
+    # the pin rect (height 0.14, centred on y) must sit fully below 7.57.
+    # y = 7.50 gives 7.43..7.57 — flush with the stub top, fully on metal.
+    'C1': [('IN', 'M1', 1.0, 5.0), ('TAP', 'M2', 6.0, 7.50)],
     # C3: 4 independent pairs. Wire centre y values measured from the generated
     # GDS (struct_C3.gds): each pair is (P, Q); P is the left end, Q the right.
     'C3': [('P0', 'M1', 1.0, 1.00), ('Q0', 'M1', 10.0, 1.28),

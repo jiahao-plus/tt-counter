@@ -1,0 +1,8 @@
+structure_id,macro_name,gds_cell,lef_macro,verilog_module,rtl_instance,configured_instance,final_gds_instance,placed_x_um,placed_y_um,orientation,expected_layers,observed_layers,topology_result,drc_result,integration_status,evidence_path
+E,research_fiducial,research_fiducial,research_fiducial,research_fiducial,u_rs_fiducial,u_rs_fiducial,PENDING,24.0,208.0,N,"M1, M2","M1,M2",PASS,PASS,LOCAL_INTEGRATED,"macros/out/struct_E.{gds,lef}"
+A,research_via1,research_via1,research_via1,research_via1,u_rs_via1,u_rs_via1,PENDING,33.5,208.0,N,"M1, Via1, M2","M1,Via1,M2",PASS,PASS,LOCAL_INTEGRATED,"macros/out/struct_A.{gds,lef}"
+B,research_via2,research_via2,research_via2,research_via2,u_rs_via2,u_rs_via2,PENDING,64.0,208.0,N,"M2, Via2, M3","M2,Via2,M3",PASS,PASS,LOCAL_INTEGRATED,"macros/out/struct_B.{gds,lef}"
+C1,research_branch,research_branch,research_branch,research_branch,u_rs_branch,u_rs_branch,PENDING,79.32,208.0,N,"M1, Via1, M2","M1,Via1,M2",PASS,PASS,LOCAL_INTEGRATED,"macros/out/struct_C1.{gds,lef}"
+C3,research_near,research_near,research_near,research_near,u_rs_near,u_rs_near,PENDING,64.0,191.57,N,M1,M1,PASS,PASS,LOCAL_INTEGRATED,"macros/out/struct_C3.{gds,lef}"
+C4,research_cross,research_cross,research_cross,research_cross,u_rs_cross,u_rs_cross,PENDING,102.0,188.0,N,"M1, M2","M1,M2",PASS,PASS,LOCAL_INTEGRATED,"macros/out/struct_C4.{gds,lef}"
+D,research_dense,research_dense,research_dense,research_dense,u_rs_dense,u_rs_dense,PENDING,23.5,150.0,N,"M1, M2, M3","M1,M2,M3",PASS,PASS,LOCAL_INTEGRATED,"macros/out/struct_D.{gds,lef}"

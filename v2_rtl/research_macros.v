@@ -1,52 +1,55 @@
-// research_macros.v — Verilog models for the V2 research structures.
+// research_macros.v — Verilog views for the seven V2 research structures.
 //
-// IMPORTANT — why these are NOT empty (* blackbox *) modules:
-//   A module with no logic and no side effects is deleted by yosys `opt`
-//   before the router sees it, so the macro never gets placed. Verified with a
-//   two-module experiment (v2_validation/_t1.v): the empty blackbox was
-//   removed, the pass-through module survived. `keep_hierarchy` alone does not
-//   save an empty module either.
+// TWO DIFFERENT TREATMENTS, for two different kinds of structure:
 //
-//   Every structure therefore carries a truthful PASS-THROUGH model. That is
-//   electrically correct: each structure IS one net carrying a signal from one
-//   layer to another (or a set of independent nets, for research_near), so a
-//   wire is the right behaviour. The GDS/LEF macro supplies the actual
-//   geometry; the RTL only has to keep the instance alive and give the router
-//   real pins to reach.
+// 1. ELECTRICAL structures (A, B, C1, C3) carry real signal nets. Their model
+//    is a truthful pass-through: the structure IS one net (or a set of
+//    independent nets, for research_near) running from one layer to another
+//    through a via, so a wire is the correct behaviour. This also keeps the
+//    instance alive through `opt` and gives the router real pins to reach.
 //
-// Naming rule (task spec 4.3): module name == LEF MACRO name == GDS cell name.
+// 2. NON_ELECTRICAL structures (C4, D, E) carry no nets by design. They use
+//    the official Tiny Tapeout pattern for geometry-only macros:
+//        (* blackbox *) (* keep *) module NAME (); endmodule
+//    with the instance name and module name listed in
+//    IGNORE_DISCONNECTED_MODULES in src/config.json.
+//
+//    Verified locally: `(* blackbox *)` ALONE is deleted by yosys `opt`;
+//    adding `(* keep *)` keeps it. That is why both attributes are required.
+//    (An earlier V2 revision used pass-through models for these three; that
+//    implies signal semantics the structures do not have, so it was wrong.)
+//
+// Naming rule: module name == LEF MACRO name == GDS cell name.
 
 `default_nettype none
 
+// ---------------------------------------------------------------- electrical
+
 // A: M1 -> Via1 -> M2
 module research_via1 (
-    input  wire a,      // met1 side
-    output wire b       // met2 side
+    input  wire a,
+    output wire b
 );
     assign b = a;
 endmodule
 
 // B: M2 -> Via2 -> M3
 module research_via2 (
-    input  wire a,      // met2 side
-    output wire b       // met3 side
+    input  wire a,
+    output wire b
 );
     assign b = a;
 endmodule
 
-// C1: single net with three branches through vias.
-// The trunk is one net; the three taps are all the same node, so the model is a
-// single wire exposed on one port.
+// C1: single net, three branches through vias
 module research_branch (
     input  wire in,
-    output wire tap     // same node as `in`, exposed so the cell is not empty
+    output wire tap
 );
     assign tap = in;
 endmodule
 
-// C3: four *independent* pairs of parallel wires at legal gaps.
-// Each pair is one net; pairs are electrically separate from each other. The
-// model ties each pair input to its own output, so all eight ports are real.
+// C3: four independent pairs of parallel wires at legal gaps
 module research_near (
     input  wire p0, output wire q0,
     input  wire p1, output wire q1,
@@ -57,6 +60,21 @@ module research_near (
     assign q1 = p1;
     assign q2 = p2;
     assign q3 = p3;
+endmodule
+
+// ------------------------------------------------------------ non-electrical
+
+// C4: M1 and M2 cross in projection, no via, deliberately NOT connected.
+// No ports: this is a negative sample, it must not join any net.
+(* blackbox *) (* keep *) module research_cross ();
+endmodule
+
+// D: width / density ladder, pure geometry.
+(* blackbox *) (* keep *) module research_dense ();
+endmodule
+
+// E: multi-layer fiducial, identical pattern on M1 and M2.
+(* blackbox *) (* keep *) module research_fiducial ();
 endmodule
 
 `default_nettype wire

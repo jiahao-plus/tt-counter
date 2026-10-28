@@ -1,0 +1,326 @@
+{
+ "all_pass": true,
+ "problems": [],
+ "macros": [
+  {
+   "structure_id": "A",
+   "cell": "research_via1",
+   "lef_macro": "research_via1",
+   "name_match": true,
+   "prboundary_count": 1,
+   "prboundary_um": [
+    8.14,
+    4.94
+   ],
+   "gds_metal_bbox_um": [
+    8.14,
+    4.94
+   ],
+   "lef_size_um": [
+    8.14,
+    4.94
+   ],
+   "lef_origin": [
+    0.93,
+    1.93
+   ],
+   "gds_bbox_ll_um": [
+    0.93,
+    1.93
+   ],
+   "prb_equals_metal": true,
+   "lef_equals_prb": true,
+   "origin_match": true,
+   "n_pins": 2,
+   "pins": [
+    {
+     "name": "A",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "B",
+     "layer": "met2",
+     "covered_by_metal": true
+    }
+   ],
+   "electrical": true,
+   "lef_has_symmetry": true,
+   "lef_has_obs": false
+  },
+  {
+   "structure_id": "B",
+   "cell": "research_via2",
+   "lef_macro": "research_via2",
+   "name_match": true,
+   "prboundary_count": 1,
+   "prboundary_um": [
+    10.22,
+    3.235
+   ],
+   "gds_metal_bbox_um": [
+    10.22,
+    3.235
+   ],
+   "lef_size_um": [
+    10.22,
+    3.235
+   ],
+   "lef_origin": [
+    0.93,
+    1.93
+   ],
+   "gds_bbox_ll_um": [
+    0.93,
+    1.93
+   ],
+   "prb_equals_metal": true,
+   "lef_equals_prb": true,
+   "origin_match": true,
+   "n_pins": 2,
+   "pins": [
+    {
+     "name": "A",
+     "layer": "met2",
+     "covered_by_metal": true
+    },
+    {
+     "name": "B",
+     "layer": "met3",
+     "covered_by_metal": true
+    }
+   ],
+   "electrical": true,
+   "lef_has_symmetry": true,
+   "lef_has_obs": false
+  },
+  {
+   "structure_id": "C1",
+   "cell": "research_branch",
+   "lef_macro": "research_branch",
+   "name_match": true,
+   "prboundary_count": 1,
+   "prboundary_um": [
+    10.14,
+    3.2
+   ],
+   "gds_metal_bbox_um": [
+    10.14,
+    3.2
+   ],
+   "lef_size_um": [
+    10.14,
+    3.2
+   ],
+   "lef_origin": [
+    0.93,
+    4.87
+   ],
+   "gds_bbox_ll_um": [
+    0.93,
+    4.87
+   ],
+   "prb_equals_metal": true,
+   "lef_equals_prb": true,
+   "origin_match": true,
+   "n_pins": 2,
+   "pins": [
+    {
+     "name": "IN",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "TAP",
+     "layer": "met2",
+     "covered_by_metal": true
+    }
+   ],
+   "electrical": true,
+   "lef_has_symmetry": true,
+   "lef_has_obs": false
+  },
+  {
+   "structure_id": "C3",
+   "cell": "research_near",
+   "lef_macro": "research_near",
+   "name_match": true,
+   "prboundary_count": 1,
+   "prboundary_um": [
+    10.14,
+    8.24
+   ],
+   "gds_metal_bbox_um": [
+    10.14,
+    8.24
+   ],
+   "lef_size_um": [
+    10.14,
+    8.24
+   ],
+   "lef_origin": [
+    0.93,
+    0.93
+   ],
+   "gds_bbox_ll_um": [
+    0.93,
+    0.93
+   ],
+   "prb_equals_metal": true,
+   "lef_equals_prb": true,
+   "origin_match": true,
+   "n_pins": 8,
+   "pins": [
+    {
+     "name": "P0",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "Q0",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "P1",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "Q1",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "P2",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "Q2",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "P3",
+     "layer": "met1",
+     "covered_by_metal": true
+    },
+    {
+     "name": "Q3",
+     "layer": "met1",
+     "covered_by_metal": true
+    }
+   ],
+   "electrical": true,
+   "lef_has_symmetry": true,
+   "lef_has_obs": false
+  },
+  {
+   "structure_id": "C4",
+   "cell": "research_cross",
+   "lef_macro": "research_cross",
+   "name_match": true,
+   "prboundary_count": 1,
+   "prboundary_um": [
+    10.14,
+    8.14
+   ],
+   "gds_metal_bbox_um": [
+    10.14,
+    8.14
+   ],
+   "lef_size_um": [
+    10.14,
+    8.14
+   ],
+   "lef_origin": [
+    0.93,
+    0.93
+   ],
+   "gds_bbox_ll_um": [
+    0.93,
+    0.93
+   ],
+   "prb_equals_metal": true,
+   "lef_equals_prb": true,
+   "origin_match": true,
+   "n_pins": 0,
+   "pins": [],
+   "electrical": false,
+   "lef_has_symmetry": true,
+   "lef_has_obs": false
+  },
+  {
+   "structure_id": "D",
+   "cell": "research_dense",
+   "lef_macro": "research_dense",
+   "name_match": true,
+   "prboundary_count": 1,
+   "prboundary_um": [
+    35.0,
+    5.79
+   ],
+   "gds_metal_bbox_um": [
+    35.0,
+    5.79
+   ],
+   "lef_size_um": [
+    35.0,
+    5.79
+   ],
+   "lef_origin": [
+    0.5,
+    0.85
+   ],
+   "gds_bbox_ll_um": [
+    0.5,
+    0.85
+   ],
+   "prb_equals_metal": true,
+   "lef_equals_prb": true,
+   "origin_match": true,
+   "n_pins": 0,
+   "pins": [],
+   "electrical": false,
+   "lef_has_symmetry": true,
+   "lef_has_obs": false
+  },
+  {
+   "structure_id": "E",
+   "cell": "research_fiducial",
+   "lef_macro": "research_fiducial",
+   "name_match": true,
+   "prboundary_count": 1,
+   "prboundary_um": [
+    4.0,
+    4.0
+   ],
+   "gds_metal_bbox_um": [
+    4.0,
+    4.0
+   ],
+   "lef_size_um": [
+    4.0,
+    4.0
+   ],
+   "lef_origin": [
+    3.0,
+    3.0
+   ],
+   "gds_bbox_ll_um": [
+    3.0,
+    3.0
+   ],
+   "prb_equals_metal": true,
+   "lef_equals_prb": true,
+   "origin_match": true,
+   "n_pins": 0,
+   "pins": [],
+   "electrical": false,
+   "lef_has_symmetry": true,
+   "lef_has_obs": false
+  }
+ ],
+ "note": "PLANNING-stage check on the macro views themselves. This does NOT verify placement in a real 2x2 layout, PDN interaction, or LVS."
+}

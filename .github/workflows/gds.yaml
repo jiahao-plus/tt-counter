@@ -39,6 +39,28 @@ jobs:
 
   viewer:
     needs: gds
+    # ------------------------------------------------------------------
+    # V2 Pages guard.
+    #
+    # Why: this workflow runs on every push with no branch filter, and the
+    # viewer job has `pages: write`. Without a condition, pushing any V2
+    # development branch would redeploy GitHub Pages and overwrite whatever
+    # is currently published.
+    #
+    # What is currently published: the V1 golden GDS (sha256 0e79d56a...),
+    # deployed from commit 24fc6a5. That commit is reachable on the remote
+    # only through branch `exp/ip-integration` (the local
+    # exp/1x1-finalization and exp/2x2-feasibility branches are not on
+    # origin), so the deployment branch is exp/ip-integration — NOT main.
+    #
+    # This condition therefore allows deployment only from the two branches
+    # that are allowed to publish: the current publishing branch and main.
+    # Every other branch still builds the GDS, runs precheck and runs the
+    # gate-level test — only the Pages deployment is skipped.
+    # ------------------------------------------------------------------
+    if: >-
+      github.ref == 'refs/heads/exp/ip-integration' ||
+      github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     permissions:
       pages: write      # to deploy to Pages

@@ -19,7 +19,7 @@ MACRO research_branch
     USE SIGNAL ;
     PORT
       LAYER met2 ;
-        RECT 5.000 2.610 5.140 2.750 ;
+        RECT 5.000 2.560 5.140 2.700 ;
     END
   END TAP
 END research_branch

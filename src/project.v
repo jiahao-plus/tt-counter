@@ -169,7 +169,22 @@ module tt_um_jiahao_plus_counter (
       .p3 (ui_in[6]), .q3 (rs_near_q3)
   );
 
-  // Keep the macro outputs observable so they are not optimised away.
+  // ---------------------------------------------------------------
+  // NON_ELECTRICAL research structures (C4, D, E).
+  //
+  // These carry no nets by design: C4 is a negative sample (crossing metal
+  // that must NOT connect), D is a geometry ladder, E is a fiducial. They are
+  // declared as (* blackbox *) (* keep *) modules and their names are listed
+  // in IGNORE_DISCONNECTED_MODULES in src/config.json.
+  //
+  // `keep` is required: a blackbox alone is deleted by yosys `opt`.
+  // ---------------------------------------------------------------
+  research_cross    u_rs_cross    ();
+  research_dense    u_rs_dense    ();
+  research_fiducial u_rs_fiducial ();
+
+  // Keep the electrical macro outputs observable so they are not optimised
+  // away. The NON_ELECTRICAL cells have no outputs and are held by `keep`.
   wire _rs_obs = rs_a_out ^ rs_b_out ^ rs_br_tap
                ^ rs_near_q0 ^ rs_near_q1 ^ rs_near_q2 ^ rs_near_q3;
 

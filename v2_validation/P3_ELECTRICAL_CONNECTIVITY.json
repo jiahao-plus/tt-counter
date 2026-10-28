@@ -1,0 +1,138 @@
+{
+ "all_pass": true,
+ "problems": [],
+ "macros": [
+  {
+   "structure_id": "A",
+   "electrical": true,
+   "n_pins": 2,
+   "pins": [
+    {
+     "name": "A",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "B",
+     "layer": "met2",
+     "on_metal": true
+    }
+   ],
+   "n_components": 2,
+   "expected_components": 2
+  },
+  {
+   "structure_id": "B",
+   "electrical": true,
+   "n_pins": 2,
+   "pins": [
+    {
+     "name": "A",
+     "layer": "met2",
+     "on_metal": true
+    },
+    {
+     "name": "B",
+     "layer": "met3",
+     "on_metal": true
+    }
+   ],
+   "n_components": 1,
+   "expected_components": 1
+  },
+  {
+   "structure_id": "C1",
+   "electrical": true,
+   "n_pins": 2,
+   "pins": [
+    {
+     "name": "IN",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "TAP",
+     "layer": "met2",
+     "on_metal": true
+    }
+   ],
+   "n_components": 1,
+   "expected_components": 1
+  },
+  {
+   "structure_id": "C3",
+   "electrical": true,
+   "n_pins": 8,
+   "pins": [
+    {
+     "name": "P0",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "Q0",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "P1",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "Q1",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "P2",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "Q2",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "P3",
+     "layer": "met1",
+     "on_metal": true
+    },
+    {
+     "name": "Q3",
+     "layer": "met1",
+     "on_metal": true
+    }
+   ],
+   "n_components": 8,
+   "expected_components": 8
+  },
+  {
+   "structure_id": "C4",
+   "electrical": false,
+   "n_pins": 0,
+   "pins": [],
+   "n_components": 2,
+   "expected_components": null
+  },
+  {
+   "structure_id": "D",
+   "electrical": false,
+   "n_pins": 0,
+   "pins": [],
+   "n_components": 13,
+   "expected_components": null
+  },
+  {
+   "structure_id": "E",
+   "electrical": false,
+   "n_pins": 0,
+   "pins": [],
+   "n_components": 4,
+   "expected_components": null
+  }
+ ],
+ "rtl_port_issues": [],
+ "scope": "DESIGN-STAGE static check. Verifies macro-internal connectivity and RTL port binding. It does NOT verify that P&R actually routed the macro pins in the final layout — only official LVS can answer that."
+}

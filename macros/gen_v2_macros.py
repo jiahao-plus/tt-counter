@@ -31,6 +31,12 @@ L = {
     'M2': (69, 20), 'Via2': (69, 44),
     'M3': (70, 20),
     'M4': (71, 20),
+    # prBoundary. Tiny Tapeout's macro guide: "Your macro GDS must also include
+    # a PR boundary rectangle on a dedicated layer (prBoundary). ... it tells the
+    # tools the legal footprint of your macro ... It is not decorative art; the
+    # LEF SIZE should match this rectangle." For SKY130 the layer is 235/4
+    # (the guide's own crossstitching01 example uses exactly this).
+    'prB': (235, 4),
 }
 # measured rules
 R = dict(
@@ -183,14 +189,25 @@ def main():
     meta = {}
     for tag, fn in BUILDERS:
         b = fn()
+        # ---- prBoundary -------------------------------------------------
+        # Required by the Tiny Tapeout macro flow. Emitted AFTER all geometry
+        # so it covers the full metal extent. Without it the placer has no
+        # legal footprint for the macro and the build fails.
+        metal_bb = b.top.bbox()
+        b.top.shapes(b.li['prB']).insert(metal_bb)
+        bb = b.top.bbox()           # now equal to the prBoundary
+
         cell = master.create_cell(b.top.name)
         cell.copy_tree(b.top)
-        bb = cell.bbox()
         meta[tag] = {
             'cell': b.top.name,
             'size_um': [round(bb.width() * DBU, 3), round(bb.height() * DBU, 3)],
             'bbox_um': [round(bb.left * DBU, 3), round(bb.bottom * DBU, 3),
                         round(bb.right * DBU, 3), round(bb.top * DBU, 3)],
+            'prboundary_um': [round(metal_bb.left * DBU, 3),
+                              round(metal_bb.bottom * DBU, 3),
+                              round(metal_bb.right * DBU, 3),
+                              round(metal_bb.top * DBU, 3)],
         }
         # also write an individual GDS for isolated DRC
         p = os.path.join(OUT, 'struct_%s.gds' % tag)
