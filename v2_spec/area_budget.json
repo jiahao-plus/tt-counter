@@ -1,0 +1,125 @@
+{
+ "v1": {
+  "die_um": [
+   0.0,
+   0.0,
+   161.0,
+   111.52
+  ],
+  "die_area_um2": 17954.7,
+  "core_um": [
+   2.76,
+   2.72,
+   158.24,
+   106.08
+  ],
+  "core_area_um2": 16070.4,
+  "n_rows": 39,
+  "cols_per_row": 338,
+  "row_pitch_um": 2.72,
+  "col_pitch_um": 0.46,
+  "site_w_um": 155.48,
+  "site_h_um": 2.72,
+  "sites_total": 13182,
+  "margins_um": [
+   2.76,
+   2.72,
+   2.76,
+   5.44
+  ]
+ },
+ "v2_2x2_extrapolated": {
+  "nominal_um": [
+   335.0,
+   226.0
+  ],
+  "nominal_area_um2": 75710.0,
+  "core_um": [
+   2.76,
+   2.72,
+   332.24,
+   220.56
+  ],
+  "core_area_um2": 71773.9,
+  "n_rows": 80,
+  "cols_per_row": 716,
+  "sites_total": 57280,
+  "ratio_vs_v1_area": 4.47,
+  "ratio_vs_v1_sites": 4.35
+ },
+ "caveat": "EXTRAPOLATED from V1 margins, not measured on a real 2x2 run. The 2x2 PDN template (tt_block_2x2_pg.def) is not available locally; official CI is the only authority. Treat core area as an upper bound.",
+ "tracks_v1": {
+  "li1": {
+   "X": {
+    "start": 0.23,
+    "count": 350,
+    "step": 0.46
+   },
+   "Y": {
+    "start": 0.17,
+    "count": 328,
+    "step": 0.34
+   }
+  },
+  "met1": {
+   "X": {
+    "start": 0.17,
+    "count": 473,
+    "step": 0.34
+   },
+   "Y": {
+    "start": 0.17,
+    "count": 328,
+    "step": 0.34
+   }
+  },
+  "met2": {
+   "X": {
+    "start": 0.23,
+    "count": 350,
+    "step": 0.46
+   },
+   "Y": {
+    "start": 0.23,
+    "count": 242,
+    "step": 0.46
+   }
+  },
+  "met3": {
+   "X": {
+    "start": 0.34,
+    "count": 237,
+    "step": 0.68
+   },
+   "Y": {
+    "start": 0.34,
+    "count": 164,
+    "step": 0.68
+   }
+  },
+  "met4": {
+   "X": {
+    "start": 0.46,
+    "count": 175,
+    "step": 0.92
+   },
+   "Y": {
+    "start": 0.46,
+    "count": 121,
+    "step": 0.92
+   }
+  },
+  "met5": {
+   "X": {
+    "start": 1.7,
+    "count": 47,
+    "step": 3.4
+   },
+   "Y": {
+    "start": 1.7,
+    "count": 33,
+    "step": 3.4
+   }
+  }
+ }
+}

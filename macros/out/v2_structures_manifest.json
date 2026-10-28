@@ -1,0 +1,144 @@
+{
+ "master_gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/v2_structures.gds",
+ "rules": {
+  "m1_w": 0.14,
+  "m1_s": 0.14,
+  "m2_w": 0.14,
+  "m2_s": 0.14,
+  "m3_w": 0.3,
+  "m3_s": 0.3,
+  "v1": 0.15,
+  "v1_m1": 0.055,
+  "v1_m2": 0.055,
+  "v2": 0.2,
+  "v2_m2": 0.04,
+  "v2_m3": 0.065,
+  "via_space": 0.2
+ },
+ "layer_map": {
+  "M1": [
+   68,
+   20
+  ],
+  "Via1": [
+   68,
+   44
+  ],
+  "M2": [
+   69,
+   20
+  ],
+  "Via2": [
+   69,
+   44
+  ],
+  "M3": [
+   70,
+   20
+  ],
+  "M4": [
+   71,
+   20
+  ]
+ },
+ "structures": {
+  "A": {
+   "cell": "research_via1",
+   "size_um": [
+    8.14,
+    4.94
+   ],
+   "bbox_um": [
+    0.93,
+    1.93,
+    9.07,
+    6.87
+   ],
+   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_A.gds"
+  },
+  "B": {
+   "cell": "research_via2",
+   "size_um": [
+    10.22,
+    3.235
+   ],
+   "bbox_um": [
+    0.93,
+    1.93,
+    11.15,
+    5.165
+   ],
+   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_B.gds"
+  },
+  "C1": {
+   "cell": "research_branch",
+   "size_um": [
+    10.14,
+    3.2
+   ],
+   "bbox_um": [
+    0.93,
+    4.87,
+    11.07,
+    8.07
+   ],
+   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C1.gds"
+  },
+  "C3": {
+   "cell": "research_near",
+   "size_um": [
+    10.14,
+    8.24
+   ],
+   "bbox_um": [
+    0.93,
+    0.93,
+    11.07,
+    9.17
+   ],
+   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C3.gds"
+  },
+  "C4": {
+   "cell": "research_cross",
+   "size_um": [
+    10.14,
+    8.14
+   ],
+   "bbox_um": [
+    0.93,
+    0.93,
+    11.07,
+    9.07
+   ],
+   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C4.gds"
+  },
+  "D": {
+   "cell": "research_dense",
+   "size_um": [
+    35.0,
+    5.79
+   ],
+   "bbox_um": [
+    0.5,
+    0.85,
+    35.5,
+    6.64
+   ],
+   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_D.gds"
+  },
+  "E": {
+   "cell": "research_fiducial",
+   "size_um": [
+    4.0,
+    4.0
+   ],
+   "bbox_um": [
+    3.0,
+    3.0,
+    7.0,
+    7.0
+   ],
+   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_E.gds"
+  }
+ }
+}

@@ -1,0 +1,25 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+MACRO feas_via
+  CLASS BLOCK ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 8.070 BY 4.640 ;
+  PIN A
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met1 ;
+        RECT 1.000 1.930 1.140 2.070 ;
+    END
+  END A
+  PIN B
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 8.860 3.930 9.000 4.070 ;
+    END
+  END B
+END feas_via
+END LIBRARY

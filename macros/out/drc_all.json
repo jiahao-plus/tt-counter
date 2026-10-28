@@ -1,0 +1,103 @@
+{
+ "results": {
+  "A": {
+   "pass": true,
+   "n_violations": 0,
+   "layers": {
+    "M1": 2,
+    "Via1": 1,
+    "M2": 1,
+    "Via2": 0,
+    "M3": 0,
+    "Via3": 0,
+    "M4": 0
+   },
+   "violations": []
+  },
+  "B": {
+   "pass": true,
+   "n_violations": 0,
+   "layers": {
+    "M1": 0,
+    "Via1": 0,
+    "M2": 1,
+    "Via2": 1,
+    "M3": 1,
+    "Via3": 0,
+    "M4": 0
+   },
+   "violations": []
+  },
+  "C1": {
+   "pass": true,
+   "n_violations": 0,
+   "layers": {
+    "M1": 1,
+    "Via1": 3,
+    "M2": 3,
+    "Via2": 0,
+    "M3": 0,
+    "Via3": 0,
+    "M4": 0
+   },
+   "violations": []
+  },
+  "C3": {
+   "pass": true,
+   "n_violations": 0,
+   "layers": {
+    "M1": 8,
+    "Via1": 0,
+    "M2": 0,
+    "Via2": 0,
+    "M3": 0,
+    "Via3": 0,
+    "M4": 0
+   },
+   "violations": []
+  },
+  "C4": {
+   "pass": true,
+   "n_violations": 0,
+   "layers": {
+    "M1": 1,
+    "Via1": 0,
+    "M2": 1,
+    "Via2": 0,
+    "M3": 0,
+    "Via3": 0,
+    "M4": 0
+   },
+   "violations": []
+  },
+  "D": {
+   "pass": true,
+   "n_violations": 0,
+   "layers": {
+    "M1": 5,
+    "Via1": 0,
+    "M2": 5,
+    "Via2": 0,
+    "M3": 3,
+    "Via3": 0,
+    "M4": 0
+   },
+   "violations": []
+  },
+  "E": {
+   "pass": true,
+   "n_violations": 0,
+   "layers": {
+    "M1": 2,
+    "Via1": 0,
+    "M2": 2,
+    "Via2": 0,
+    "M3": 0,
+    "Via3": 0,
+    "M4": 0
+   },
+   "violations": []
+  }
+ },
+ "all_pass": true
+}

@@ -1,0 +1,10 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+MACRO research_cross
+  CLASS BLOCK ;
+  ORIGIN 0.930 0.930 ;
+  SIZE 10.140 BY 8.140 ;
+  SYMMETRY X Y ;
+END research_cross
+END LIBRARY

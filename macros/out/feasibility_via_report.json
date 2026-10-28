@@ -1,0 +1,75 @@
+{
+ "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/feasibility_via.gds",
+ "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/feasibility_via.lef",
+ "bbox_um": [
+  1.0,
+  1.93,
+  9.07,
+  6.57
+ ],
+ "size_um": [
+  8.07,
+  4.64
+ ],
+ "layer_map": {
+  "M1": [
+   68,
+   20
+  ],
+  "Via1": [
+   68,
+   44
+  ],
+  "M2": [
+   69,
+   20
+  ]
+ },
+ "rules_used": {
+  "m1_w": 0.14,
+  "m1_s": 0.14,
+  "m2_w": 0.14,
+  "m2_s": 0.14,
+  "via_cut": 0.15,
+  "m1_encl": 0.055,
+  "m2_encl": 0.055
+ },
+ "checks": [
+  {
+   "name": "M1 merged islands",
+   "value": 2,
+   "note": "expect 2 (netA + netC)"
+  },
+  {
+   "name": "Via1 cuts",
+   "value": 1,
+   "note": "expect 1"
+  },
+  {
+   "name": "M2 merged islands",
+   "value": 1,
+   "note": "expect 1"
+  },
+  {
+   "name": "via1 inside M1",
+   "value": true,
+   "note": "must be true"
+  },
+  {
+   "name": "via1 inside M2",
+   "value": true,
+   "note": "must be true"
+  },
+  {
+   "name": "M1 nets separated",
+   "value": true,
+   "note": "netA and netC must not touch"
+  },
+  {
+   "name": "netA M1-Via1-M2 continuity",
+   "value": true,
+   "note": "via must couple both layers"
+  }
+ ],
+ "all_pass": true
+}

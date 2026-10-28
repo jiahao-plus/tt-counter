@@ -1,0 +1,26 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+MACRO research_via1
+  CLASS BLOCK ;
+  ORIGIN 0.930 1.930 ;
+  SIZE 8.140 BY 4.940 ;
+  SYMMETRY X Y ;
+  PIN A
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met1 ;
+        RECT -0.000 0.000 0.140 0.140 ;
+    END
+  END A
+  PIN B
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 8.000 2.000 8.140 2.140 ;
+    END
+  END B
+END research_via1
+END LIBRARY

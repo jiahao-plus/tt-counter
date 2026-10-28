@@ -1,0 +1,20 @@
+# Normalise line endings for text files that get hash-verified.
+# The V1 audit found that info.yaml's working-tree copy was CRLF (2325 B,
+# sha256 086cefd2...) while the git blob was LF (2268 B, sha256 66929239...),
+# so any hash check run on a Windows checkout reported a false mismatch.
+# Forcing LF for these paths removes that trap for V2.
+*.yaml      text eol=lf
+*.yml       text eol=lf
+*.json      text eol=lf
+*.md        text eol=lf
+*.v         text eol=lf
+*.sv        text eol=lf
+*.py        text eol=lf
+*.sh        text eol=lf
+*.ys        text eol=lf
+*.lef       text eol=lf
+*.gds       binary
+*.oas       binary
+*.png       binary
+*.jpg       binary
+*.pdf       binary

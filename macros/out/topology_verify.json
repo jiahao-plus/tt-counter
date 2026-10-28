@@ -1,0 +1,293 @@
+{
+ "checks": [
+  {
+   "name": "A: M1-Via1-M2 forms one component, neighbour separate",
+   "pass": true,
+   "detail": "comps=2 via1=1"
+  },
+  {
+   "name": "B: M2-Via2-M3 forms one component",
+   "pass": true,
+   "detail": "comps=1 via2=1"
+  },
+  {
+   "name": "C1: single net with 3 via branches -> 1 component",
+   "pass": true,
+   "detail": "comps=1 via1=3"
+  },
+  {
+   "name": "C3: all parallel wires electrically separate",
+   "pass": true,
+   "detail": "comps=8 m1=8"
+  },
+  {
+   "name": "C4: M1/M2 cross in projection but NOT connected (no via)",
+   "pass": true,
+   "detail": "comps=2 via1=0"
+  },
+  {
+   "name": "D: width ladder matches designed widths, no vias",
+   "pass": true,
+   "detail": "m1 widths=[0.14, 0.2, 0.3, 0.5, 1.0] (want [0.14, 0.2, 0.3, 0.5, 1.0])"
+  },
+  {
+   "name": "E: M1 and M2 fiducial patterns at identical XY",
+   "pass": true,
+   "detail": "m1_shapes=3 m2_shapes=3 identical=True"
+  }
+ ],
+ "detail": {
+  "A": {
+   "components": [
+    [
+     [
+      "M1",
+      0
+     ],
+     [
+      "M1",
+      1
+     ],
+     [
+      "M1",
+      2
+     ],
+     [
+      "M2",
+      0
+     ],
+     [
+      "M2",
+      1
+     ]
+    ],
+    [
+     [
+      "M1",
+      3
+     ]
+    ]
+   ],
+   "via1": 1
+  },
+  "B": {
+   "components": [
+    [
+     [
+      "M2",
+      0
+     ],
+     [
+      "M2",
+      1
+     ],
+     [
+      "M2",
+      2
+     ],
+     [
+      "M3",
+      0
+     ],
+     [
+      "M3",
+      1
+     ]
+    ]
+   ],
+   "via2": 1
+  },
+  "C1": {
+   "components": [
+    [
+     [
+      "M1",
+      0
+     ],
+     [
+      "M1",
+      1
+     ],
+     [
+      "M1",
+      2
+     ],
+     [
+      "M1",
+      3
+     ],
+     [
+      "M2",
+      0
+     ],
+     [
+      "M2",
+      1
+     ],
+     [
+      "M2",
+      2
+     ],
+     [
+      "M2",
+      3
+     ],
+     [
+      "M2",
+      4
+     ],
+     [
+      "M2",
+      5
+     ]
+    ]
+   ],
+   "via1": 3
+  },
+  "C3": {
+   "components": [
+    [
+     [
+      "M1",
+      0
+     ]
+    ],
+    [
+     [
+      "M1",
+      1
+     ]
+    ],
+    [
+     [
+      "M1",
+      2
+     ]
+    ],
+    [
+     [
+      "M1",
+      3
+     ]
+    ],
+    [
+     [
+      "M1",
+      4
+     ]
+    ],
+    [
+     [
+      "M1",
+      5
+     ]
+    ],
+    [
+     [
+      "M1",
+      6
+     ]
+    ],
+    [
+     [
+      "M1",
+      7
+     ]
+    ]
+   ],
+   "m1_shapes": 8
+  },
+  "C4": {
+   "components": [
+    [
+     [
+      "M1",
+      0
+     ]
+    ],
+    [
+     [
+      "M2",
+      0
+     ]
+    ]
+   ],
+   "via1": 0
+  },
+  "D": {
+   "m1": 5,
+   "m2": 5,
+   "m3": 3,
+   "m1_widths_um": [
+    0.14,
+    0.2,
+    0.3,
+    0.5,
+    1.0
+   ],
+   "m2_widths_um": [
+    0.14,
+    0.2,
+    0.3,
+    0.5,
+    1.0
+   ],
+   "m3_widths_um": [
+    0.3,
+    0.5,
+    1.0
+   ],
+   "expected_m1": [
+    0.14,
+    0.2,
+    0.3,
+    0.5,
+    1.0
+   ]
+  },
+  "E": {
+   "m1": [
+    [
+     3000,
+     3000,
+     3600,
+     3600
+    ],
+    [
+     3000,
+     4750,
+     7000,
+     5250
+    ],
+    [
+     4750,
+     3000,
+     5250,
+     7000
+    ]
+   ],
+   "m2": [
+    [
+     3000,
+     3000,
+     3600,
+     3600
+    ],
+    [
+     3000,
+     4750,
+     7000,
+     5250
+    ],
+    [
+     4750,
+     3000,
+     5250,
+     7000
+    ]
+   ],
+   "identical": true
+  }
+ },
+ "all_pass": true
+}

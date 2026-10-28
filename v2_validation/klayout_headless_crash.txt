@@ -1,0 +1,6 @@
+ERROR: Signal number: 11
+Address: 0x8
+Program Version: KLayout 0.26.2 (2022-01-13 rLatestSourcePackage)
+
+Backtrace:
+/usr/lib/klayout/libklayout_lay.so.0 +0x24b786 lay::SaltDownloadManager::execute(lay::SaltManagerDialog*, lay::Salt&) [??:?]

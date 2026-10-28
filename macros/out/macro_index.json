@@ -1,0 +1,286 @@
+{
+ "A": {
+  "cell": "research_via1",
+  "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_A.lef",
+  "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_A.gds",
+  "bbox_um": [
+   0.93,
+   1.93,
+   9.07,
+   6.87
+  ],
+  "size_um": [
+   8.14,
+   4.94
+  ],
+  "layers": {
+   "M1": 4,
+   "Via1": 1,
+   "M2": 2,
+   "Via2": 0,
+   "M3": 0,
+   "M4": 0
+  },
+  "pins": [
+   {
+    "name": "A",
+    "layer": "M1",
+    "x": 1.0,
+    "y": 2.0,
+    "on_metal": true
+   },
+   {
+    "name": "B",
+    "layer": "M2",
+    "x": 9.0,
+    "y": 4.0,
+    "on_metal": true
+   }
+  ],
+  "pins_all_on_metal": true,
+  "electrical": true
+ },
+ "B": {
+  "cell": "research_via2",
+  "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_B.lef",
+  "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_B.gds",
+  "bbox_um": [
+   0.93,
+   1.93,
+   11.15,
+   5.165
+  ],
+  "size_um": [
+   10.22,
+   3.235
+  ],
+  "layers": {
+   "M1": 0,
+   "Via1": 0,
+   "M2": 3,
+   "Via2": 1,
+   "M3": 2,
+   "M4": 0
+  },
+  "pins": [
+   {
+    "name": "A",
+    "layer": "M2",
+    "x": 1.0,
+    "y": 2.0,
+    "on_metal": true
+   },
+   {
+    "name": "B",
+    "layer": "M3",
+    "x": 11.0,
+    "y": 5.0,
+    "on_metal": true
+   }
+  ],
+  "pins_all_on_metal": true,
+  "electrical": true
+ },
+ "C1": {
+  "cell": "research_branch",
+  "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C1.lef",
+  "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C1.gds",
+  "bbox_um": [
+   0.93,
+   4.87,
+   11.07,
+   8.07
+  ],
+  "size_um": [
+   10.14,
+   3.2
+  ],
+  "layers": {
+   "M1": 4,
+   "Via1": 3,
+   "M2": 6,
+   "Via2": 0,
+   "M3": 0,
+   "M4": 0
+  },
+  "pins": [
+   {
+    "name": "IN",
+    "layer": "M1",
+    "x": 1.0,
+    "y": 5.0,
+    "on_metal": true
+   },
+   {
+    "name": "TAP",
+    "layer": "M2",
+    "x": 6.0,
+    "y": 7.55,
+    "on_metal": true
+   }
+  ],
+  "pins_all_on_metal": true,
+  "electrical": true
+ },
+ "C3": {
+  "cell": "research_near",
+  "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C3.lef",
+  "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C3.gds",
+  "bbox_um": [
+   0.93,
+   0.93,
+   11.07,
+   9.17
+  ],
+  "size_um": [
+   10.14,
+   8.24
+  ],
+  "layers": {
+   "M1": 8,
+   "Via1": 0,
+   "M2": 0,
+   "Via2": 0,
+   "M3": 0,
+   "M4": 0
+  },
+  "pins": [
+   {
+    "name": "P0",
+    "layer": "M1",
+    "x": 1.0,
+    "y": 1.0,
+    "on_metal": true
+   },
+   {
+    "name": "Q0",
+    "layer": "M1",
+    "x": 10.0,
+    "y": 1.28,
+    "on_metal": true
+   },
+   {
+    "name": "P1",
+    "layer": "M1",
+    "x": 1.0,
+    "y": 3.42,
+    "on_metal": true
+   },
+   {
+    "name": "Q1",
+    "layer": "M1",
+    "x": 10.0,
+    "y": 3.76,
+    "on_metal": true
+   },
+   {
+    "name": "P2",
+    "layer": "M1",
+    "x": 1.0,
+    "y": 5.9,
+    "on_metal": true
+   },
+   {
+    "name": "Q2",
+    "layer": "M1",
+    "x": 10.0,
+    "y": 6.32,
+    "on_metal": true
+   },
+   {
+    "name": "P3",
+    "layer": "M1",
+    "x": 1.0,
+    "y": 8.46,
+    "on_metal": true
+   },
+   {
+    "name": "Q3",
+    "layer": "M1",
+    "x": 10.0,
+    "y": 9.1,
+    "on_metal": true
+   }
+  ],
+  "pins_all_on_metal": true,
+  "electrical": true
+ },
+ "C4": {
+  "cell": "research_cross",
+  "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C4.lef",
+  "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C4.gds",
+  "bbox_um": [
+   0.93,
+   0.93,
+   11.07,
+   9.07
+  ],
+  "size_um": [
+   10.14,
+   8.14
+  ],
+  "layers": {
+   "M1": 1,
+   "Via1": 0,
+   "M2": 1,
+   "Via2": 0,
+   "M3": 0,
+   "M4": 0
+  },
+  "pins": [],
+  "pins_all_on_metal": true,
+  "electrical": false
+ },
+ "D": {
+  "cell": "research_dense",
+  "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_D.lef",
+  "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_D.gds",
+  "bbox_um": [
+   0.5,
+   0.85,
+   35.5,
+   6.64
+  ],
+  "size_um": [
+   35.0,
+   5.79
+  ],
+  "layers": {
+   "M1": 5,
+   "Via1": 0,
+   "M2": 5,
+   "Via2": 0,
+   "M3": 3,
+   "M4": 0
+  },
+  "pins": [],
+  "pins_all_on_metal": true,
+  "electrical": false
+ },
+ "E": {
+  "cell": "research_fiducial",
+  "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_E.lef",
+  "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_E.gds",
+  "bbox_um": [
+   3.0,
+   3.0,
+   7.0,
+   7.0
+  ],
+  "size_um": [
+   4.0,
+   4.0
+  ],
+  "layers": {
+   "M1": 3,
+   "Via1": 0,
+   "M2": 3,
+   "Via2": 0,
+   "M3": 0,
+   "M4": 0
+  },
+  "pins": [],
+  "pins_all_on_metal": true,
+  "electrical": false
+ }
+}

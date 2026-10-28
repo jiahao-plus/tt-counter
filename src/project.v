@@ -1,6 +1,13 @@
 /*
  * tt_um_jiahao_plus_counter
- * Integrated multi-mode design (experiment branch exp/ip-integration)
+ * V2 2x2 research vehicle (branch exp/v2-2x2-research)
+ *
+ * Functional behaviour is UNCHANGED from the V1 golden commit 24fc6a5.
+ * Added: RTL instances of the V2 electrical research structures
+ * (M1-Via1-M2, M2-Via2-M3, single-net branch, near-neighbour pairs).
+ * The NON_ELECTRICAL cells (research_cross / research_dense /
+ * research_fiducial) carry no nets and are placed by the floorplan, so
+ * they are deliberately NOT instantiated here.
  *
  * Original (mode 0, ui_in[7:2] == 0):
  *   - ui_in[0] = en    计数使能（1=计数，0=保持）
@@ -122,7 +129,51 @@ module tt_um_jiahao_plus_counter (
   assign uio_out = uio_o;
   assign uio_oe  = uio_oe_r;
 
+
+  // ---------------------------------------------------------------
+  // V2 research structures.
+  //
+  // Only the ELECTRICAL structures are instantiated: they have real pins and
+  // must be reached by the router. The NON_ELECTRICAL cells carry no nets and
+  // are placed by the floorplan instead.
+  //
+  // Each macro input is tied to pwm_out (a flop-driven signal in mode 1) so the
+  // nets survive synthesis and the router must connect the macro pins.
+  // ---------------------------------------------------------------
+  wire rs_a_in = pwm_out;
+  wire rs_a_out;
+  wire rs_b_in = pwm_out;
+  wire rs_b_out;
+  wire rs_br_tap;
+  wire rs_near_q0, rs_near_q1, rs_near_q2, rs_near_q3;
+
+  research_via1 u_rs_via1 (
+      .a (rs_a_in),
+      .b (rs_a_out)
+  );
+
+  research_via2 u_rs_via2 (
+      .a (rs_b_in),
+      .b (rs_b_out)
+  );
+
+  research_branch u_rs_branch (
+      .in  (pwm_out),
+      .tap (rs_br_tap)
+  );
+
+  research_near u_rs_near (
+      .p0 (ui_in[0]), .q0 (rs_near_q0),
+      .p1 (ui_in[2]), .q1 (rs_near_q1),
+      .p2 (ui_in[4]), .q2 (rs_near_q2),
+      .p3 (ui_in[6]), .q3 (rs_near_q3)
+  );
+
+  // Keep the macro outputs observable so they are not optimised away.
+  wire _rs_obs = rs_a_out ^ rs_b_out ^ rs_br_tap
+               ^ rs_near_q0 ^ rs_near_q1 ^ rs_near_q2 ^ rs_near_q3;
+
   // Silence unused-input warning
-  wire _unused = &{1'b0};
+  wire _unused = &{1'b0, _rs_obs};
 
 endmodule
