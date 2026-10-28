@@ -111,7 +111,7 @@ A/B/C1/C3 四个电气宏全部有真实 PIN，**不依赖**此开关。
 
 | 文件 | 改动 |
 |---|---|
-| `v2_rtl/research_macros.v` | C4/D/E 从 pass-through 改为 `(* blackbox *) (* keep *)` |
+| `src/research_macros.v` | C4/D/E 从 pass-through 改为 `(* blackbox *) (* keep *)` |
 | `src/project.v` | 加 `u_rs_cross` / `u_rs_dense` / `u_rs_fiducial` 实例 |
 | `src/config.json` | 加 `MACROS`（7）、`IGNORE_DISCONNECTED_MODULES`（6）、`ERROR_ON_DISCONNECTED_PINS` |
 
@@ -147,12 +147,12 @@ yosys -p "read_verilog v2_validation/_kk.v; hierarchy -top top; proc; opt; stat"
 
 # 七宏综合
 yosys -p "read_verilog -sv src/project.v src/pwm.v src/LFSR_Design.v \
-          v2_rtl/research_macros.v; hierarchy -top tt_um_jiahao_plus_counter; \
+          src/research_macros.v; hierarchy -top tt_um_jiahao_plus_counter; \
           proc; opt; stat"
 
 # 仿真
 iverilog -g2012 -o /tmp/t.vvp v2_validation/tb_v2_smoke.v \
-    src/project.v src/pwm.v src/LFSR_Design.v v2_rtl/research_macros.v
+    src/project.v src/pwm.v src/LFSR_Design.v src/research_macros.v
 vvp /tmp/t.vvp
 
 # 宏回归

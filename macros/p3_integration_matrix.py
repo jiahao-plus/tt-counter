@@ -43,7 +43,7 @@ def main():
     cfg = json.load(open(os.path.join(ROOT, 'src', 'config.json'),
                          encoding='utf-8'))
     proj = read_text(os.path.join(ROOT, 'src', 'project.v'))
-    veri = read_text(os.path.join(ROOT, 'v2_rtl', 'research_macros.v'))
+    veri = read_text(os.path.join(ROOT, 'src', 'research_macros.v'))
     topo = json.load(open(os.path.join(ROOT, 'macros', 'out', 'topology_verify.json'),
                           encoding='utf-8'))
     drc = json.load(open(os.path.join(ROOT, 'macros', 'out', 'drc_all.json'),

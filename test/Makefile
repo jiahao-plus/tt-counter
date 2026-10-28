@@ -6,7 +6,12 @@ SIM ?= icarus
 FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v pwm.v LFSR_Design.v
+# Must mirror project.source_files in info.yaml. The V2 research macro models
+# (research_macros.v) live in src/ alongside the functional RTL, because the
+# Tiny Tapeout build only sees files listed under src/. A mismatch here was the
+# cause of the first CI failure: the test flow compiled project.v alone, hit
+# the research_* module instantiations, and cocotb never produced results.xml.
+PROJECT_SOURCES = project.v pwm.v LFSR_Design.v research_macros.v
 
 ifneq ($(GATES),yes)
 
