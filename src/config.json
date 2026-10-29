@@ -60,6 +60,9 @@
 
   "FP_PDN_VPITCH": 38.87,
 
+  "//": "CANDIDATE, NOT YET OFFICIAL-VERIFIED. CutRows prunes row segments narrower than this before tap/endcap insertion. 26.22 um = 57 sites = 2*round(FP_TAPCELL_DIST/0.46)+1, the narrowest segment that could legally host one tap. Historical evidence from run 40726887237: the 26 segments below this width hold 0 taps (0/997) and contain all 576 LU.2/LU.3/nwell.4 violations, while the 88 kept segments hold 0 such violations. NOT a guarantee that tap rules are satisfied -- that must be confirmed by the next CI run.",
+  "FP_PRUNE_THRESHOLD": 26.22,
+
   "//": "Clock",
   "RUN_CTS": 1,
 

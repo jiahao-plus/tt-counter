@@ -52,12 +52,12 @@
     "met2": 3
    },
    "area_obs": {
-    "met1": 2159200,
-    "met2": 459600
+    "met1": 2201600,
+    "met2": 502000
    },
    "area_metal": {
-    "met1": 2178800,
-    "met2": 479200
+    "met1": 2221200,
+    "met2": 521600
    },
    "obs_pin_overlap": {
     "met1": 0,
@@ -82,11 +82,11 @@
    0.93,
    1.93,
    11.15,
-   5.165
+   5.195
   ],
   "size_um": [
    10.22,
-   3.235
+   3.265
   ],
   "layers": {
    "M1": 0,
@@ -127,12 +127,12 @@
     "met3": 3
    },
    "area_obs": {
-    "met2": 1169000,
-    "met3": 1514400
+    "met2": 1235000,
+    "met3": 1548600
    },
    "area_metal": {
-    "met2": 1188600,
-    "met3": 1604400
+    "met2": 1254600,
+    "met3": 1638600
    },
    "obs_pin_overlap": {
     "met2": 0,
@@ -155,13 +155,13 @@
   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C1.gds",
   "bbox_um": [
    0.93,
-   4.87,
+   4.83,
    11.07,
    8.07
   ],
   "size_um": [
    10.14,
-   3.2
+   3.24
   ],
   "layers": {
    "M1": 4,
@@ -216,12 +216,12 @@
     "met2": 6
    },
    "area_obs": {
-    "met1": 1493600,
-    "met2": 1168800
+    "met1": 1604000,
+    "met2": 1296000
    },
    "area_metal": {
-    "met1": 1513200,
-    "met2": 1227600
+    "met1": 1623600,
+    "met2": 1354800
    },
    "obs_pin_overlap": {
     "met1": 0,

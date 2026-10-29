@@ -8,11 +8,11 @@
   "m3_w": 0.3,
   "m3_s": 0.3,
   "v1": 0.15,
-  "v1_m1": 0.055,
-  "v1_m2": 0.055,
+  "v1_m1": 0.095,
+  "v1_m2": 0.095,
   "v2": 0.2,
-  "v2_m2": 0.04,
-  "v2_m3": 0.065,
+  "v2_m2": 0.095,
+  "v2_m3": 0.095,
   "via_space": 0.2
  },
  "layer_map": {
@@ -70,19 +70,19 @@
    "cell": "research_via2",
    "size_um": [
     10.22,
-    3.235
+    3.265
    ],
    "bbox_um": [
     0.93,
     1.93,
     11.15,
-    5.165
+    5.195
    ],
    "prboundary_um": [
     0.93,
     1.93,
     11.15,
-    5.165
+    5.195
    ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_B.gds"
   },
@@ -90,17 +90,17 @@
    "cell": "research_branch",
    "size_um": [
     10.14,
-    3.2
+    3.24
    ],
    "bbox_um": [
     0.93,
-    4.87,
+    4.83,
     11.07,
     8.07
    ],
    "prboundary_um": [
     0.93,
-    4.87,
+    4.83,
     11.07,
     8.07
    ],

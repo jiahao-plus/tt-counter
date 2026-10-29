@@ -4,7 +4,7 @@ DIVIDERCHAR "/" ;
 MACRO research_via2
   CLASS BLOCK ;
   ORIGIN 0.930 1.930 ;
-  SIZE 10.220 BY 3.235 ;
+  SIZE 10.220 BY 3.265 ;
   SYMMETRY X Y ;
   PIN net
     DIRECTION INOUT ;
@@ -19,12 +19,12 @@ MACRO research_via2
   OBS
       LAYER met2 ;
         RECT 0.140 0.000 5.140 0.140 ;
-        RECT 5.000 0.140 5.140 2.930 ;
-        RECT 4.930 2.930 5.210 3.210 ;
+        RECT 5.000 0.140 5.140 2.875 ;
+        RECT 4.875 2.875 5.265 3.265 ;
       LAYER met3 ;
-        RECT 4.905 2.905 5.235 2.920 ;
-        RECT 4.905 2.920 9.920 3.220 ;
-        RECT 4.905 3.220 5.235 3.235 ;
+        RECT 4.875 2.875 5.265 2.920 ;
+        RECT 4.875 2.920 9.920 3.220 ;
+        RECT 4.875 3.220 5.265 3.265 ;
   END
 END research_via2
 END LIBRARY

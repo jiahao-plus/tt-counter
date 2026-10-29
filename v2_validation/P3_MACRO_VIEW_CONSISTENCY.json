@@ -56,15 +56,15 @@
    "prboundary_count": 1,
    "prboundary_um": [
     10.22,
-    3.235
+    3.265
    ],
    "gds_metal_bbox_um": [
     10.22,
-    3.235
+    3.265
    ],
    "lef_size_um": [
     10.22,
-    3.235
+    3.265
    ],
    "lef_origin": [
     0.93,
@@ -102,23 +102,23 @@
    "prboundary_count": 1,
    "prboundary_um": [
     10.14,
-    3.2
+    3.24
    ],
    "gds_metal_bbox_um": [
     10.14,
-    3.2
+    3.24
    ],
    "lef_size_um": [
     10.14,
-    3.2
+    3.24
    ],
    "lef_origin": [
     0.93,
-    4.87
+    4.83
    ],
    "gds_bbox_ll_um": [
     0.93,
-    4.87
+    4.83
    ],
    "prb_equals_metal": true,
    "lef_equals_prb": true,

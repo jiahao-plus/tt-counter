@@ -1,11 +1,22 @@
 {
- "method": "Per-layer, per-shape canonical signature (layer/datatype + shape kind + absolute dbu coordinates, polygons normalised for winding and vertex start), sorted then SHA-256. Hierarchy transforms are applied via begin_shapes_rec, so \"absolute coordinates\" already incorporates every hierarchical transformation. File timestamps, library names and BGNLIB dates are not part of the digest. A second, complementary check compares the raw bytes and requires every differing byte to fall inside a BGNLIB (0x0102) or BGNSTR (0x0502) date record — the digest ignores dates by construction, the byte check proves they are the ONLY difference.",
+ "pass_condition": "Per-macro, per the reviewed classification in .v2ana/geometry_change_record.json: GEOM_IDENTICAL must match HEAD shape-for-shape; PAD_ONLY may differ but must keep every via cut identical and must contain all HEAD geometry (additive only). Byte identity is NO LONGER the pass condition — the P5 via-enclosure fix is a deliberate geometry change.",
+ "method": "Per-layer, per-shape canonical signature (layer/datatype + shape kind + absolute dbu coordinates, polygons normalised for winding and vertex start), sorted then SHA-256. Hierarchy transforms are applied via begin_shapes_rec. File timestamps, library names and BGNLIB dates are not part of the digest. A second, complementary check compares raw bytes and requires every differing byte to fall inside a BGNLIB (0x0102) or BGNSTR (0x0502) date record — only applied to GEOM_IDENTICAL macros, where byte differences are not expected at all.",
+ "declared_classifications": {
+  "A": "PAD_ONLY",
+  "B": "PAD_ONLY",
+  "C1": "PAD_ONLY",
+  "C3": "GEOM_IDENTICAL",
+  "C4": "GEOM_IDENTICAL",
+  "D": "GEOM_IDENTICAL",
+  "E": "GEOM_IDENTICAL"
+ },
  "all_pass": true,
  "problems": [],
  "macros": [
   {
    "tag": "A",
    "gds": "macros/out/struct_A.gds",
+   "declared": "PAD_ONLY",
    "head": {
     "digest": "21405b27113172ce12f7f20c44882baad3d50b60b9d935d53a232523d902fbd7",
     "cell": "research_via1",
@@ -13,7 +24,7 @@
     "n_shapes": 8
    },
    "work": {
-    "digest": "21405b27113172ce12f7f20c44882baad3d50b60b9d935d53a232523d902fbd7",
+    "digest": "db875c6dcca1d2e8623b31654aed09b1794292bf2b2a508401537109c1332af9",
     "cell": "research_via1",
     "n_layers": 4,
     "n_shapes": 8
@@ -21,15 +32,36 @@
    "dbu_ok": true,
    "bbox_ok": true,
    "raw_bytes": {
-    "ok": true,
-    "n_diff": 16,
+    "ok": false,
+    "n_diff": 46,
     "n_bytes": 628,
     "n_records": 48,
     "timestamp_records_hit": [
      "BGNLIB",
      "BGNSTR"
     ],
-    "outside": []
+    "outside": [
+     259,
+     262,
+     263,
+     267,
+     271,
+     274,
+     275,
+     279,
+     282,
+     283,
+     286,
+     287,
+     291,
+     294,
+     295,
+     451,
+     454,
+     455,
+     459,
+     463
+    ]
    },
    "layers": [
     {
@@ -61,12 +93,12 @@
      },
      "work": {
       "n_shapes": 4,
-      "digest": "f42b28d8b439331d",
+      "digest": "e55601be45c34130",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "68/44",
@@ -97,19 +129,32 @@
      },
      "work": {
       "n_shapes": 2,
-      "digest": "4bb88383dc2ba3f2",
+      "digest": "e3c07569d0c0c9e9",
       "kinds": [
        "box"
       ]
      },
+     "verdict": "DIFFERS"
+    },
+    {
+     "layer": "via-cuts",
+     "head": 1,
+     "work": 1,
+     "verdict": "SAME"
+    },
+    {
+     "layer": "head-containment",
+     "head": "-",
+     "work": "all present",
      "verdict": "PASS"
     }
    ],
-   "verdict": "PASS"
+   "verdict": "PASS (declared PAD_ONLY)"
   },
   {
    "tag": "B",
    "gds": "macros/out/struct_B.gds",
+   "declared": "PAD_ONLY",
    "head": {
     "digest": "9d784e867e841b1a4e63731480819122b39484e3469969848b6b2dbea1eb112c",
     "cell": "research_via2",
@@ -117,23 +162,44 @@
     "n_shapes": 7
    },
    "work": {
-    "digest": "9d784e867e841b1a4e63731480819122b39484e3469969848b6b2dbea1eb112c",
+    "digest": "0d427e5da7169ae25aca3e172a9b5748608f974b50684f82921a1b49e113ab66",
     "cell": "research_via2",
     "n_layers": 4,
     "n_shapes": 7
    },
    "dbu_ok": true,
-   "bbox_ok": true,
+   "bbox_ok": false,
    "raw_bytes": {
-    "ok": true,
-    "n_diff": 16,
+    "ok": false,
+    "n_diff": 40,
     "n_bytes": 564,
     "n_records": 43,
     "timestamp_records_hit": [
      "BGNLIB",
      "BGNSTR"
     ],
-    "outside": []
+    "outside": [
+     259,
+     263,
+     267,
+     271,
+     274,
+     275,
+     279,
+     282,
+     283,
+     287,
+     291,
+     295,
+     387,
+     391,
+     395,
+     399,
+     403,
+     407,
+     411,
+     415
+    ]
    },
    "layers": [
     {
@@ -147,12 +213,12 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "d9d7f5254f298156",
+      "digest": "32acdf2d342656ac",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "69/20",
@@ -165,12 +231,12 @@
      },
      "work": {
       "n_shapes": 3,
-      "digest": "bc3c4abbdc80d7a7",
+      "digest": "c88090df51b6a5fa",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "69/44",
@@ -201,19 +267,32 @@
      },
      "work": {
       "n_shapes": 2,
-      "digest": "be9905234f62cd33",
+      "digest": "f8b42ea3b0cfe484",
       "kinds": [
        "box"
       ]
      },
+     "verdict": "DIFFERS"
+    },
+    {
+     "layer": "via-cuts",
+     "head": 1,
+     "work": 1,
+     "verdict": "SAME"
+    },
+    {
+     "layer": "head-containment",
+     "head": "-",
+     "work": "all present",
      "verdict": "PASS"
     }
    ],
-   "verdict": "PASS"
+   "verdict": "PASS (declared PAD_ONLY)"
   },
   {
    "tag": "C1",
    "gds": "macros/out/struct_C1.gds",
+   "declared": "PAD_ONLY",
    "head": {
     "digest": "4930cd8678abf3f52781f0431914a2eb2b442517cce7e11c85d90619d16f148b",
     "cell": "research_branch",
@@ -221,23 +300,44 @@
     "n_shapes": 14
    },
    "work": {
-    "digest": "4930cd8678abf3f52781f0431914a2eb2b442517cce7e11c85d90619d16f148b",
+    "digest": "d333ff410776a74d0863adac07a73f82b50ff1478d041d4423944d3d15c8c961",
     "cell": "research_branch",
     "n_layers": 4,
     "n_shapes": 14
    },
    "dbu_ok": true,
-   "bbox_ok": true,
+   "bbox_ok": false,
    "raw_bytes": {
-    "ok": true,
-    "n_diff": 16,
+    "ok": false,
+    "n_diff": 104,
     "n_bytes": 1014,
     "n_records": 78,
     "timestamp_records_hit": [
      "BGNLIB",
      "BGNSTR"
     ],
-    "outside": []
+    "outside": [
+     197,
+     200,
+     201,
+     205,
+     209,
+     213,
+     217,
+     221,
+     224,
+     225,
+     229,
+     232,
+     233,
+     261,
+     264,
+     265,
+     269,
+     273,
+     276,
+     277
+    ]
    },
    "layers": [
     {
@@ -251,12 +351,12 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "87dc88b1b67c5bb6",
+      "digest": "d0d7e0df9089c2cd",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "68/20",
@@ -269,12 +369,12 @@
      },
      "work": {
       "n_shapes": 4,
-      "digest": "664877bf1d4f9054",
+      "digest": "7ddaf4312868fc7f",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "68/44",
@@ -305,19 +405,32 @@
      },
      "work": {
       "n_shapes": 6,
-      "digest": "b7f33d186426ebae",
+      "digest": "f542c272b7c29b6b",
       "kinds": [
        "box"
       ]
      },
+     "verdict": "DIFFERS"
+    },
+    {
+     "layer": "via-cuts",
+     "head": 3,
+     "work": 3,
+     "verdict": "SAME"
+    },
+    {
+     "layer": "head-containment",
+     "head": "-",
+     "work": "all present",
      "verdict": "PASS"
     }
    ],
-   "verdict": "PASS"
+   "verdict": "PASS (declared PAD_ONLY)"
   },
   {
    "tag": "C3",
    "gds": "macros/out/struct_C3.gds",
+   "declared": "GEOM_IDENTICAL",
    "head": {
     "digest": "230a0c518e4fe9e419ee3ca5e2e2af97a97548cd6fb99c57de9a0e95ff91cc48",
     "cell": "research_near",
@@ -386,6 +499,7 @@
   {
    "tag": "C4",
    "gds": "macros/out/struct_C4.gds",
+   "declared": "GEOM_IDENTICAL",
    "head": {
     "digest": "0dc226e2f9cea7f12c9616f980d7afa1b2a45eae9b838864fcf4a3cf313b9c4c",
     "cell": "research_cross",
@@ -472,6 +586,7 @@
   {
    "tag": "D",
    "gds": "macros/out/struct_D.gds",
+   "declared": "GEOM_IDENTICAL",
    "head": {
     "digest": "ed16d9a062a6998ecbcdc4ae720dc50b80041d97e9688f3bfc3bcff965c67d08",
     "cell": "research_dense",
@@ -576,6 +691,7 @@
   {
    "tag": "E",
    "gds": "macros/out/struct_E.gds",
+   "declared": "GEOM_IDENTICAL",
    "head": {
     "digest": "e08e5747b496e7d253a17d9c9a59e6a9291740c28a454183355b6d3af1726f90",
     "cell": "research_fiducial",
@@ -663,19 +779,42 @@
  "master_gds": {
   "gds": "macros/out/v2_structures.gds",
   "head_digest": "4a61d0bd686c3f59016d66bd5a4f6f4a0c371e47c90712cb7018682e20029ec3",
-  "work_digest": "4a61d0bd686c3f59016d66bd5a4f6f4a0c371e47c90712cb7018682e20029ec3",
+  "work_digest": "db10ea00651509fabc782643aacb57ed39d3aea61715d805ef7177ee6eb50e87",
   "raw_bytes": {
-   "ok": true,
-   "n_diff": 64,
+   "ok": false,
+   "n_diff": 206,
    "n_bytes": 4390,
    "n_records": 336,
    "timestamp_records_hit": [
     "BGNLIB",
     "BGNSTR"
    ],
-   "outside": []
+   "outside": [
+    2513,
+    2516,
+    2517,
+    2521,
+    2525,
+    2529,
+    2533,
+    2537,
+    2540,
+    2541,
+    2545,
+    2548,
+    2549,
+    2577,
+    2580,
+    2581,
+    2585,
+    2589,
+    2592,
+    2593
+   ]
   },
+  "note": "combined file expected to differ from HEAD (three macros changed); checked for staleness against the per-macro outputs instead",
+  "stale_against_macros": [],
   "verdict": "PASS"
  },
- "scope": "Compares the working tree against HEAD of the same branch. It proves the working tree did not change any macro geometry relative to HEAD. It says nothing about V1 — V1 (24fc6a5) has no research macros at all, so there is nothing to compare these seven against."
+ "scope": "Compares the working tree against HEAD of the same branch. It proves the working tree changed nothing except the declared via-pad growth. It says nothing about V1 — V1 (24fc6a5) has no research macros at all."
 }

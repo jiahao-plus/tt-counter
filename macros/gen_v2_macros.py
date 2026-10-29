@@ -14,6 +14,39 @@
   E  research_fiducial : 多层配准标记
 
 输出：macros/out/v2_structures.gds（单文件多 cell）+ 每结构 LEF + manifest
+
+--------------------------------------------------------------------------------
+VIA ENCLOSURE —— 2026-10-29 修订（第三轮 CI 的 107 个 Magic DRC 错误的根因）
+--------------------------------------------------------------------------------
+Sky130 Magic DRC deck（sky130.tech，blob 2fdf72416c5f5384415269436878940b27112409）
+中的原文是：
+
+    surround v1/m1  *m1,rm1  30 directional  "Metal1 overlap of Via1 < %d ..."
+    surround v1/m2  *m2,rm2  30 directional  "Metal2 overlap of Via1 < %d ..."
+    surround v2/m2  *m2,rm2  45 directional  "Metal2 overlap of via2 < %d ..."
+    surround v2/m3  *m3,rm3  25 absence_illegal "Metal3 overlap of via2 < %d ..."
+
+该 deck 以 5 nm 为单位，故打印值为 6/6/9/5，真实阈值是
+    via1 -> met1 = 0.085 um   （via.5a - via.4a）
+    via1 -> met2 = 0.085 um   （met2.5 - met2.4）
+    via2 -> met2 = 0.085 um   （via2.4a - via2.4）
+    via2 -> met3 = 0.065 um   （met3.4，absence_illegal，四边都需满足）
+
+旧版此处写的是 v1_m1=0.055 / v1_m2=0.055 / v2_m2=0.040 —— 三个值都低于规则。
+对 0.150 um 的 Via1，对称方形 pad 至少需要 0.150 + 2*0.085 = 0.320 um；
+对 0.200 um 的 Via2 落到 M2 上，至少需要 0.200 + 2*0.085 = 0.370 um。
+
+这里取 0.095 的包围（比 0.085 多 10 nm 余量）：
+    Via1 pad = 0.150 + 2*0.095 = 0.340 um      （met1 与 met2 两侧同尺寸）
+    Via2 pad = 0.200 + 2*0.095 = 0.390 um      （met2 与 met3 两侧同尺寸）
+met3.4 只要求 0.065，本可以只给 0.330 的 pad；选择 0.390 是为了让两个 landing
+都是**对称正方形**、四边等深，既留 30 nm 余量，也使修复不依赖任何
+"directional 到底怎么解释"的争议 —— 四边等深时按哪种语义都通过。
+该值与 OpenROAD 自己在最终 GDS 里为 1018 个 via1 使用的 0.320 pad
+（正好 0.085 包围、DRC 干净）保持同一量级，并留出加工余量。
+
+**不变的量**（科研真值的前提）：via cut 尺寸仍是 0.150 / 0.200，
+所有 via 的**中心坐标与数量**完全未动 —— 只有 landing pad 变大。
 """
 import json
 import os
@@ -38,13 +71,15 @@ L = {
     # (the guide's own crossstitching01 example uses exactly this).
     'prB': (235, 4),
 }
-# measured rules
+# measured rules — see module docstring for the enclosure revision
+ENCL = 0.095          # >= 0.085 required for all three 0.085 rules, +10 nm margin
+ENCL_M3 = 0.095       # met3.4 only needs 0.065; keep the pad square and add margin
 R = dict(
     m1_w=0.14, m1_s=0.14,
     m2_w=0.14, m2_s=0.14,
     m3_w=0.30, m3_s=0.30,
-    v1=0.15, v1_m1=0.055, v1_m2=0.055,
-    v2=0.20, v2_m2=0.040, v2_m3=0.065,
+    v1=0.15, v1_m1=ENCL, v1_m2=ENCL,          # via1 -> m1/m2 : rule 0.085
+    v2=0.20, v2_m2=ENCL, v2_m3=ENCL_M3,       # via2 -> m2 : 0.085 ; via2 -> m3 : 0.065
     via_space=0.20,
 )
 

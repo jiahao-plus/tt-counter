@@ -15,14 +15,36 @@ enclosing_check / isolated_check）重新实现关键 BEOL 规则：
   m2.2  min m2 spacing          0.140 um
   m3.1  min m3 width            0.300 um
   m3.*  min m3 spacing          0.300 um
-  via.4a/b  m1 enclosure of via1  0.055 um
-  via2.4/5  m2 enclosure of via2  0.040 um
-  m3.4      m3 enclosure of via2  0.065 um
-  m3.4/13   m3 enclosure of via3  0.060 um
-  m4.3/15   m4 enclosure of via3  0.065 um
-  via2.2/12 via2 spacing          0.200 um
-  via3.2/12 via3 spacing          0.200 um
-  x.1b      on-grid 0.005 um
+  via.1a   min via1 width              0.150 um
+  via.2    min via1 spacing            0.060 um  (via.2 - 2*via.4a, touching_ok)
+  via.5a   m1 enclosure of via1        0.085 um  (via.5a - via.4a, DIRECTIONAL)
+  met2.5   m2 enclosure of via1        0.085 um  (met2.5 - met2.4, DIRECTIONAL)
+  via2.1a  min via2 width              0.200 um
+  via2.2   min via2 spacing            0.120 um  (via2.2 - 2*via2.4, touching_ok)
+  via2.4a  m2 enclosure of via2        0.085 um  (via2.4a - via2.4, DIRECTIONAL)
+  met3.4   m3 enclosure of via2        0.065 um  (ABSENCE_ILLEGAL, all sides)
+
+**方向性包围（directional surround）的语义 —— 这是旧版本最大的漏洞：**
+  SKY130 的 via.5a 原文是 "Metal1 overlap of Via1 on at least **two opposite
+  sides** by 0.085 um" —— 要求的是**某一对相对边都达标**，即
+        min( left, right ) >= T    或    min( bottom, top ) >= T
+  而不是"四边都要达标"，也不是"任意一边达标"。
+  早期版本把 0.055 当作"实测规则值"写死，等于把违规几何判定为通过 ——
+  这正是第三轮 CI 中 107 个 via.5a/met2.5/via2.4a 错误能一路逃过本地检查的原因。
+
+  **阈值依据（不是猜的）**：第三轮 CI 的 669 个 Magic 盒子里，包围类错误的
+  规则名分布是 via.5a 63 + met2.5 36 + via2.4a 8 = 107，**met3.4 为 0**。
+  逐宏核对：A 23 = 11 via.5a + 12 met2.5；B 8 = 纯 via2.4a；
+  C1 62 = 38 via.5a + 24 met2.5；余下 14 个 via.5a 落在左/中 sliver 的 PDN via 上。
+  三条规则在 0.085 处、met3.4 在 0.065 处同时自洽 —— 这就是阈值的实测锚点。
+
+  **对本检查器的直接推论**：B 的 Via2 落到 M3 上是 L=0.065/R=2.000/B=0.065/
+  T=0.065，Magic 没有报 met3.4，因此该几何合法。任何把这条报成违规的实现
+  都是错的（旧版的 µm-vs-dbu 单位混用就造成了这个假阳性）。
+
+  **与修复的关系**：本版把三处包围统一改成对称 pad（Via1 0.340 = 0.095 包围，
+  Via2 0.390 = 0.095 包围），四边等深 —— 无论按哪种语义解释都通过，
+  因此修复不依赖对 directional 语义的解读。
 
 **局限（必须随结果说明）**：
   - 不覆盖 FEOL、密度、天线、pin、max-width/slotting 规则
@@ -44,10 +66,12 @@ RULES = dict(
     m1_w=0.140, m1_s=0.140,
     m2_w=0.140, m2_s=0.140,
     m3_w=0.300, m3_s=0.300,
-    via1_cut=0.150, via1_m1_encl=0.055, via1_m2_encl=0.055,
-    via2_cut=0.200, via2_m2_encl=0.040, via2_m3_encl=0.065,
-    via3_cut=0.200, via3_m3_encl=0.060, via3_m4_encl=0.065,
-    via_spacing=0.200,
+    via1_cut=0.150, via1_m1_encl=0.085, via1_m2_encl=0.085, via1_space=0.060,
+    via2_cut=0.200, via2_m2_encl=0.085, via2_m3_encl=0.065, via2_space=0.120,
+    # Via3 is not used by any research macro. These values were NOT re-measured
+    # in this pass, so the Via3 spacing check is skipped (None) rather than
+    # asserting a number that has no evidence behind it.
+    via3_cut=0.200, via3_m3_encl=0.060, via3_m4_encl=0.065, via3_space=None,
 )
 
 LAYERS = {
@@ -62,6 +86,7 @@ VIA_ENCL = {
     'Via3': [('M3', 'via3_m3_encl'), ('M4', 'via3_m4_encl')],
 }
 VIA_SIZE = {'Via1': 'via1_cut', 'Via2': 'via2_cut', 'Via3': 'via3_cut'}
+VIA_SPACE = {'Via1': 'via1_space', 'Via2': 'via2_space', 'Via3': 'via3_space'}
 
 
 def um(v):
@@ -105,6 +130,86 @@ def _collect(res, rule, min_um, what):
     return out
 
 
+def _side_depths(metal, via_box):
+    """Exact per-side enclosure depth of `via_box` inside `metal`, um.
+
+    Binary-searches the largest d for which the one-side probe rectangle
+    grown by d is fully covered by the metal Region. This is exact for
+    rectilinear geometry (the deck's target), and does not assume the
+    metal polygon containing the via is itself a rectangle.
+    """
+    out = {}
+    for side in ('L', 'R', 'B', 'T'):
+        lo, hi = 0.0, 2.0
+        for _ in range(24):
+            mid = (lo + hi) / 2.0
+            d = um(mid)
+            if side == 'L':
+                pr = pya.Box(via_box.left - d, via_box.bottom, via_box.left, via_box.top)
+            elif side == 'R':
+                pr = pya.Box(via_box.right, via_box.bottom, via_box.right + d, via_box.top)
+            elif side == 'B':
+                pr = pya.Box(via_box.left, via_box.bottom - d, via_box.right, via_box.bottom)
+            else:
+                pr = pya.Box(via_box.left, via_box.top, via_box.right, via_box.top + d)
+            if pr.width() <= 0 or pr.height() <= 0:
+                lo = mid
+                continue
+            if (pya.Region(pr) - metal).is_empty():
+                lo = mid
+            else:
+                hi = mid
+        out[side] = lo
+    return out
+
+
+def check_enclosure(metal, via_region, threshold_um, directional=True):
+    """SKY130 via-enclosure check.
+
+    directional=True reproduces the SKY130 `surround ... directional` rule
+    ("at least two opposite sides"):
+        OK iff min(L,R) >= T   OR   min(B,T) >= T
+    directional=False is the strict four-side test (all sides >= T), used
+    only by the negative controls to prove the check actually bites.
+
+    UNITS: threshold_um is um and _side_depths returns um. An earlier revision
+    converted T to database units (65) while comparing against um (0.065),
+    which made every via trip the test unconditionally — a false pass on the
+    *count* and a false verdict on B's legal met3.4 geometry.
+    """
+    viol = []
+    if via_region.is_empty():
+        return viol
+    if metal.is_empty():
+        return viol
+    T = threshold_um          # um
+    tol = 0.5 * DBU           # half a database unit, in um
+    for v in via_region.each():
+        vb = v.bbox()
+        s = _side_depths(metal, vb)
+        lr = min(s['L'], s['R'])   # this opposite-side pair must BOTH reach T
+        bt = min(s['B'], s['T'])
+        if directional:
+            bad = (lr < T - tol) and (bt < T - tol)
+        else:
+            bad = min(s.values()) < T - tol
+        if bad:
+            viol.append({
+                'check': 'enclosure',
+                'mode': 'directional' if directional else 'all_sides',
+                'min_required_um': threshold_um,
+                'bbox_um': [round(vb.left * DBU, 3), round(vb.bottom * DBU, 3),
+                            round(vb.right * DBU, 3), round(vb.top * DBU, 3)],
+                'sides_um': {k: round(vv, 3) for k, vv in s.items()},
+                'best_axis_um': round(max(lr, bt), 3),
+                'min_lr_um': round(lr, 3),
+                'min_bt_um': round(bt, 3),
+            })
+        if len(viol) >= 500:
+            break
+    return viol
+
+
 def run(gds, verbose=True):
     ly, top, R = load(gds)
     viol = []
@@ -137,30 +242,39 @@ def run(gds, verbose=True):
                              'bbox_um': [round(bb.left * DBU, 3), round(bb.bottom * DBU, 3),
                                          round(bb.right * DBU, 3), round(bb.top * DBU, 3)]})
 
-    # ---- via enclosure by both metals (native enclosing_check)
+    # ---- via enclosure by both metals (Magic-compatible directional semantics)
+    #
+    # Previously this used `rm.enclosing_check(rv, need)` with need = 0.055/0.040,
+    # which both (a) used the wrong threshold values and (b) applied an
+    # all-sides rule where the SKY130 deck specifies a directional one.
+    # Both defects are corrected here.
     for v, pairs in VIA_ENCL.items():
         rv = R[v]
         if rv.is_empty():
             continue
         for mname, key in pairs:
             rm = R[mname]
-            need = um(RULES[key])
             if rm.is_empty():
                 viol.append({'rule': '%s.%s.enclosure' % (v, mname),
                              'check': 'enclosure', 'error': 'metal layer empty'})
                 continue
-            # KLayout: enclosing_check(other, d) -> places where `other` (the via)
-            # is not enclosed by `self` (the metal) with distance d.
-            viol += _collect(rm.enclosing_check(rv, need),
-                             '%s.%s.enclosure' % (v, mname), RULES[key], 'enclosure')
+            for item in check_enclosure(rm, rv, RULES[key], directional=True):
+                item = dict(item)
+                item['rule'] = '%s.%s.enclosure' % (v, mname)
+                viol.append(item)
 
     # ---- via spacing
-    for v in ('Via1', 'Via2', 'Via3'):
+    #
+    # The deck rules are `spacing v1 v1 60 touching_ok` (0.060) and
+    # `spacing v2 v2 120 touching_ok` (0.120). `touching_ok` is exactly the
+    # semantics of space_check() on the *merged* region: vias that touch are
+    # one polygon and are not flagged.
+    for v, key in VIA_SPACE.items():
+        need = RULES[key]
         r = R[v]
-        if r.is_empty() or r.count() < 2:
+        if need is None or r.is_empty() or r.count() < 2:
             continue
-        viol += _collect(r.isolated_check(um(RULES['via_spacing'])),
-                         '%s.min_space' % v, RULES['via_spacing'], 'space')
+        viol += _collect(r.space_check(um(need)), '%s.min_space' % v, need, 'space')
 
     # ---- on-grid
     g = um(GRID)

@@ -26,8 +26,8 @@
     "met1": {
      "n_obs": 4,
      "n_pins": 1,
-     "obs_area": 2159200,
-     "metal_area": 2178800,
+     "obs_area": 2201600,
+     "metal_area": 2221200,
      "obs_pin_overlap": 0,
      "obs_self_overlap": 0,
      "obs_outside_footprint": 0,
@@ -40,8 +40,8 @@
     "met2": {
      "n_obs": 3,
      "n_pins": 1,
-     "obs_area": 459600,
-     "metal_area": 479200,
+     "obs_area": 502000,
+     "metal_area": 521600,
      "obs_pin_overlap": 0,
      "obs_self_overlap": 0,
      "obs_outside_footprint": 0,
@@ -114,8 +114,8 @@
     "met2": {
      "n_obs": 3,
      "n_pins": 1,
-     "obs_area": 1169000,
-     "metal_area": 1188600,
+     "obs_area": 1235000,
+     "metal_area": 1254600,
      "obs_pin_overlap": 0,
      "obs_self_overlap": 0,
      "obs_outside_footprint": 0,
@@ -128,8 +128,8 @@
     "met3": {
      "n_obs": 3,
      "n_pins": 1,
-     "obs_area": 1514400,
-     "metal_area": 1604400,
+     "obs_area": 1548600,
+     "metal_area": 1638600,
      "obs_pin_overlap": 0,
      "obs_self_overlap": 0,
      "obs_outside_footprint": 0,
@@ -202,8 +202,8 @@
     "met1": {
      "n_obs": 7,
      "n_pins": 1,
-     "obs_area": 1493600,
-     "metal_area": 1513200,
+     "obs_area": 1604000,
+     "metal_area": 1623600,
      "obs_pin_overlap": 0,
      "obs_self_overlap": 0,
      "obs_outside_footprint": 0,
@@ -216,8 +216,8 @@
     "met2": {
      "n_obs": 6,
      "n_pins": 3,
-     "obs_area": 1168800,
-     "metal_area": 1227600,
+     "obs_area": 1296000,
+     "metal_area": 1354800,
      "obs_pin_overlap": 0,
      "obs_self_overlap": 0,
      "obs_outside_footprint": 0,
@@ -239,36 +239,36 @@
        "layer": "met1",
        "rect_um": [
         0.0,
-        0.06,
+        0.1,
         0.14,
-        0.2
+        0.24
        ]
       },
       {
        "layer": "met2",
        "rect_um": [
         1.0,
-        2.06,
+        2.1,
         1.14,
-        2.2
+        2.24
        ]
       },
       {
        "layer": "met2",
        "rect_um": [
         5.0,
-        2.56,
+        2.6,
         5.14,
-        2.7
+        2.74
        ]
       },
       {
        "layer": "met2",
        "rect_um": [
         9.0,
-        3.06,
+        3.1,
         9.14,
-        3.2
+        3.24
        ]
       }
      ]

@@ -72,6 +72,65 @@ def flip_symmetry(ly, top):
 results = [perturb('translate_1dbu', move_one),
            perturb('widen_1dbu', widen_one),
            perturb('mirror_x', flip_symmetry)]
+
+# ---------------------------------------------------------------------------
+# Controls for the P5 PAD_ONLY policy. A macro declared PAD_ONLY is allowed to
+# differ from HEAD — but only by GROWING metal. If these controls did not fail,
+# "PAD_ONLY" would be a licence to silently move or delete research geometry.
+# ---------------------------------------------------------------------------
+print()
+print("PAD_ONLY containment controls (must all be REJECTED):")
+
+def policy_perturb(name, fn, expect_removed):
+    p = os.path.join(WORK, 'policy_%s.gds' % name)
+    ly = pya.Layout(); ly.read(SRC)
+    fn(ly, ly.top_cell())
+    ly.write(p)
+    gone = gi.head_not_contained(SRC, p)
+    v_same = gi.vias_of(SRC) == gi.vias_of(p)
+    rejected = bool(gone) or not v_same
+    good = rejected == expect_removed
+    print("  %-22s removed=%-28s vias_unchanged=%-5s rejected=%-5s %s"
+          % (name, (gone or 'none'), v_same, rejected,
+             'PASS' if good else 'FAIL'))
+    return good
+
+def shrink_one(ly, top):
+    """Shrink a wire — old geometry is no longer contained."""
+    li = ly.find_layer(68, 20)
+    sh = list(top.shapes(li).each())[0]
+    b = sh.box
+    top.shapes(li).erase(sh)
+    top.shapes(li).insert(pya.Box(b.left, b.bottom, b.right, b.top - 100))
+
+def move_one_far(ly, top):
+    li = ly.find_layer(68, 20)
+    sh = list(top.shapes(li).each())[0]
+    b = sh.box
+    top.shapes(li).erase(sh)
+    top.shapes(li).insert(pya.Box(b.left, b.bottom + 2000, b.right, b.top + 2000))
+
+def move_via_cut(ly, top):
+    li = ly.find_layer(68, 44)
+    sh = list(top.shapes(li).each())[0]
+    b = sh.box
+    top.shapes(li).erase(sh)
+    top.shapes(li).insert(pya.Box(b.left + 1, b.bottom, b.right + 1, b.top))
+
+def grow_only(ly, top):
+    """Pure additive growth — the ONE thing PAD_ONLY permits."""
+    li = ly.find_layer(68, 20)
+    sh = list(top.shapes(li).each())[0]
+    b = sh.box
+    top.shapes(li).erase(sh)
+    top.shapes(li).insert(pya.Box(b.left - 100, b.bottom - 100,
+                                  b.right + 100, b.top + 100))
+
+p5 = [policy_perturb('shrink_wire', shrink_one, True),
+      policy_perturb('move_wire_2um', move_one_far, True),
+      policy_perturb('move_via_cut_1dbu', move_via_cut, True),
+      policy_perturb('grow_only', grow_only, False)]
+results.append(all(p5))
 print()
 print("NEGATIVE CONTROL:", "PASS (all perturbations detected)" if all(results) else "FAIL")
 sys.exit(0 if all(results) else 1)
