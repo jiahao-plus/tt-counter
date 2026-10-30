@@ -48,7 +48,7 @@
    "macro_name": "research_via1",
    "x_range_um": [
     33.5,
-    41.64
+    42.57
    ],
    "n_straps_crossing": 0,
    "straps": [],
@@ -60,7 +60,7 @@
    "macro_name": "research_via2",
    "x_range_um": [
     64.0,
-    74.22
+    75.15
    ],
    "n_straps_crossing": 0,
    "straps": [],
@@ -72,7 +72,7 @@
    "macro_name": "research_branch",
    "x_range_um": [
     79.32,
-    89.46
+    90.39
    ],
    "n_straps_crossing": 0,
    "straps": [],

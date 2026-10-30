@@ -43,7 +43,10 @@ continuously; only its visibility on the pin is gated by the mode.
 
 **Mode 2 — `ui_in[7:2] == 6'd2`: LFSR generator with serial output.**
 
-- `uio_in[7:0]` = **seed_value**, sampled while `rst_n` is low.
+- `uio_in[7:0]` = **seed_value**, loaded on the rising `clk` edge that finds
+  `rst_n` still low (`LFSR_Design.v:31` is `posedge clk` with a synchronous
+  `if (rst)`). A seed that is only present while `rst_n` is low, and is gone
+  before the next rising edge, is therefore **not** captured.
 - `ui_in[0]` = **enable**, `ui_in[1]` = **output_enable**.
 - `uo_out[7:0]` = the LFSR state.
 - `uio_out[0]` = serial `Out`, `uio_out[1]` = `valid`;

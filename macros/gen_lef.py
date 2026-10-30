@@ -334,18 +334,33 @@ def verify_obs(tag, rule, obs_by_layer, pin_boxes_by_layer, metal_local,
     return report
 
 
-def emit(m, bbox, pins, obs_by_layer, dbu):
+def emit(m, bbox, pins, obs_by_layer, dbu, local_origin):
     """Emit the LEF. `pins` is [(name, [(layer, x, y), ...])] — one PORT per
     PIN, listing every access point as a LAYER/RECT pair inside that PORT.
 
     `obs_by_layer` is {lef_layer_name: [pya.Box in dbu]} for the obstruction
     block, already in macro-local coordinates.
+
+    `local_origin` is the offset that was removed from the cell during
+    normalisation (0,0 for the macros that were left alone).  It is used only
+    to map the design-coordinate PINS table onto the cell as it sits on disk.
+
+    TWO DIFFERENT THINGS, do not conflate them:
+      ORIGIN       written as the cell's own bbox lower-left (`bbox[0:2]`).
+                   For a normalised macro that is (0,0); for a geometry-only
+                   macro it stays the round-4 value.  This keeps every RECT
+                   inside the (0,0)-(SIZE) frame, so SIZE never has to grow.
+      local_origin the re-basing shift, only used to convert PINS.
     """
     lines = ['VERSION 5.8 ;',
              'BUSBITCHARS "[]" ;',
              'DIVIDERCHAR "/" ;',
              'MACRO %s' % m['cell'],
              '  CLASS BLOCK ;',
+             # ORIGIN follows the cell's own frame.  A PIN under a non-zero
+             # ORIGIN is unsafe (OpenROAD adds ORIGIN, Magic subtracts it), so
+             # only the macros without a PIN may carry a non-zero ORIGIN --
+             # and those are exactly the ones we did not normalise.
              '  ORIGIN %.3f %.3f ;' % (bbox[0], bbox[1]),
              '  SIZE %.3f BY %.3f ;' % (bbox[2] - bbox[0], bbox[3] - bbox[1]),
              '  SYMMETRY X Y ;']
@@ -355,7 +370,7 @@ def emit(m, bbox, pins, obs_by_layer, dbu):
         lines.append('    USE SIGNAL ;')
         lines.append('    PORT')
         for layer, x, y in accesses:
-            lx, ly_ = clean(x - bbox[0]), clean(y - bbox[1])
+            lx, ly_ = clean(x - local_origin[0]), clean(y - local_origin[1])
             x0, y0, x1, y1 = (clean(v) for v in pin_rect(layer, lx, ly_))
             lines.append('      LAYER %s ;' % LEF_LAYER[layer])
             lines.append('        RECT %.3f %.3f %.3f %.3f ;' % (x0, y0, x1, y1))
@@ -408,12 +423,20 @@ def main():
         metal_local = metal_regions(ly, top, ox, oy)
 
         # ---- pins, and the per-layer pin rectangles they occupy ----------
+        # PINS stores the access points in DESIGN coordinates, i.e. the frame
+        # the structures were laid out in before any re-basing.  A cell on disk
+        # has had `local_origin` subtracted from it, so subtract the same
+        # offset to get the cell-local coordinate.  For the normalised macros
+        # local_origin == the original bbox lower-left and bbox[0] is now 0;
+        # for the untouched geometry macros local_origin is 0 and bbox[0] is
+        # that same lower-left.  Using `local_origin` covers both cases.
+        lo_um = m.get('local_origin_um', [0.0, 0.0])
         pins = PINS.get(tag, [])
         pin_checks = []
         pin_boxes_by_layer = {}
         for name, accesses in pins:
             for layer, x, y in accesses:
-                lx, ly_ = x - bbox[0], y - bbox[1]
+                lx, ly_ = x - lo_um[0], y - lo_um[1]
                 ok = verify_pin_on_metal(metal_local, layer, lx, ly_, dbu)
                 pin_checks.append({'pin': name, 'layer': layer,
                                    'x': x, 'y': y, 'on_metal': ok})
@@ -440,7 +463,8 @@ def main():
         obs_check = verify_obs(tag, rule, obs_by_layer, pin_boxes_by_layer,
                                metal_local, size_dbu, problems)
 
-        lef = emit(m, bbox, pins, obs_by_layer, dbu)
+        lef = emit(m, bbox, pins, obs_by_layer, dbu,
+                   local_origin=m.get('local_origin_um', [0.0, 0.0]))
         lp = os.path.join(OUT, 'struct_%s.lef' % tag)
         open(lp, 'w', encoding='utf-8', newline='\n').write(lef)
         idx[tag] = {
@@ -448,6 +472,10 @@ def main():
             'lef': lp,
             'gds': p,
             'bbox_um': [round(v, 3) for v in bbox],
+            # Re-basing shift taken out of the cell (0,0 for the geometry-only
+            # macros that were left alone).  p3_placement_plan.py adds this
+            # back into the instance placement so the macro does not move.
+            'local_origin_um': list(m.get('local_origin_um', [0.0, 0.0])),
             'size_um': [round(bbox[2] - bbox[0], 3), round(bbox[3] - bbox[1], 3)],
             'layers': counts,
             'pins': pin_checks,

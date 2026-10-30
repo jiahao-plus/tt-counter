@@ -55,7 +55,14 @@ def build_macros():
         macros[p['macro_name']] = {
             'instances': {
                 p['instance']: {
-                    'location': [p['x_um'], p['y_um']],
+                    # place_*_um is the placement the cell actually needs:
+                    # design-intent lower-left plus whatever offset was removed
+                    # from the cell geometry during normalisation.  For the four
+                    # geometry-only macros the two coincide.  Never write x_um
+                    # here -- for a normalised macro that reverts the placement
+                    # to the pre-normalisation value and moves the metal.
+                    'location': [p.get('place_x_um', p['x_um']),
+                                 p.get('place_y_um', p['y_um'])],
                     'orientation': p['orientation'],
                 }
             },

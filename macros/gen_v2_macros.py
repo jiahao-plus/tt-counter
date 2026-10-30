@@ -217,6 +217,15 @@ BUILDERS = [('A', build_A), ('B', build_B), ('C1', build_C1),
             ('C3', build_C3), ('C4', build_C4), ('D', build_D), ('E', build_E)]
 
 
+# Structures whose cell geometry is re-based so its bbox starts at (0,0).
+# Only the three macros that carry an electrical PIN need this: their LEF PIN
+# rectangles are read by both OpenROAD (place + ORIGIN + RECT) and Magic
+# (place + RECT - ORIGIN), and the two only agree when ORIGIN is zero.  The
+# four geometry-only macros have no PIN, never enter the netlist, and keep the
+# round-4 coordinates byte-for-byte, so they are deliberately NOT normalised.
+NORMALISE = {'A', 'B', 'C1'}
+
+
 def main():
     # one layout holding every structure as its own cell
     master = pya.Layout()
@@ -232,6 +241,20 @@ def main():
         b.top.shapes(b.li['prB']).insert(metal_bb)
         bb = b.top.bbox()           # now equal to the prBoundary
 
+        # ---- re-base the cell so its bbox starts at (0,0) ---------------
+        # The offset removed here is handed to the placer through
+        # `local_origin_um`, which p3_placement_plan.py adds back to the
+        # instance placement, so the macro does not move on the die.
+        origin_um = (0.0, 0.0)
+        if tag in NORMALISE:
+            origin_um = (round(bb.left * DBU, 3), round(bb.bottom * DBU, 3))
+            if bb.left or bb.bottom:
+                b.top.transform(
+                    pya.ICplxTrans(1.0, 0, False, -bb.left, -bb.bottom))
+                bb = b.top.bbox()
+            assert bb.left == 0 and bb.bottom == 0, \
+                '%s: normalisation failed, bbox starts at %d,%d' % (tag, bb.left, bb.bottom)
+
         cell = master.create_cell(b.top.name)
         cell.copy_tree(b.top)
         meta[tag] = {
@@ -243,6 +266,9 @@ def main():
                               round(metal_bb.bottom * DBU, 3),
                               round(metal_bb.right * DBU, 3),
                               round(metal_bb.top * DBU, 3)],
+            # Offset removed from the cell geometry (0,0 for the geometry-only
+            # macros).  p3_placement_plan.py adds it back to the placement.
+            'local_origin_um': list(origin_um),
         }
         # also write an individual GDS for isolated DRC
         p = os.path.join(OUT, 'struct_%s.gds' % tag)

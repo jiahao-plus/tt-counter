@@ -28,52 +28,52 @@ P3 的通过条件是"与 HEAD 逐图形相同"。**P5 的 Item 2 修正了 via 
 
 | 宏 | 声明分类 | 非空层 | HEAD 图形数 | 工作区图形数 | HEAD 摘要 | 工作区摘要 | 判定 |
 |---|---|---|---|---|---|---|---|
-| A | `PAD_ONLY` | 4 | 8 | 8 | `21405b27113172ce` | `db875c6dcca1d2e8` | **PASS (declared PAD_ONLY)** |
-| B | `PAD_ONLY` | 4 | 7 | 7 | `9d784e867e841b1a` | `0d427e5da7169ae2` | **PASS (declared PAD_ONLY)** |
-| C1 | `PAD_ONLY` | 4 | 14 | 14 | `4930cd8678abf3f5` | `d333ff410776a74d` | **PASS (declared PAD_ONLY)** |
+| A | `NORMALISED` | 4 | 8 | 8 | `db875c6dcca1d2e8` | `20485d449b9a5b6a` | **PASS (declared NORMALISED)** |
+| B | `NORMALISED` | 4 | 7 | 7 | `0d427e5da7169ae2` | `aecb0128a12c597e` | **PASS (declared NORMALISED)** |
+| C1 | `NORMALISED` | 4 | 14 | 14 | `d333ff410776a74d` | `b15e44aaa1be92d6` | **PASS (declared NORMALISED)** |
 | C3 | `GEOM_IDENTICAL` | 2 | 9 | 9 | `230a0c518e4fe9e4` | `230a0c518e4fe9e4` | **PASS** |
 | C4 | `GEOM_IDENTICAL` | 3 | 3 | 3 | `0dc226e2f9cea7f1` | `0dc226e2f9cea7f1` | **PASS** |
 | D | `GEOM_IDENTICAL` | 4 | 14 | 14 | `ed16d9a062a6998e` | `ed16d9a062a6998e` | **PASS** |
 | E | `GEOM_IDENTICAL` | 3 | 7 | 7 | `e08e5747b496e7d2` | `e08e5747b496e7d2` | **PASS** |
-| ALL | （合并版） | — | — | — | `4a61d0bd686c3f59` | `db10ea00651509fa` | **PASS** |
+| ALL | （合并版） | — | — | — | `4a61d0bd686c3f59` | `c55dfb6ce5e77751` | **PASS** |
 
 > 合并版 `v2_structures.gds` 含三个声明为 `PAD_ONLY` 的宏，
 > 与 HEAD 不同是**预期**的。它改判"是否与逐宏输出一致"（防陈旧）。
 
 ## 逐层明细
 
-### A — macros/out/struct_A.gds（声明 `PAD_ONLY`）
+### A — macros/out/struct_A.gds（声明 `NORMALISED`）
 
 | 层 | HEAD | 工作区 | 判定 |
 |---|---|---|---|
-| 235/4 | 1 shapes, `5b4c0e4a566bf6f9` | 1 shapes, `5b4c0e4a566bf6f9` | PASS |
-| 68/20 | 4 shapes, `f42b28d8b439331d` | 4 shapes, `e55601be45c34130` | DIFFERS |
-| 68/44 | 1 shapes, `e3596aa93a6cfd30` | 1 shapes, `e3596aa93a6cfd30` | PASS |
-| 69/20 | 2 shapes, `4bb88383dc2ba3f2` | 2 shapes, `e3c07569d0c0c9e9` | DIFFERS |
+| 235/4 | 1 shapes, `5b4c0e4a566bf6f9` | 1 shapes, `1748a86ffdf6911b` | DIFFERS |
+| 68/20 | 4 shapes, `e55601be45c34130` | 4 shapes, `0cbaed7c0bbbdd84` | DIFFERS |
+| 68/44 | 1 shapes, `e3596aa93a6cfd30` | 1 shapes, `f25d12e34acaa96c` | DIFFERS |
+| 69/20 | 2 shapes, `e3c07569d0c0c9e9` | 2 shapes, `2b7dc937c1c83d28` | DIFFERS |
+| rigid-shift | (-930,-1930) dbu | applied | PASS |
 | via-cuts | 1 | 1 | SAME |
-| head-containment | - | all present | PASS |
 
-### B — macros/out/struct_B.gds（声明 `PAD_ONLY`）
+### B — macros/out/struct_B.gds（声明 `NORMALISED`）
 
 | 层 | HEAD | 工作区 | 判定 |
 |---|---|---|---|
-| 235/4 | 1 shapes, `d9d7f5254f298156` | 1 shapes, `32acdf2d342656ac` | DIFFERS |
-| 69/20 | 3 shapes, `bc3c4abbdc80d7a7` | 3 shapes, `c88090df51b6a5fa` | DIFFERS |
-| 69/44 | 1 shapes, `ec94fd5901dc375a` | 1 shapes, `ec94fd5901dc375a` | PASS |
-| 70/20 | 2 shapes, `be9905234f62cd33` | 2 shapes, `f8b42ea3b0cfe484` | DIFFERS |
+| 235/4 | 1 shapes, `32acdf2d342656ac` | 1 shapes, `e5f8498d8c491d3b` | DIFFERS |
+| 69/20 | 3 shapes, `c88090df51b6a5fa` | 3 shapes, `27426b28d27825e6` | DIFFERS |
+| 69/44 | 1 shapes, `ec94fd5901dc375a` | 1 shapes, `5280fb8596c8c03b` | DIFFERS |
+| 70/20 | 2 shapes, `f8b42ea3b0cfe484` | 2 shapes, `991d155123bb441d` | DIFFERS |
+| rigid-shift | (-930,-1930) dbu | applied | PASS |
 | via-cuts | 1 | 1 | SAME |
-| head-containment | - | all present | PASS |
 
-### C1 — macros/out/struct_C1.gds（声明 `PAD_ONLY`）
+### C1 — macros/out/struct_C1.gds（声明 `NORMALISED`）
 
 | 层 | HEAD | 工作区 | 判定 |
 |---|---|---|---|
-| 235/4 | 1 shapes, `87dc88b1b67c5bb6` | 1 shapes, `d0d7e0df9089c2cd` | DIFFERS |
-| 68/20 | 4 shapes, `664877bf1d4f9054` | 4 shapes, `7ddaf4312868fc7f` | DIFFERS |
-| 68/44 | 3 shapes, `6956278a5f904c18` | 3 shapes, `6956278a5f904c18` | PASS |
-| 69/20 | 6 shapes, `b7f33d186426ebae` | 6 shapes, `f542c272b7c29b6b` | DIFFERS |
+| 235/4 | 1 shapes, `d0d7e0df9089c2cd` | 1 shapes, `b62a11047e211eec` | DIFFERS |
+| 68/20 | 4 shapes, `7ddaf4312868fc7f` | 4 shapes, `9dc0113afe9c8e2f` | DIFFERS |
+| 68/44 | 3 shapes, `6956278a5f904c18` | 3 shapes, `d32f37285fbc8021` | DIFFERS |
+| 69/20 | 6 shapes, `f542c272b7c29b6b` | 6 shapes, `524224009f183aa5` | DIFFERS |
+| rigid-shift | (-930,-4830) dbu | applied | PASS |
 | via-cuts | 3 | 3 | SAME |
-| head-containment | - | all present | PASS |
 
 ### C3 — macros/out/struct_C3.gds（声明 `GEOM_IDENTICAL`）
 
@@ -118,14 +118,14 @@ P3 的通过条件是"与 HEAD 逐图形相同"。**P5 的 Item 2 修正了 via 
 
 | 文件 | 声明 | 字节数 | 不同字节 | 命中的日期记录 | 日期记录之外 |
 |---|---|---|---|---|---|
-| A | PAD_ONLY | 628 | 46 | BGNLIB, BGNSTR | **20** |
-| B | PAD_ONLY | 564 | 40 | BGNLIB, BGNSTR | **20** |
-| C1 | PAD_ONLY | 1014 | 104 | BGNLIB, BGNSTR | **20** |
-| C3 | GEOM_IDENTICAL | 692 | 16 | BGNLIB, BGNSTR | NONE |
-| C4 | GEOM_IDENTICAL | 308 | 16 | BGNLIB, BGNSTR | NONE |
-| D | GEOM_IDENTICAL | 1012 | 16 | BGNLIB, BGNSTR | NONE |
-| E | GEOM_IDENTICAL | 568 | 16 | BGNLIB, BGNSTR | NONE |
-| ALL | （合并版） | 4390 | 206 | BGNLIB, BGNSTR | **20** |
+| A | NORMALISED | 628 | 172 | BGNLIB, BGNSTR | **20** |
+| B | NORMALISED | 564 | 152 | BGNLIB, BGNSTR | **20** |
+| C1 | NORMALISED | 1014 | 292 | BGNLIB, BGNSTR | **20** |
+| C3 | GEOM_IDENTICAL | 692 | 12 | BGNLIB, BGNSTR | NONE |
+| C4 | GEOM_IDENTICAL | 308 | 12 | BGNLIB, BGNSTR | NONE |
+| D | GEOM_IDENTICAL | 1012 | 12 | BGNLIB, BGNSTR | NONE |
+| E | GEOM_IDENTICAL | 568 | 12 | BGNLIB, BGNSTR | NONE |
+| ALL | （合并版） | 4390 | 628 | BGNLIB, BGNSTR | **20** |
 
 ## 结论
 

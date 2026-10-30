@@ -53,16 +53,20 @@
     4.94
    ],
    "bbox_um": [
-    0.93,
-    1.93,
-    9.07,
-    6.87
+    0.0,
+    0.0,
+    8.14,
+    4.94
    ],
    "prboundary_um": [
     0.93,
     1.93,
     9.07,
     6.87
+   ],
+   "local_origin_um": [
+    0.93,
+    1.93
    ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_A.gds"
   },
@@ -73,16 +77,20 @@
     3.265
    ],
    "bbox_um": [
-    0.93,
-    1.93,
-    11.15,
-    5.195
+    0.0,
+    0.0,
+    10.22,
+    3.265
    ],
    "prboundary_um": [
     0.93,
     1.93,
     11.15,
     5.195
+   ],
+   "local_origin_um": [
+    0.93,
+    1.93
    ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_B.gds"
   },
@@ -93,16 +101,20 @@
     3.24
    ],
    "bbox_um": [
-    0.93,
-    4.83,
-    11.07,
-    8.07
+    0.0,
+    0.0,
+    10.14,
+    3.24
    ],
    "prboundary_um": [
     0.93,
     4.83,
     11.07,
     8.07
+   ],
+   "local_origin_um": [
+    0.93,
+    4.83
    ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C1.gds"
   },
@@ -124,6 +136,10 @@
     11.07,
     9.17
    ],
+   "local_origin_um": [
+    0.0,
+    0.0
+   ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C3.gds"
   },
   "C4": {
@@ -143,6 +159,10 @@
     0.93,
     11.07,
     9.07
+   ],
+   "local_origin_um": [
+    0.0,
+    0.0
    ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C4.gds"
   },
@@ -164,6 +184,10 @@
     35.5,
     6.64
    ],
+   "local_origin_um": [
+    0.0,
+    0.0
+   ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_D.gds"
   },
   "E": {
@@ -183,6 +207,10 @@
     3.0,
     7.0,
     7.0
+   ],
+   "local_origin_um": [
+    0.0,
+    0.0
    ],
    "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_E.gds"
   }

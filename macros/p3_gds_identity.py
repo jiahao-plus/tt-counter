@@ -78,6 +78,16 @@ TMP = os.path.join(HERE, '_tmp_gds_identity_work')
 
 TAGS = ['A', 'B', 'C1', 'C3', 'C4', 'D', 'E']
 
+# Immutable reference: the round-4 CI commit whose physical implementation the
+# round-5 work must not disturb.  Pinned by SHA on purpose -- `HEAD` moves.
+BASELINE_COMMIT = 'b4e32b8a2c679619acc03fe3ad415bb476258260'
+
+# (layer, datatype) pairs the NORMALISED check compares shape-for-shape:
+# the drawn metal, the via cuts and the prBoundary.
+LAYERS_FOR_RECTS = [(68, 20), (69, 20), (70, 20),
+                    (68, 44), (69, 44),
+                    (235, 4)]
+
 # GDSII records that legitimately carry a modification date. They are the only
 # records allowed to differ between HEAD and the working tree when the geometry
 # is unchanged.
@@ -293,30 +303,22 @@ def ensure_head_src():
 
 
 def checkout_head(rel_path, dest):
-    """Write HEAD:<rel_path> to dest as RAW BYTES. Returns True on success.
+    """Write the reference GDS for `rel_path` to dest as RAW BYTES.
+
+    The reference is the IMMUTABLE round-4 commit, pinned by SHA, not `HEAD`.
+    `HEAD` moves as soon as the round-5 work is committed, and a checker whose
+    baseline drifts with the thing it checks is worthless.
 
     `git cat-file blob` is used rather than `git show`: `git show` runs the
     blob through attributes/pager machinery, which can text-mangle a binary.
     cat-file returns the object verbatim.
 
-    Called under WSL, where `git` may not see this worktree (the repo was
-    created on the Windows side and the .git file points at a Windows path).
-    Falls back to a copy the Windows shell pre-extracted into
-    _tmp_gds_identity/.
+    The pre-extracted copy in _tmp_gds_identity/ is only a FALLBACK -- it was
+    written once and went stale (it still carried a pre-b4e32b8 struct_C1 with
+    bbox y=4.870 instead of 4.830).  git is consulted first so the baseline is
+    always the pinned commit.
     """
-    obj = 'HEAD:%s' % rel_path
-    pre = os.path.join(HEAD_SRC, 'head_%s.gds'
-                       % os.path.basename(rel_path).replace('struct_', '')
-                       .replace('.gds', '').replace('v2_structures', 'master'))
-    # A pre-extracted copy (written by the Windows side) is used first, and is
-    # COPIED not consumed: WSL's git cannot read this worktree's .git pointer
-    # reliably and has been observed returning rc=0 with an unusable blob.
-    if os.path.exists(pre) and os.path.getsize(pre) > 100:
-        with open(pre, 'rb') as src:
-            data = src.read()
-        with open(dest, 'wb') as f:
-            f.write(data)
-        return True
+    obj = '%s:%s' % (BASELINE_COMMIT, rel_path)
     for args in (['git', 'cat-file', 'blob', obj],
                  ['git', '-C', ROOT, 'cat-file', 'blob', obj]):
         try:
@@ -328,6 +330,16 @@ def checkout_head(rel_path, dest):
             with open(dest, 'wb') as f:
                 f.write(r.stdout)
             return True
+
+    pre = os.path.join(HEAD_SRC, 'head_%s.gds'
+                       % os.path.basename(rel_path).replace('struct_', '')
+                       .replace('.gds', '').replace('v2_structures', 'master'))
+    if os.path.exists(pre) and os.path.getsize(pre) > 100:
+        with open(pre, 'rb') as src:
+            data = src.read()
+        with open(dest, 'wb') as f:
+            f.write(data)
+        return True
     return False
 
 
@@ -362,6 +374,50 @@ def region_of(layout, cell, li):
             r.insert(s.path.transformed(t).simple_polygon())
         it.next()
     return r.merge()
+
+
+def head_bbox_ll(path):
+    """(left, bottom) of the cell bbox in dbu -- the offset route B removed."""
+    ly = pya.Layout()
+    ly.read(path)
+    b = ly.top_cell().bbox()
+    return int(b.left), int(b.bottom)
+
+
+def head_rects(path):
+    """Every drawn rectangle on the tracked layers, in dbu, as a sorted list.
+
+    Covers metal and via-cut layers plus prBoundary.  Used by the NORMALISED
+    check, which needs the full shape set rather than just the via fingerprint.
+    """
+    ly = pya.Layout()
+    ly.read(path)
+    top = ly.top_cell()
+    out = []
+    for ln, dt in LAYERS_FOR_RECTS:
+        li = ly.find_layer(ln, dt)
+        if li is None:
+            continue
+        it = top.begin_shapes_rec(li)
+        while not it.at_end():
+            s = it.shape()
+            b = None
+            if s.is_box():
+                b = s.box.transformed(it.trans())
+            elif s.is_polygon():
+                b = s.polygon.transformed(it.trans()).bbox()
+            elif s.is_path():
+                b = s.path.transformed(it.trans()).bbox()
+            it.next()
+            if b is not None:
+                out.append((b.left, b.bottom, b.right, b.top))
+    return sorted(out)
+
+
+def shift_rects(rects, dx, dy):
+    """Translate a rect list; keeps it sorted so equality is meaningful."""
+    return sorted((x0 + dx, y0 + dy, x1 + dx, y1 + dy)
+                  for (x0, y0, x1, y1) in rects)
 
 
 def vias_of(path):
@@ -504,6 +560,40 @@ def main():
             layer_rows.append({'layer': 'head-containment',
                                'head': '-', 'work': gone or 'all present',
                                'verdict': 'PASS' if contain_ok else 'REMOVED'})
+        elif cls == 'NORMALISED':
+            # Route B: the cell was re-based so its bbox starts at (0,0).
+            # The invariant is "HEAD geometry minus the old bbox lower-left
+            # equals the new geometry, polygon for polygon" -- a pure rigid
+            # translation.  No polygon may be added, removed, resized or
+            # mirrored, and the via cuts must translate by the same offset.
+            #
+            # The offset is read from the HEAD file itself, never from the
+            # generator, so this cannot be satisfied by a generator that is
+            # wrong in the same way as the thing it produced.
+            dx, dy = head_bbox_ll(old)
+            shifted = shift_rects(head_rects(old), -dx, -dy)
+            now = sorted(head_rects(cur))
+            geom_ok = shifted == now
+            hv, nv = vias_of(old), vias_of(cur)
+            nv_shifted = sorted((k, cx - dx, cy - dy, w, h)
+                                for (k, cx, cy, w, h) in hv)
+            vias_ok = nv_shifted == sorted(nv)
+            if not geom_ok:
+                problems.append('%s: NORMALISED but rigid shift (-%d,-%d) dbu '
+                                'does not reproduce the new geometry'
+                                % (tag, dx, dy))
+            if not vias_ok:
+                problems.append('%s: NORMALISED but via cuts did not move by '
+                                'the same rigid offset' % tag)
+            verdict = 'PASS (declared NORMALISED)' if (geom_ok and vias_ok) \
+                else 'FAIL'
+            layer_rows.append({'layer': 'rigid-shift',
+                               'head': '(-%d,-%d) dbu' % (dx, dy),
+                               'work': 'applied',
+                               'verdict': 'PASS' if geom_ok else 'DIFFERS'})
+            layer_rows.append({'layer': 'via-cuts',
+                               'head': len(hv), 'work': len(nv),
+                               'verdict': 'SAME' if vias_ok else 'CHANGED'})
         else:
             problems.append('%s: declared %s — not an allowed change class'
                             % (tag, cls))

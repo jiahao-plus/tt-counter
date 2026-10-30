@@ -96,8 +96,8 @@
           "instances": {
               "u_rs_via1": {
                   "location": [
-                      33.5,
-                      208.0
+                      34.43,
+                      209.93
                   ],
                   "orientation": "N"
               }
@@ -113,8 +113,8 @@
           "instances": {
               "u_rs_via2": {
                   "location": [
-                      64.0,
-                      208.0
+                      64.93,
+                      209.93
                   ],
                   "orientation": "N"
               }
@@ -130,8 +130,8 @@
           "instances": {
               "u_rs_branch": {
                   "location": [
-                      79.32,
-                      208.0
+                      80.25,
+                      212.83
                   ],
                   "orientation": "N"
               }

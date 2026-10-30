@@ -34,12 +34,24 @@ def fail(msgs, msg):
 
 
 def check_placement_constraints(plan, msgs):
-    """C1 inside core / C2 no overlap / C3 min gap >= MIN_GAP_UM / C4 all N."""
+    """C1 inside core / C2 no overlap / C3 min gap >= MIN_GAP_UM / C4 all N.
+
+    All footprint maths uses `place_*_um`, i.e. where the metal actually lands.
+    `x_um`/`y_um` is the design-intent lower-left, and route B shifts the three
+    electrical macros by their `local_origin`, so the two differ.  Measuring a
+    gap against the design-intent coordinate would be measuring empty space.
+    """
     cx0, cy0, cx1, cy1 = plan['core_rect_um']
     ps = plan['placements']
 
+    def px(p):
+        return p.get('place_x_um', p['x_um'])
+
+    def py(p):
+        return p.get('place_y_um', p['y_um'])
+
     for p in ps:
-        if not (p['x_um'] >= cx0 and p['y_um'] >= cy0
+        if not (px(p) >= cx0 and py(p) >= cy0
                 and p['x1_um'] <= cx1 and p['y1_um'] <= cy1):
             fail(msgs, 'C1: %s outside core' % p['structure_id'])
         if p['orientation'] != 'N':
@@ -49,13 +61,13 @@ def check_placement_constraints(plan, msgs):
     for i in range(len(ps)):
         for j in range(i + 1, len(ps)):
             a, b = ps[i], ps[j]
-            ox = min(a['x1_um'], b['x1_um']) - max(a['x_um'], b['x_um'])
-            oy = min(a['y1_um'], b['y1_um']) - max(a['y_um'], b['y_um'])
+            ox = min(a['x1_um'], b['x1_um']) - max(px(a), px(b))
+            oy = min(a['y1_um'], b['y1_um']) - max(py(a), py(b))
             if ox > 0 and oy > 0:
                 fail(msgs, 'C2: overlap %s/%s %.2fx%.2f'
                      % (a['structure_id'], b['structure_id'], ox, oy))
-            dx = max(a['x_um'] - b['x1_um'], b['x_um'] - a['x1_um'], 0.0)
-            dy = max(a['y_um'] - b['y1_um'], b['y_um'] - a['y1_um'], 0.0)
+            dx = max(px(a) - b['x1_um'], px(b) - a['x1_um'], 0.0)
+            dy = max(py(a) - b['y1_um'], py(b) - a['y1_um'], 0.0)
             d = (dx * dx + dy * dy) ** 0.5
             if d < MIN_GAP_UM - 1e-6:
                 fail(msgs, 'C3: gap %.3f um < %.2f between %s and %s'
@@ -82,14 +94,17 @@ def main():
     check_placement_constraints(plan, msgs)
 
     # ---- 1. self-consistency of the plan
+    # The footprint starts at the PLACEMENT, so x1 == place_x + w.
     for p in plan['placements']:
-        exp_x1 = round(p['x_um'] + p['w_um'], 3)
-        exp_y1 = round(p['y_um'] + p['h_um'], 3)
+        p_x = p.get('place_x_um', p['x_um'])
+        p_y = p.get('place_y_um', p['y_um'])
+        exp_x1 = round(p_x + p['w_um'], 3)
+        exp_y1 = round(p_y + p['h_um'], 3)
         if abs(p['x1_um'] - exp_x1) > TOL:
-            fail(msgs, 'plan self: %s x1 %.3f != x+w %.3f'
+            fail(msgs, 'plan self: %s x1 %.3f != place_x+w %.3f'
                  % (p['structure_id'], p['x1_um'], exp_x1))
         if abs(p['y1_um'] - exp_y1) > TOL:
-            fail(msgs, 'plan self: %s y1 %.3f != y+h %.3f'
+            fail(msgs, 'plan self: %s y1 %.3f != place_y+h %.3f'
                  % (p['structure_id'], p['y1_um'], exp_y1))
 
     # ---- 2. config.json
@@ -105,9 +120,13 @@ def main():
         if inst not in m.get('instances', {}):
             fail(msgs, 'config: %s missing instance "%s"' % (name, inst)); continue
         loc = m['instances'][inst]['location']
-        if abs(loc[0] - p['x_um']) > TOL or abs(loc[1] - p['y_um']) > TOL:
-            fail(msgs, 'config: %s loc [%.2f,%.2f] != plan [%.2f,%.2f]'
-                 % (name, loc[0], loc[1], p['x_um'], p['y_um']))
+        # config carries the PLACEMENT (design-intent + local_origin), because
+        # that is what the DEF needs.  Compare against place_*_um, not x_um.
+        exp_x = p.get('place_x_um', p['x_um'])
+        exp_y = p.get('place_y_um', p['y_um'])
+        if abs(loc[0] - exp_x) > TOL or abs(loc[1] - exp_y) > TOL:
+            fail(msgs, 'config: %s loc [%.2f,%.2f] != plan placement [%.2f,%.2f]'
+                 % (name, loc[0], loc[1], exp_x, exp_y))
         orient = m['instances'][inst]['orientation']
         if orient != p['orientation']:
             fail(msgs, 'config: %s orientation %s != plan %s'
@@ -138,9 +157,11 @@ def main():
         if not m:
             fail(msgs, 'MD: no row for %s' % p['structure_id']); continue
         mx, my = float(m.group(1)), float(m.group(2))
-        if abs(mx - p['x_um']) > TOL or abs(my - p['y_um']) > TOL:
-            fail(msgs, 'MD: %s (%.2f,%.2f) != plan (%.2f,%.2f)'
-                 % (p['structure_id'], mx, my, p['x_um'], p['y_um']))
+        exp_x = p.get('place_x_um', p['x_um'])
+        exp_y = p.get('place_y_um', p['y_um'])
+        if abs(mx - exp_x) > TOL or abs(my - exp_y) > TOL:
+            fail(msgs, 'MD: %s (%.2f,%.2f) != plan placement (%.2f,%.2f)'
+                 % (p['structure_id'], mx, my, exp_x, exp_y))
 
     # ---- report
     print()

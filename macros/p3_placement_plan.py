@@ -50,6 +50,10 @@ V1_PITCH = 27.14
 # PDN opacity is UNKNOWN (the strap positions themselves are extrapolated).
 PLAN = [
     # (tag, instance, x_um, y_um, orientation, note)
+    # x_um / y_um below are the DESIGN-INTENT position of the macro's lower-left
+    # corner on the die.  It is the same number for every structure regardless
+    # of how its cell happens to be drawn, because the plan is about where the
+    # silicon goes, not about the internal coordinate frame of the cell.
     ('E',  'u_rs_fiducial',  24.00, 208.00, 'N', 'gap 23.20-57.20'),
     ('A',  'u_rs_via1',      33.50, 208.00, 'N', 'gap 23.20-57.20, 5.5 um from E'),
     # B and C1 share the next gap, 5.1 um apart in x
@@ -85,7 +89,23 @@ def main():
         w, h = m['size_um']
         if orient in ('E', 'W'):
             w, h = h, w
-        x1, y1 = x + w, y + h
+        # Route B: the three electrical macros had their cell geometry shifted
+        # so its bbox starts at (0,0), and their LEF ORIGIN is now zero.  The
+        # offset that was removed from the cell has to come back into the
+        # instance placement, otherwise the macro lands `local_origin` too far
+        # down-left on the die.  The four geometry-only macros were not
+        # touched, so their local_origin is (0,0) and this is a no-op for them.
+        #
+        # `x, y` stays the design-intent lower-left on the die; the emitted
+        # placement is that value plus whatever the cell's own frame needs.
+        lo = m.get('local_origin_um', [0.0, 0.0])
+        place_x, place_y = round(x + lo[0], 3), round(y + lo[1], 3)
+        # The footprint on the die starts at the PLACEMENT, not at the
+        # design-intent coordinate -- they differ by exactly `lo` for a
+        # normalised macro.  Everything below (gaps, core containment, straps)
+        # must use the real footprint or a normalised macro would be checked
+        # against a box shifted by -lo and a real overlap could be missed.
+        x1, y1 = place_x + w, place_y + h
         inside = (x >= core_x0 and y >= core_y0
                   and x1 <= core_x1 and y1 <= core_y1)
         if not inside:
@@ -105,7 +125,12 @@ def main():
 
         rows.append({
             'structure_id': tag, 'macro_name': m['cell'], 'instance': inst,
-            'x_um': x, 'y_um': y, 'w_um': w, 'h_um': h,
+            # design-intent lower-left on the die
+            'x_um': x, 'y_um': y,
+            # what actually goes into the DEF/config placement
+            'place_x_um': place_x, 'place_y_um': place_y,
+            'local_origin_um': list(lo),
+            'w_um': w, 'h_um': h,
             'x1_um': round(x1, 3), 'y1_um': round(y1, 3),
             'orientation': orient,
             'electrical': m['electrical'],
@@ -121,19 +146,25 @@ def main():
     for i in range(len(rows)):
         for j in range(i + 1, len(rows)):
             a, b = rows[i], rows[j]
-            ox = min(a['x1_um'], b['x1_um']) - max(a['x_um'], b['x_um'])
-            oy = min(a['y1_um'], b['y1_um']) - max(a['y_um'], b['y_um'])
+            ox = min(a['x1_um'], b['x1_um']) - max(a['place_x_um'], b['place_x_um'])
+            oy = min(a['y1_um'], b['y1_um']) - max(a['place_y_um'], b['place_y_um'])
             if ox > 0 and oy > 0:
                 problems.append('C2 FAIL: overlap %s/%s %.2fx%.2f um'
                                 % (a['structure_id'], b['structure_id'], ox, oy))
 
     # ---- C3 min gap (the requirement the user restored to 5 um)
+    # Use the REAL footprint (place_*) throughout.  x_um/y_um is the
+    # design-intent coordinate and differs from the placement by `local_origin`
+    # for a normalised macro, so mixing the two would measure a gap against a
+    # box that is not where the metal actually is.
     gaps = []
     for i in range(len(rows)):
         for j in range(i + 1, len(rows)):
             a, b = rows[i], rows[j]
-            dx = max(a['x_um'] - b['x1_um'], b['x_um'] - a['x1_um'], 0.0)
-            dy = max(a['y_um'] - b['y1_um'], b['y_um'] - a['y1_um'], 0.0)
+            ax0, ay0 = a['place_x_um'], a['place_y_um']
+            bx0, by0 = b['place_x_um'], b['place_y_um']
+            dx = max(ax0 - b['x1_um'], bx0 - a['x1_um'], 0.0)
+            dy = max(ay0 - b['y1_um'], by0 - a['y1_um'], 0.0)
             gaps.append(((dx * dx + dy * dy) ** 0.5,
                          a['structure_id'], b['structure_id'], dx, dy))
     gaps.sort()
@@ -147,6 +178,7 @@ def main():
     csv_p = os.path.join(ROOT, 'v2_validation', 'P3_MACRO_BBOX.csv')
     os.makedirs(os.path.dirname(csv_p), exist_ok=True)
     cols = ['structure_id', 'macro_name', 'instance', 'x_um', 'y_um',
+            'place_x_um', 'place_y_um', 'local_origin_x_um', 'local_origin_y_um',
             'w_um', 'h_um', 'x1_um', 'y1_um', 'orientation', 'electrical',
             'n_pins', 'inside_core', 'strap_crossings', 'strap_x_hit',
             'strap_width_fraction_ESTIMATE', 'note']
@@ -154,7 +186,10 @@ def main():
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         for r in rows:
-            r2 = dict(r); r2['strap_x_hit'] = ';'.join(str(v) for v in r['strap_x_hit'])
+            r2 = dict(r)
+            r2['strap_x_hit'] = ';'.join(str(v) for v in r['strap_x_hit'])
+            lo = r2.pop('local_origin_um', [0.0, 0.0])
+            r2['local_origin_x_um'], r2['local_origin_y_um'] = lo[0], lo[1]
             w.writerow(r2)
 
     out = {

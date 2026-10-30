@@ -3,7 +3,7 @@ BUSBITCHARS "[]" ;
 DIVIDERCHAR "/" ;
 MACRO research_via1
   CLASS BLOCK ;
-  ORIGIN 0.930 1.930 ;
+  ORIGIN 0.000 0.000 ;
   SIZE 8.140 BY 4.940 ;
   SYMMETRY X Y ;
   PIN net

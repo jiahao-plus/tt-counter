@@ -13,7 +13,8 @@
  *   - ui_in[0] = en    计数使能（1=计数，0=保持）
  *   - ui_in[1] = dir   方向（1=加计数，0=减计数）
  *   - uo_out[7:0]      = 当前计数值
- *   - rst_n 低有效复位，清零；ena 为全局使能
+ *   - rst_n 低有效复位，清零；ena 为 mode 0 的使能（不是全局使能：
+ *     mode 1/2 的 PWM 与 LFSR 在 ena=0 时照常运行。TT tile 上 ena 恒为 1）
  *
  * Mode select (ui_in[7:2]):
  *   mode 0 : original 8-bit up/down reversible counter (unchanged behavior)

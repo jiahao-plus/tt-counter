@@ -72,6 +72,7 @@ run "p3_verify_lef_obs.py"              python3 macros/p3_verify_lef_obs.py
 run "_neg_obs.py"                       python3 macros/_neg_obs.py
 run_opt "p3_v1_lef_evidence.py"         python3 macros/p3_v1_lef_evidence.py
 run "p3_gds_identity.py"                python3 macros/p3_gds_identity.py
+run "p6_world_equiv.py"                 python3 macros/p6_world_equiv.py
 run "_neg_gds_identity.py"              python3 macros/_neg_gds_identity.py
 run "check_source_files.py"             python3 tools/check_source_files.py
 

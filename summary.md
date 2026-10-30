@@ -49,7 +49,7 @@
 | PWM | bhasan60/verilog-pwm-controller | `789f55292b94b392b586752821033ad2b1568759` | `pwm(clk, rst[高有效], duty[7:0], pwm_out)` |
 | LFSR | Brafamous/Linear-Feedback-Shift-Register-Design | `fc59536f0017ddba4447f9497b2485072bc6ee99` | `LFSR_Design #(8,8,4)(clk,rst,enable,output_enable,seed_value[7:0],valid,Out,lfsr_out[7:0])` |
 
-集成：顶层名 `tt_um_jiahao_plus_counter` 与全部端口保留；`ui_in[7:2]`=mode。mode0 行为完全不变（en=ui[0], dir=ui[1], rst_n 低有效清零, ena 全局使能）。
+集成：顶层名 `tt_um_jiahao_plus_counter` 与全部端口保留；`ui_in[7:2]`=mode。mode0 行为完全不变（en=ui[0], dir=ui[1], rst_n 低有效清零, ena 只在 mode0 生效——不是全局使能）。
 
 ## 5. ORFS sky130hd 布局布线（本地 ORFS 流程，非官方 TT CI 产物）
 

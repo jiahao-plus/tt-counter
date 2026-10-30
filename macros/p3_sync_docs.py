@@ -39,9 +39,15 @@ def render_table(plan):
              '| Tag | 宏 | 实例名 | 位置 (µm) | 尺寸 (µm) | 朝向 | 电气 | PIN | 说明 |',
              '|---|---|---|---|---|---|---|---|---|']
     for p in plan['placements']:
+        # Report the real placement, i.e. design-intent + whatever the cell
+        # frame needs.  For the four geometry-only macros the two coincide; for
+        # the three normalised macros they differ by `local_origin`, and the
+        # documented position must be where the metal actually sits.
+        px = p.get('place_x_um', p['x_um'])
+        py = p.get('place_y_um', p['y_um'])
         lines.append('| %s | `%s` | `%s` | (%.2f, %.2f) | %.2f × %.2f | `%s` | %s | %d | %s |'
                      % (p['structure_id'], p['macro_name'], p['instance'],
-                        p['x_um'], p['y_um'], p['w_um'], p['h_um'],
+                        px, py, p['w_um'], p['h_um'],
                         p['orientation'],
                         '✓' if p['electrical'] else '✗',
                         p['n_pins'],
@@ -82,8 +88,11 @@ def main():
         print('MD already in sync')
     print(table.split('\n')[2])
     for p in plan['placements']:
-        print('  %-3s (%7.2f, %7.2f) %s' % (p['structure_id'], p['x_um'],
-                                            p['y_um'], p['orientation']))
+        print('  %-3s (%7.2f, %7.2f) %s'
+              % (p['structure_id'],
+                 p.get('place_x_um', p['x_um']),
+                 p.get('place_y_um', p['y_um']),
+                 p['orientation']))
     return 0
 
 

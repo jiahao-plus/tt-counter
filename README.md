@@ -16,9 +16,15 @@ later under a microscope after de-capping.
 | `ui_in[1]` | ui[1] | `dir` — 1 = count up, 0 = count down |
 | `uo_out[7:0]` | uo[0..7] | current 8-bit count value (drive the LEDs) |
 
-- Active-low async reset (`rst_n`) clears the count to 0.
+- Active-low async reset (`rst_n`) clears the count to 0. Only the mode-0
+  counter resets asynchronously; the mode-1 PWM and mode-2 LFSR blocks use
+  synchronous resets, so there a low `rst_n` takes effect on the next edge.
 - The count only advances on the rising edge of `clk` while both `ena` and `en` are high.
-- All `uio` pins are configured as inputs (unused).
+- `ena` gates **mode 0 only**. It is not a global enable: in mode 1 and mode 2
+  the PWM and LFSR keep running while `ena` is low. On a Tiny Tapeout tile
+  `ena` is permanently high, so this is not observable in use.
+- `uio` pins are inputs in mode 0 and unused in unused modes; modes 1 and 2
+  drive `uio_out[0]` / `uio_oe[0]` (and `uio_out[1]` / `uio_oe[1]` in mode 2).
 
 ## How to test
 

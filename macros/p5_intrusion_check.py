@@ -191,6 +191,13 @@ def min_gap(foreign, self_r):
 def main(final_gds, def_path, out_json=None, macro_dir=None):
     macro_dir = macro_dir or DEFAULT_MACRO_DIR
     place = def_placements(def_path)
+    # The placements come from the DEF, so the macro GDS they are paired with
+    # MUST be the cells that DEF was built from.  Checking the round-4 DEF
+    # against round-5 macro cells mixes two coordinate frames and reports the
+    # offset as fake "foreign" metal -- that is exactly the 0.0324 um2
+    # research_via2 artefact seen when this was first run.  The caller names
+    # the matching pair explicitly (see the usage note at the top); the LEF
+    # must come from the same directory or PIN classification silently breaks.
 
     fly = pya.Layout()
     fly.read(final_gds)
@@ -225,7 +232,23 @@ def main(final_gds, def_path, out_json=None, macro_dir=None):
         self_r = {k: (v.moved(int(round(px / DBU)), int(round(py / DBU))) & clip)
                   for k, v in collect(mly, mtop, LAYERS).items()}
         pins, lef_or = lef_pins(
-            os.path.join(DEFAULT_MACRO_DIR, 'struct_%s.lef' % tag), LAYERS)
+            os.path.join(macro_dir, 'struct_%s.lef' % tag), LAYERS)
+        # Three situations must not be conflated:
+        #   * the macro HAS a PIN and we read it      -> classify on/off PIN
+        #   * the macro has NO PIN by design (C3/C4/D/E are geometry-only, the
+        #     round-4 LEFs declare no PIN at all)     -> every contact with its
+        #     metal is a real intrusion; the off-PIN path is correct
+        #   * the LEF is missing or unreadable        -> we cannot tell the two
+        #     apart, and silently treating everything as off-PIN produces a
+        #     false "polluted" verdict
+        # Distinguish the last case by checking whether the LEF exists at all.
+        lef_path = os.path.join(macro_dir, 'struct_%s.lef' % tag)
+        if not pins and not os.path.exists(lef_path):
+            results[cell] = {'tag': tag,
+                             'error': 'missing %s -- cannot classify contacts'
+                                      % lef_path}
+            total_pollution += 1
+            continue
         pin_dx = int(round((px + lef_or[0]) / DBU))
         pin_dy = int(round((py + lef_or[1]) / DBU))
         pins_abs = {k: [b.moved(pin_dx, pin_dy) for b in v]
