@@ -34,6 +34,19 @@ VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_f
 # this gets copied in by the GDS action workflow
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
 
+# The seven research structures are (* blackbox *) modules with no body, so
+# write_verilog emits them as real instances but never emits a definition.
+# The routed netlist therefore contains seven `Unknown module type` references
+# that Icarus reports as errors. Feed the same blackbox declarations the RTL
+# flow uses: module names and ports match the netlist character for character
+# (three macros take `net`, four take no ports).
+#
+# Only this one file is added. project.v / pwm.v / LFSR_Design.v are NOT added
+# here: gate_level_netlist.v already contains the full synthesized design, and
+# re-adding a behavioural copy would silently substitute RTL for the gate-level
+# logic the test exists to verify.
+VERILOG_SOURCES += $(SRC_DIR)/research_macros.v
+
 endif
 
 # Allow sharing configuration between design and testbench via `include`:
