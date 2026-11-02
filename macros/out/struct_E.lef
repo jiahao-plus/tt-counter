@@ -3,7 +3,7 @@ BUSBITCHARS "[]" ;
 DIVIDERCHAR "/" ;
 MACRO research_fiducial
   CLASS BLOCK ;
-  ORIGIN 3.000 3.000 ;
+  ORIGIN 0.000 0.000 ;
   SIZE 4.000 BY 4.000 ;
   SYMMETRY X Y ;
   OBS

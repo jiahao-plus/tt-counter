@@ -218,12 +218,24 @@ BUILDERS = [('A', build_A), ('B', build_B), ('C1', build_C1),
 
 
 # Structures whose cell geometry is re-based so its bbox starts at (0,0).
-# Only the three macros that carry an electrical PIN need this: their LEF PIN
-# rectangles are read by both OpenROAD (place + ORIGIN + RECT) and Magic
-# (place + RECT - ORIGIN), and the two only agree when ORIGIN is zero.  The
-# four geometry-only macros have no PIN, never enter the netlist, and keep the
-# round-4 coordinates byte-for-byte, so they are deliberately NOT normalised.
-NORMALISE = {'A', 'B', 'C1'}
+#
+# Round 5 normalised only the three macros that carry an electrical PIN, on the
+# reasoning that a non-zero LEF ORIGIN is harmless when no PIN is placed.  Round
+# 5 CI disproved that: Magic reads a macro's LEF OBS as
+# `place + RECT - ORIGIN` while OpenROAD reads it as `place + ORIGIN + RECT`, so
+# a non-zero ORIGIN shifts the *obstruction* box by 2 x ORIGIN even for a macro
+# with no pins at all.  The check that caught it is `Checker.IllegalOverlap`:
+# research_cross (ORIGIN 0.930,0.930) had its OBS drawn at
+# (101.07,187.07)-(111.21,195.21) instead of its true footprint
+# (102.93,188.93)-(113.07,197.07), and three top-level routes that legitimately
+# run just outside the real footprint fell inside the phantom box -> 11 illegal
+# overlaps.  Round 4 reported 0 because no route happened to occupy that strip.
+#
+# The only ORIGIN value both tools agree on is zero, so every macro is
+# normalised.  World coordinates are preserved either way: the removed offset
+# is added back into the instance placement (see p3_placement_plan.py), so the
+# silicon does not move -- only the cell-local frame changes.
+NORMALISE = {'A', 'B', 'C1', 'C3', 'C4', 'D', 'E'}
 
 
 def main():

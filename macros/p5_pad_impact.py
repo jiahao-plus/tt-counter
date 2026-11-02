@@ -195,6 +195,11 @@ def main(final_gds, def_path, old_dir=None, out_json=None):
                 d['growth_min_gap_um'] = None if gd is None else round(gd, 3)
                 if gg.area() > 0:
                     d['growth_touches_foreign'] = True
+                    # Count here, where the flag is set.  Counting in the print
+                    # loop below left the JSON saying 0 while the console said
+                    # 9 -- Phase 3 reads the JSON, so the record must be the
+                    # authoritative copy.
+                    n_growth_touch += 1
                     gb = gg.bbox()
                     d['growth_touch_bbox_um'] = [round(gb.left * DBU, 3),
                                                  round(gb.bottom * DBU, 3),
@@ -216,6 +221,50 @@ def main(final_gds, def_path, old_dir=None, out_json=None):
            'new_space_violations': n_space,
            'growth_touching_foreign': n_growth_touch,
            'pass': n_short == 0 and n_space == 0}
+
+    # Pairing test.  This check treats the reference macro geometry as "self", so
+    # the final GDS must be one those cells were actually placed into.  When the
+    # reference cells have since been re-based or moved, they describe metal that
+    # is not in this layout at all: `foreign` then swallows the macro own current
+    # geometry and every layer reports a short against itself.  The fingerprint
+    # is unmistakable -- overlap equals the whole new area while overlap_old is
+    # exactly zero on every layer.
+    #
+    # Test it directly rather than by a ratio: ask how much of the REFERENCE
+    # geometry is actually present in the final GDS.  A matched reference is ~all
+    # there; a displaced one is ~absent.
+    #
+    # Judge per macro and take the worst, not an area-weighted average: the large
+    # clean footprint of research_dense (22.8 um2 of metal) would otherwise
+    # outvote three displaced small macros and make a broken pairing look fine.
+    # That dilution is exactly why the earlier "overlap / new area" ratio read
+    # 9.1% on a pairing that was plainly wrong.
+    final_layers = {name: region_of(fly, ftop, name) for name in CHECK_LAYERS}
+    shares = {}
+    for cell, r in report.items():
+        tag = r['tag']
+        old_path = os.path.join(old_dir, 'struct_%s.gds' % tag)
+        if not os.path.exists(old_path):
+            continue
+        oly = pya.Layout()
+        oly.read(old_path)
+        ot = oly.top_cell()
+        px, py = r['placement_um']
+        dx, dy = int(round(px / DBU)), int(round(py / DBU))
+        tot = pres = 0.0
+        for name in CHECK_LAYERS:
+            o = region_of(oly, ot, name)
+            if o.is_empty():
+                continue
+            o = o.moved(dx, dy)
+            tot += o.area()
+            f = final_layers[name]
+            if not f.is_empty():
+                pres += (o & f).area()
+        shares[tag] = (pres / tot) if tot else 1.0
+    displaced = any(v < 0.5 for v in shares.values())
+    res['reference_geometry_present'] = {k: round(v, 4)
+                                         for k, v in shares.items()}
 
     print('=' * 100)
     print('PAD-GROWTH IMPACT ON EXISTING ROUTING / PDN')
@@ -243,13 +292,22 @@ def main(final_gds, def_path, old_dir=None, out_json=None):
                       % (d['growth_area_um2'], d['growth_overlap_um2'],
                          'n/a' if d['growth_min_gap_um'] is None
                          else '%.3f um' % d['growth_min_gap_um']))
-                if d.get('growth_touches_foreign'):
-                    n_growth_touch += 1
     print()
     print('new shorts:            %d' % n_short)
     print('new spacing violations: %d' % n_space)
     print('growth regions touching foreign metal: %d' % n_growth_touch)
-    print('VERDICT:', 'PASS' if res['pass'] else 'FAIL')
+    print('reference geometry still present in the final GDS (per macro):')
+    for tag, v in sorted(shares.items()):
+        print('    %-2s  %6.1f%%%s' % (tag, 100.0 * v,
+                                       '   DISPLACED' if v < 0.5 else ''))
+    if displaced:
+        res['verdict'] = 'INCONCLUSIVE'
+        print('VERDICT: INCONCLUSIVE - the reference cells no longer sit where')
+        print('         this layout put them, so "foreign" contains the macro')
+        print('         own metal. Re-run against the GDS those cells built.')
+    else:
+        res['verdict'] = 'PASS' if res['pass'] else 'FAIL'
+        print('VERDICT:', 'PASS' if res['pass'] else 'FAIL')
 
     if out_json:
         json.dump(res, open(out_json, 'w', encoding='utf-8'), indent=1,
@@ -262,4 +320,6 @@ if __name__ == '__main__':
     _r = main(sys.argv[1], sys.argv[2],
               sys.argv[3] if len(sys.argv) > 3 else None,
               sys.argv[4] if len(sys.argv) > 4 else None)
+    if _r.get('verdict') == 'INCONCLUSIVE':
+        sys.exit(2)
     sys.exit(0 if _r['pass'] else 1)

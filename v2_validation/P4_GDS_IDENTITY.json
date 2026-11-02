@@ -5,10 +5,10 @@
   "A": "NORMALISED",
   "B": "NORMALISED",
   "C1": "NORMALISED",
-  "C3": "GEOM_IDENTICAL",
-  "C4": "GEOM_IDENTICAL",
-  "D": "GEOM_IDENTICAL",
-  "E": "GEOM_IDENTICAL"
+  "C3": "NORMALISED",
+  "C4": "NORMALISED",
+  "D": "NORMALISED",
+  "E": "NORMALISED"
  },
  "all_pass": true,
  "problems": [],
@@ -33,7 +33,7 @@
    "bbox_ok": false,
    "raw_bytes": {
     "ok": false,
-    "n_diff": 172,
+    "n_diff": 180,
     "n_bytes": 628,
     "n_records": 48,
     "timestamp_records_hit": [
@@ -171,7 +171,7 @@
    "bbox_ok": false,
    "raw_bytes": {
     "ok": false,
-    "n_diff": 152,
+    "n_diff": 160,
     "n_bytes": 564,
     "n_records": 43,
     "timestamp_records_hit": [
@@ -309,7 +309,7 @@
    "bbox_ok": false,
    "raw_bytes": {
     "ok": false,
-    "n_diff": 292,
+    "n_diff": 300,
     "n_bytes": 1014,
     "n_records": 78,
     "timestamp_records_hit": [
@@ -430,7 +430,7 @@
   {
    "tag": "C3",
    "gds": "macros/out/struct_C3.gds",
-   "declared": "GEOM_IDENTICAL",
+   "declared": "NORMALISED",
    "head": {
     "digest": "230a0c518e4fe9e419ee3ca5e2e2af97a97548cd6fb99c57de9a0e95ff91cc48",
     "cell": "research_near",
@@ -438,23 +438,44 @@
     "n_shapes": 9
    },
    "work": {
-    "digest": "230a0c518e4fe9e419ee3ca5e2e2af97a97548cd6fb99c57de9a0e95ff91cc48",
+    "digest": "487d05fad0eb66117ef4766a3bf8e79cc5d5e013f0faf5b61692babd29a2dd13",
     "cell": "research_near",
     "n_layers": 2,
     "n_shapes": 9
    },
    "dbu_ok": true,
-   "bbox_ok": true,
+   "bbox_ok": false,
    "raw_bytes": {
-    "ok": true,
-    "n_diff": 12,
+    "ok": false,
+    "n_diff": 200,
     "n_bytes": 692,
     "n_records": 53,
     "timestamp_records_hit": [
      "BGNLIB",
      "BGNSTR"
     ],
-    "outside": []
+    "outside": [
+     130,
+     131,
+     134,
+     135,
+     138,
+     139,
+     142,
+     143,
+     146,
+     147,
+     150,
+     151,
+     154,
+     155,
+     158,
+     159,
+     162,
+     163,
+     166,
+     167
+    ]
    },
    "layers": [
     {
@@ -468,12 +489,12 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "b9fae7d38eb16505",
+      "digest": "78bdf2d33ec0a412",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "68/20",
@@ -486,20 +507,32 @@
      },
      "work": {
       "n_shapes": 8,
-      "digest": "af78b5a7aaf523fd",
+      "digest": "976ff61718807d9e",
       "kinds": [
        "box"
       ]
      },
+     "verdict": "DIFFERS"
+    },
+    {
+     "layer": "rigid-shift",
+     "head": "(-930,-930) dbu",
+     "work": "applied",
      "verdict": "PASS"
+    },
+    {
+     "layer": "via-cuts",
+     "head": 0,
+     "work": 0,
+     "verdict": "SAME"
     }
    ],
-   "verdict": "PASS"
+   "verdict": "PASS (declared NORMALISED)"
   },
   {
    "tag": "C4",
    "gds": "macros/out/struct_C4.gds",
-   "declared": "GEOM_IDENTICAL",
+   "declared": "NORMALISED",
    "head": {
     "digest": "0dc226e2f9cea7f12c9616f980d7afa1b2a45eae9b838864fcf4a3cf313b9c4c",
     "cell": "research_cross",
@@ -507,23 +540,44 @@
     "n_shapes": 3
    },
    "work": {
-    "digest": "0dc226e2f9cea7f12c9616f980d7afa1b2a45eae9b838864fcf4a3cf313b9c4c",
+    "digest": "c310434003391593d57739a4746d7091ebd1ecdb9e71ad278bb393a0cf9f79c8",
     "cell": "research_cross",
     "n_layers": 3,
     "n_shapes": 3
    },
    "dbu_ok": true,
-   "bbox_ok": true,
+   "bbox_ok": false,
    "raw_bytes": {
-    "ok": true,
-    "n_diff": 12,
+    "ok": false,
+    "n_diff": 80,
     "n_bytes": 308,
     "n_records": 23,
     "timestamp_records_hit": [
      "BGNLIB",
      "BGNSTR"
     ],
-    "outside": []
+    "outside": [
+     130,
+     131,
+     134,
+     135,
+     138,
+     139,
+     142,
+     143,
+     146,
+     147,
+     150,
+     151,
+     154,
+     155,
+     158,
+     159,
+     162,
+     163,
+     166,
+     167
+    ]
    },
    "layers": [
     {
@@ -537,12 +591,12 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "869b4d0a0363ab29",
+      "digest": "61b16c7f6c35d59d",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "68/20",
@@ -555,12 +609,12 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "e0d421ab3d90123d",
+      "digest": "e2411d3cf4e24c5a",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "69/20",
@@ -573,20 +627,32 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "6168be1465eb7258",
+      "digest": "c44340676a5c4abf",
       "kinds": [
        "box"
       ]
      },
+     "verdict": "DIFFERS"
+    },
+    {
+     "layer": "rigid-shift",
+     "head": "(-930,-930) dbu",
+     "work": "applied",
      "verdict": "PASS"
+    },
+    {
+     "layer": "via-cuts",
+     "head": 0,
+     "work": 0,
+     "verdict": "SAME"
     }
    ],
-   "verdict": "PASS"
+   "verdict": "PASS (declared NORMALISED)"
   },
   {
    "tag": "D",
    "gds": "macros/out/struct_D.gds",
-   "declared": "GEOM_IDENTICAL",
+   "declared": "NORMALISED",
    "head": {
     "digest": "ed16d9a062a6998ecbcdc4ae720dc50b80041d97e9688f3bfc3bcff965c67d08",
     "cell": "research_dense",
@@ -594,23 +660,44 @@
     "n_shapes": 14
    },
    "work": {
-    "digest": "ed16d9a062a6998ecbcdc4ae720dc50b80041d97e9688f3bfc3bcff965c67d08",
+    "digest": "27bc7133504b6f3e945dcaf966524e5b04595b619dcaeea602492a7397c83a8f",
     "cell": "research_dense",
     "n_layers": 4,
     "n_shapes": 14
    },
    "dbu_ok": true,
-   "bbox_ok": true,
+   "bbox_ok": false,
    "raw_bytes": {
-    "ok": true,
-    "n_diff": 12,
+    "ok": false,
+    "n_diff": 300,
     "n_bytes": 1012,
     "n_records": 78,
     "timestamp_records_hit": [
      "BGNLIB",
      "BGNSTR"
     ],
-    "outside": []
+    "outside": [
+     130,
+     131,
+     134,
+     135,
+     138,
+     139,
+     142,
+     143,
+     146,
+     147,
+     150,
+     151,
+     154,
+     155,
+     158,
+     159,
+     162,
+     163,
+     166,
+     167
+    ]
    },
    "layers": [
     {
@@ -624,12 +711,12 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "500465ffd39fe112",
+      "digest": "3a9a8dca04559e30",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "68/20",
@@ -642,12 +729,12 @@
      },
      "work": {
       "n_shapes": 5,
-      "digest": "ed1982474302d3d0",
+      "digest": "1a7d42fe3dee397c",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "69/20",
@@ -660,12 +747,12 @@
      },
      "work": {
       "n_shapes": 5,
-      "digest": "452e3a77d25b5c4e",
+      "digest": "1ea66e4d183ceba7",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "70/20",
@@ -678,20 +765,32 @@
      },
      "work": {
       "n_shapes": 3,
-      "digest": "36144cbfbcf6ee11",
+      "digest": "d28c38bab31a5044",
       "kinds": [
        "box"
       ]
      },
+     "verdict": "DIFFERS"
+    },
+    {
+     "layer": "rigid-shift",
+     "head": "(-500,-850) dbu",
+     "work": "applied",
      "verdict": "PASS"
+    },
+    {
+     "layer": "via-cuts",
+     "head": 0,
+     "work": 0,
+     "verdict": "SAME"
     }
    ],
-   "verdict": "PASS"
+   "verdict": "PASS (declared NORMALISED)"
   },
   {
    "tag": "E",
    "gds": "macros/out/struct_E.gds",
-   "declared": "GEOM_IDENTICAL",
+   "declared": "NORMALISED",
    "head": {
     "digest": "e08e5747b496e7d253a17d9c9a59e6a9291740c28a454183355b6d3af1726f90",
     "cell": "research_fiducial",
@@ -699,23 +798,44 @@
     "n_shapes": 7
    },
    "work": {
-    "digest": "e08e5747b496e7d253a17d9c9a59e6a9291740c28a454183355b6d3af1726f90",
+    "digest": "52b1c5f65d2a2d7f260a959a3064a58169dec203249081fa54852bfad4da60b4",
     "cell": "research_fiducial",
     "n_layers": 3,
     "n_shapes": 7
    },
    "dbu_ok": true,
-   "bbox_ok": true,
+   "bbox_ok": false,
    "raw_bytes": {
-    "ok": true,
-    "n_diff": 12,
+    "ok": false,
+    "n_diff": 160,
     "n_bytes": 568,
     "n_records": 43,
     "timestamp_records_hit": [
      "BGNLIB",
      "BGNSTR"
     ],
-    "outside": []
+    "outside": [
+     134,
+     135,
+     138,
+     139,
+     142,
+     143,
+     146,
+     147,
+     150,
+     151,
+     154,
+     155,
+     158,
+     159,
+     162,
+     163,
+     166,
+     167,
+     170,
+     171
+    ]
    },
    "layers": [
     {
@@ -729,12 +849,12 @@
      },
      "work": {
       "n_shapes": 1,
-      "digest": "87155998ad8f3c16",
+      "digest": "548e692a0117360c",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "68/20",
@@ -747,12 +867,12 @@
      },
      "work": {
       "n_shapes": 3,
-      "digest": "ce4804a9ad60c4fb",
+      "digest": "834339b403c0c227",
       "kinds": [
        "box"
       ]
      },
-     "verdict": "PASS"
+     "verdict": "DIFFERS"
     },
     {
      "layer": "69/20",
@@ -765,24 +885,36 @@
      },
      "work": {
       "n_shapes": 3,
-      "digest": "ce4804a9ad60c4fb",
+      "digest": "834339b403c0c227",
       "kinds": [
        "box"
       ]
      },
+     "verdict": "DIFFERS"
+    },
+    {
+     "layer": "rigid-shift",
+     "head": "(-3000,-3000) dbu",
+     "work": "applied",
      "verdict": "PASS"
+    },
+    {
+     "layer": "via-cuts",
+     "head": 0,
+     "work": 0,
+     "verdict": "SAME"
     }
    ],
-   "verdict": "PASS"
+   "verdict": "PASS (declared NORMALISED)"
   }
  ],
  "master_gds": {
   "gds": "macros/out/v2_structures.gds",
   "head_digest": "4a61d0bd686c3f59016d66bd5a4f6f4a0c371e47c90712cb7018682e20029ec3",
-  "work_digest": "c55dfb6ce5e77751c046f6ededdd9bbad51387078ee7e06f318de3d389aeade6",
+  "work_digest": "2a0c6c9947bcf8534df81eba6f7c4f4de0bd8abd13a0e3222ef5180cd40bf9a1",
   "raw_bytes": {
    "ok": false,
-   "n_diff": 628,
+   "n_diff": 1320,
    "n_bytes": 4390,
    "n_records": 336,
    "timestamp_records_hit": [
@@ -790,26 +922,26 @@
     "BGNSTR"
    ],
    "outside": [
-    2448,
-    2449,
-    2452,
-    2453,
-    2456,
-    2457,
-    2460,
-    2461,
-    2464,
-    2465,
-    2468,
-    2469,
-    2472,
-    2473,
-    2476,
-    2477,
-    2480,
-    2481,
-    2484,
-    2485
+    134,
+    135,
+    138,
+    139,
+    142,
+    143,
+    146,
+    147,
+    150,
+    151,
+    154,
+    155,
+    158,
+    159,
+    162,
+    163,
+    166,
+    167,
+    170,
+    171
    ]
   },
   "note": "combined file expected to differ from HEAD (three macros changed); checked for staleness against the per-macro outputs instead",

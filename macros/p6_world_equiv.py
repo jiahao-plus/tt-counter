@@ -41,8 +41,13 @@ def _find_old_def():
 
 
 OLD_DEF = _find_old_def()
-NORMALISED = ('A', 'B', 'C1')
-UNTOUCHED = ('C3', 'C4', 'D', 'E')
+# Round 5b normalises all seven macros, not just the three electrical ones: a
+# non-zero LEF ORIGIN displaces Magic's obstruction box by 2 x ORIGIN even for
+# a macro with no PIN, which is what produced the 11 illegal overlaps on
+# research_cross.  The world-coordinate invariant is unchanged and is now
+# checked for every structure.
+NORMALISED = ('A', 'B', 'C1', 'C3', 'C4', 'D', 'E')
+UNTOUCHED = ()
 CELL = {'A': 'research_via1', 'B': 'research_via2', 'C1': 'research_branch',
         'C3': 'research_near', 'C4': 'research_cross',
         'D': 'research_dense', 'E': 'research_fiducial'}
@@ -161,9 +166,37 @@ def main():
                        int(round(newp[cell][1] * 1000)))
         same = (hw == cw)
         if not same:
+            # The fiducial is the one macro allowed to move: its round-4 metal
+            # sat 3.43 um from research_via1 because the plan measured the cell
+            # frame instead of the drawn geometry, and the 5 um rule was being
+            # violated.  It carries no PIN and no netlist entry, so a pure
+            # translation cannot change any electrical property.
+            #
+            # Derive the shift from the WORLD polygons themselves, not from the
+            # placements: normalisation moved both the cell frame and the
+            # placement, so neither number alone is the world displacement.
+            # Then demand two things -- the mapping is rigid (no shape added,
+            # removed or reshaped) and it is horizontal only (dy == 0), because
+            # the clearances it must preserve are measured in x.
+            if tag == 'E':
+                def _ll(ps):
+                    xs = [x for v in ps.values() for pts in v for (x, y) in pts]
+                    ys = [y for v in ps.values() for pts in v for (x, y) in pts]
+                    return min(xs), min(ys)
+                hx, hy = _ll(hw)
+                cx, cy = _ll(cw)
+                dx, dy = cx - hx, cy - hy
+                rigid = (translate(hw, dx, dy) == cw and dy == 0)
+                same = rigid
+                note = ('rigid translation (%+d,%+d) um, shapes unchanged'
+                        % (dx // 1000, dy // 1000)) if rigid else 'WORLD MISMATCH'
+            else:
+                note = 'WORLD MISMATCH'
+        else:
+            note = 'world coordinates identical'
+        if not same:
             ok = False
         n_poly = sum(len(v) for v in cp.values())
-        note = 'world coordinates identical' if same else 'WORLD MISMATCH'
         print('%-16s %-10d %-10s %s' % (cell, n_poly, 'YES' if same else 'NO', note))
 
     # untouched macros must additionally be identical in LOCAL coordinates

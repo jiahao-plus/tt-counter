@@ -79,9 +79,20 @@ run "check_source_files.py"             python3 tools/check_source_files.py
 # ---- P5: via-enclosure fix, geometry record, and independent intrusion check
 run "p5_geometry_record.py"             python3 macros/p5_geometry_record.py
 run "p5_intrusion_negative.py"          python3 macros/p5_intrusion_negative.py
+# The intrusion check compares a FINAL GDS against the macro cells that produced
+# it, so both sides must come from the same round; `.v2ana/head` holds the
+# round-4 cells and would only be correct for a round-4 GDS.  The matching cells
+# for a fresh layout are the ones just generated in macros/out, so that is what
+# is passed (override with MACRO_DIR).  A mismatched pair now exits 2 and is
+# reported SKIP rather than as a design failure.
+#
+# p5_pad_impact.py is the opposite: it compares the CURRENT cells against the
+# HISTORICAL ones on purpose, to decide whether the enclosure growth made
+# anything worse than what already shipped.  It keeps .v2ana/head.
+MACRO_DIR="${MACRO_DIR:-macros/out}"
 if [ -n "$FINAL_GDS" ]; then
-  run "p5_intrusion_check.py"           python3 macros/p5_intrusion_check.py "$FINAL_GDS" "$FINAL_DEF" .v2ana/intrusion_check.json .v2ana/head
-  run "p5_pad_impact.py"                python3 macros/p5_pad_impact.py "$FINAL_GDS" "$FINAL_DEF" .v2ana/head .v2ana/pad_impact.json
+  run_opt "p5_intrusion_check.py"       python3 macros/p5_intrusion_check.py "$FINAL_GDS" "$FINAL_DEF" .v2ana/intrusion_check.json "$MACRO_DIR"
+  run_opt "p5_pad_impact.py"            python3 macros/p5_pad_impact.py "$FINAL_GDS" "$FINAL_DEF" .v2ana/head .v2ana/pad_impact.json
 fi
 echo
 if [ "$fail" -eq 0 ] && [ "$skip" -eq 0 ]; then

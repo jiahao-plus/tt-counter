@@ -255,14 +255,14 @@
   "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C3.lef",
   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C3.gds",
   "bbox_um": [
-   0.93,
-   0.93,
-   11.07,
-   9.17
+   0.0,
+   0.0,
+   10.14,
+   8.24
   ],
   "local_origin_um": [
-   0.0,
-   0.0
+   0.93,
+   0.93
   ],
   "size_um": [
    10.14,
@@ -311,14 +311,14 @@
   "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C4.lef",
   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_C4.gds",
   "bbox_um": [
-   0.93,
-   0.93,
-   11.07,
-   9.07
+   0.0,
+   0.0,
+   10.14,
+   8.14
   ],
   "local_origin_um": [
-   0.0,
-   0.0
+   0.93,
+   0.93
   ],
   "size_um": [
    10.14,
@@ -373,14 +373,14 @@
   "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_D.lef",
   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_D.gds",
   "bbox_um": [
-   0.5,
-   0.85,
-   35.5,
-   6.64
+   0.0,
+   0.0,
+   35.0,
+   5.79
   ],
   "local_origin_um": [
-   0.0,
-   0.0
+   0.5,
+   0.85
   ],
   "size_um": [
    35.0,
@@ -441,14 +441,14 @@
   "lef": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_E.lef",
   "gds": "/mnt/c/Users/Lenovo/Desktop/课题/lesson/toposem_lesson8/tt-v2/macros/out/struct_E.gds",
   "bbox_um": [
-   3.0,
-   3.0,
-   7.0,
-   7.0
+   0.0,
+   0.0,
+   4.0,
+   4.0
   ],
   "local_origin_um": [
-   0.0,
-   0.0
+   3.0,
+   3.0
   ],
   "size_um": [
    4.0,

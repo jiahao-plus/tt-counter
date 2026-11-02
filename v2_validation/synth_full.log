@@ -79,8 +79,8 @@ Cleaned up 0 empty switches.
 5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
 Marked 4 switch rules as full_case in process $proc$src/LFSR_Design.v:29$31 in module $paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.
 Marked 1 switch rules as full_case in process $proc$src/pwm.v:8$11 in module pwm.
-Marked 1 switch rules as full_case in process $proc$src/project.v:104$10 in module tt_um_jiahao_plus_counter.
-Marked 2 switch rules as full_case in process $proc$src/project.v:53$1 in module tt_um_jiahao_plus_counter.
+Marked 1 switch rules as full_case in process $proc$src/project.v:105$10 in module tt_um_jiahao_plus_counter.
+Marked 2 switch rules as full_case in process $proc$src/project.v:54$1 in module tt_um_jiahao_plus_counter.
 Removed a total of 0 dead cases.
 
 5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
@@ -90,7 +90,7 @@ Promoted 5 assignments to connections.
 5.2.4. Executing PROC_INIT pass (extract init attributes).
 
 5.2.5. Executing PROC_ARST pass (detect async resets in processes).
-Found async reset \rst_n in `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+Found async reset \rst_n in `\tt_um_jiahao_plus_counter.$proc$src/project.v:54$1'.
 
 5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
 Converted 0 switches.
@@ -108,19 +108,19 @@ Creating decoders for process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b
      8/8: $0\valid[0:0]
 Creating decoders for process `\pwm.$proc$src/pwm.v:8$11'.
      1/1: $0\counter[7:0]
-Creating decoders for process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+Creating decoders for process `\tt_um_jiahao_plus_counter.$proc$src/project.v:105$10'.
      1/5: $1\uio_oe_r[1:0] [1]
      2/5: $1\uio_o[1:0] [1]
      3/5: $1\uio_oe_r[1:0] [0]
      4/5: $1\uio_o[1:0] [0]
      5/5: $1\uo[7:0]
-Creating decoders for process `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+Creating decoders for process `\tt_um_jiahao_plus_counter.$proc$src/project.v:54$1'.
      1/1: $0\count[7:0]
 
 5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
-No latch inferred for signal `\tt_um_jiahao_plus_counter.\uo' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
-No latch inferred for signal `\tt_um_jiahao_plus_counter.\uio_o' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
-No latch inferred for signal `\tt_um_jiahao_plus_counter.\uio_oe_r' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
+No latch inferred for signal `\tt_um_jiahao_plus_counter.\uo' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:105$10'.
+No latch inferred for signal `\tt_um_jiahao_plus_counter.\uio_o' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:105$10'.
+No latch inferred for signal `\tt_um_jiahao_plus_counter.\uio_oe_r' from process `\tt_um_jiahao_plus_counter.$proc$src/project.v:105$10'.
 
 5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
 Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.\valid' using process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
@@ -141,7 +141,7 @@ Creating register for signal `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\
   created $dff cell `$procdff$165' with positive edge clock.
 Creating register for signal `\pwm.\counter' using process `\pwm.$proc$src/pwm.v:8$11'.
   created $dff cell `$procdff$166' with positive edge clock.
-Creating register for signal `\tt_um_jiahao_plus_counter.\count' using process `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+Creating register for signal `\tt_um_jiahao_plus_counter.\count' using process `\tt_um_jiahao_plus_counter.$proc$src/project.v:54$1'.
   created $adff cell `$procdff$171' with positive edge clock and positive level reset.
 
 5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
@@ -151,10 +151,10 @@ Found and cleaned up 5 empty switches in `$paramod$8a68c104d0971da6b2bf19614e782
 Removing empty process `$paramod$8a68c104d0971da6b2bf19614e7821f462a38a7b\LFSR_Design.$proc$src/LFSR_Design.v:29$31'.
 Found and cleaned up 1 empty switch in `\pwm.$proc$src/pwm.v:8$11'.
 Removing empty process `pwm.$proc$src/pwm.v:8$11'.
-Found and cleaned up 1 empty switch in `\tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
-Removing empty process `tt_um_jiahao_plus_counter.$proc$src/project.v:104$10'.
-Found and cleaned up 2 empty switches in `\tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
-Removing empty process `tt_um_jiahao_plus_counter.$proc$src/project.v:53$1'.
+Found and cleaned up 1 empty switch in `\tt_um_jiahao_plus_counter.$proc$src/project.v:105$10'.
+Removing empty process `tt_um_jiahao_plus_counter.$proc$src/project.v:105$10'.
+Found and cleaned up 2 empty switches in `\tt_um_jiahao_plus_counter.$proc$src/project.v:54$1'.
+Removing empty process `tt_um_jiahao_plus_counter.$proc$src/project.v:54$1'.
 Cleaned up 9 empty switches.
 
 5.2.12. Executing OPT_EXPR pass (perform const folding).
@@ -526,8 +526,8 @@ Removed top 31 bits (of 32) from port B of cell pwm.$add$src/pwm.v:10$13 ($add).
 Removed top 24 bits (of 32) from port Y of cell pwm.$add$src/pwm.v:10$13 ($add).
 Removed top 31 bits (of 32) from mux cell pwm.$ternary$src/pwm.v:12$15 ($mux).
 Removed top 24 bits (of 32) from wire pwm.$add$src/pwm.v:10$13_Y.
-Removed top 7 bits (of 8) from port B of cell tt_um_jiahao_plus_counter.$add$src/project.v:58$6 ($add).
-Removed top 7 bits (of 8) from port B of cell tt_um_jiahao_plus_counter.$sub$src/project.v:60$7 ($sub).
+Removed top 7 bits (of 8) from port B of cell tt_um_jiahao_plus_counter.$add$src/project.v:59$6 ($add).
+Removed top 7 bits (of 8) from port B of cell tt_um_jiahao_plus_counter.$sub$src/project.v:61$7 ($sub).
 Removed top 5 bits (of 6) from port B of cell tt_um_jiahao_plus_counter.$procmux$148_CMP0 ($eq).
 Removed top 4 bits (of 6) from port B of cell tt_um_jiahao_plus_counter.$procmux$151_CMP0 ($eq).
 Removed top 6 bits (of 8) from wire tt_um_jiahao_plus_counter.uio_oe_r.
@@ -563,12 +563,12 @@ Extracting $alu and $macc cells in module pwm:
   creating $alu cell for $add$src/pwm.v:10$13: $auto$alumacc.cc:548:replace_alu$255
   created 2 $alu and 0 $macc cells.
 Extracting $alu and $macc cells in module tt_um_jiahao_plus_counter:
-  creating $macc model for $sub$src/project.v:60$7 ($sub).
-  creating $macc model for $add$src/project.v:58$6 ($add).
-  creating $alu model for $macc $add$src/project.v:58$6.
-  creating $alu model for $macc $sub$src/project.v:60$7.
-  creating $alu cell for $sub$src/project.v:60$7: $auto$alumacc.cc:548:replace_alu$258
-  creating $alu cell for $add$src/project.v:58$6: $auto$alumacc.cc:548:replace_alu$261
+  creating $macc model for $sub$src/project.v:61$7 ($sub).
+  creating $macc model for $add$src/project.v:59$6 ($add).
+  creating $alu model for $macc $add$src/project.v:59$6.
+  creating $alu model for $macc $sub$src/project.v:61$7.
+  creating $alu cell for $sub$src/project.v:61$7: $auto$alumacc.cc:548:replace_alu$258
+  creating $alu cell for $add$src/project.v:59$6: $auto$alumacc.cc:548:replace_alu$261
   created 2 $alu and 0 $macc cells.
 
 5.13. Executing SHARE pass (SAT-based resource sharing).
@@ -1477,6 +1477,6 @@ Dumping module `\tt_um_jiahao_plus_counter'.
         1   research_via1
         1   research_via2
 
-End of script. Logfile hash: 732736a214, time: 0.21s, user: 0.05s, system: 0.04s, MEM: 29.43 MB peak
+End of script. Logfile hash: 2a82de62e9, time: 0.21s, user: 0.05s, system: 0.03s, MEM: 29.90 MB peak
 Yosys 0.69+ (git sha1 9f09efcdb-dirty, Release, GNU /home/conda/feedstock_root/build_artifacts/bld/rattler-build_yosys_1788957668/build_env/bin/x86_64-conda-linux-gnu-c++ 15.3.0) [github.com/conda-forge/yosys-feedstock at main]
-Time spent: 64% 1x abc (0 sec), 7% 25x opt_clean (0 sec), ...
+Time spent: 65% 1x abc (0 sec), 7% 25x opt_clean (0 sec), ...

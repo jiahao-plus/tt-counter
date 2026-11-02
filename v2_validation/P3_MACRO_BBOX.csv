@@ -1,8 +1,8 @@
 structure_id,macro_name,instance,x_um,y_um,place_x_um,place_y_um,local_origin_x_um,local_origin_y_um,w_um,h_um,x1_um,y1_um,orientation,electrical,n_pins,inside_core,strap_crossings,strap_x_hit,strap_width_fraction_ESTIMATE,note
-E,research_fiducial,u_rs_fiducial,24.0,208.0,24.0,208.0,0.0,0.0,4.0,4.0,28.0,212.0,N,False,0,True,0,,0.0,gap 23.20-57.20
-A,research_via1,u_rs_via1,33.5,208.0,34.43,209.93,0.93,1.93,8.14,4.94,42.57,214.87,N,True,2,True,0,,0.0,"gap 23.20-57.20, 5.5 um from E"
+E,research_fiducial,u_rs_fiducial,22.0,208.0,25.0,211.0,3.0,3.0,4.0,4.0,29.0,215.0,N,False,0,True,1,22.38,0.295,"gap 23.20-57.20, 5.43 um from A"
+A,research_via1,u_rs_via1,33.5,208.0,34.43,209.93,0.93,1.93,8.14,4.94,42.57,214.87,N,True,2,True,0,,0.0,gap 23.20-57.20
 B,research_via2,u_rs_via2,64.0,208.0,64.93,209.93,0.93,1.93,10.22,3.265,75.15,213.195,N,True,2,True,0,,0.0,gap 62.00-96.00
 C1,research_branch,u_rs_branch,79.32,208.0,80.25,212.83,0.93,4.83,10.14,3.24,90.39,216.07,N,True,4,True,0,,0.0,"gap 62.00-96.00, 5.1 um from B"
-C3,research_near,u_rs_near,64.0,191.57,64.0,191.57,0.0,0.0,10.14,8.24,74.14,199.81,N,False,0,True,0,,0.0,"gap 62.00-96.00, below B"
-C4,research_cross,u_rs_cross,102.0,188.0,102.0,188.0,0.0,0.0,10.14,8.14,112.14,196.14,N,False,0,True,0,,0.0,gap 100.90-134.90
-D,research_dense,u_rs_dense,23.5,150.0,23.5,150.0,0.0,0.0,35.0,5.79,58.5,155.79,N,False,0,True,1,57.95,0.0386,"35 um, crosses ~1 assumed strap"
+C3,research_near,u_rs_near,64.0,191.57,64.93,192.5,0.93,0.93,10.14,8.24,75.07,200.74,N,False,0,True,0,,0.0,"gap 62.00-96.00, below B"
+C4,research_cross,u_rs_cross,102.0,188.0,102.93,188.93,0.93,0.93,10.14,8.14,113.07,197.07,N,False,0,True,0,,0.0,gap 100.90-134.90
+D,research_dense,u_rs_dense,23.5,150.0,24.0,150.85,0.5,0.85,35.0,5.79,59.0,156.64,N,False,0,True,1,57.95,0.0457,"35 um, crosses ~1 assumed strap"

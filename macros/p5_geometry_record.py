@@ -35,10 +35,16 @@ LAYERS = {'M1': (68, 20), 'Via1': (68, 44), 'M2': (69, 20),
           'prB': (235, 4)}
 TAGS = ('A', 'B', 'C1', 'C3', 'C4', 'D', 'E')
 
-# Route B: only the three macros that carry an electrical PIN were re-based so
-# their cell geometry starts at (0,0).  The four geometry-only macros keep
-# their round-4 coordinates and stay under the strict GEOM_IDENTICAL rule.
-NORMALISED = {'A', 'B', 'C1'}
+# Route B, extended to all seven macros in round 5b.  Magic reads a macro's LEF
+# OBS as `place + RECT - ORIGIN` and OpenROAD as `place + ORIGIN + RECT`, so a
+# non-zero ORIGIN displaces the obstruction box by 2 x ORIGIN even when the
+# macro has no PIN.  research_cross (ORIGIN 0.93,0.93) produced 11 illegal
+# overlaps that way.  Zero is the only value both tools agree on, so every cell
+# is re-based to start at (0,0); the offset is added back into the placement so
+# no silicon moves.  The strict GEOM_IDENTICAL rule no longer applies to any
+# macro -- the NORMALISED rigid-shift invariant is the stronger check here
+# because it pins the shift to the historical bbox the checker reads itself.
+NORMALISED = {'A', 'B', 'C1', 'C3', 'C4', 'D', 'E'}
 
 
 def shapes_of(ly, top, li):

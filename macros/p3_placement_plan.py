@@ -54,8 +54,18 @@ PLAN = [
     # corner on the die.  It is the same number for every structure regardless
     # of how its cell happens to be drawn, because the plan is about where the
     # silicon goes, not about the internal coordinate frame of the cell.
-    ('E',  'u_rs_fiducial',  24.00, 208.00, 'N', 'gap 23.20-57.20'),
-    ('A',  'u_rs_via1',      33.50, 208.00, 'N', 'gap 23.20-57.20, 5.5 um from E'),
+    #
+    # E's x was 24.00 through round 5.  That value described where the cell
+    # frame was meant to sit, but struct_E's geometry was drawn from (3.0,3.0),
+    # so the metal actually landed at 27.00 and the true clearance to A was
+    # 34.43 - 31.00 = 3.43 um -- below the 5 um requirement.  The old planner
+    # compared intent values and reported 5.50 um, so the violation was hidden
+    # until every macro was re-based to (0,0) and placement became the real
+    # footprint.  Reducing x by 2.00 puts the fiducial metal at 25.00 and
+    # restores a 5.43 um gap.  E carries no PIN and no netlist entry, so moving
+    # it changes no electrical connection; A keeps its historical position.
+    ('E',  'u_rs_fiducial',  22.00, 208.00, 'N', 'gap 23.20-57.20, 5.43 um from A'),
+    ('A',  'u_rs_via1',      33.50, 208.00, 'N', 'gap 23.20-57.20'),
     # B and C1 share the next gap, 5.1 um apart in x
     ('B',  'u_rs_via2',      64.00, 208.00, 'N', 'gap 62.00-96.00'),
     ('C1', 'u_rs_branch',    79.32, 208.00, 'N', 'gap 62.00-96.00, 5.1 um from B'),

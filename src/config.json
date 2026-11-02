@@ -79,8 +79,8 @@
           "instances": {
               "u_rs_fiducial": {
                   "location": [
-                      24.0,
-                      208.0
+                      25.0,
+                      211.0
                   ],
                   "orientation": "N"
               }
@@ -147,8 +147,8 @@
           "instances": {
               "u_rs_near": {
                   "location": [
-                      64.0,
-                      191.57
+                      64.93,
+                      192.5
                   ],
                   "orientation": "N"
               }
@@ -164,8 +164,8 @@
           "instances": {
               "u_rs_cross": {
                   "location": [
-                      102.0,
-                      188.0
+                      102.93,
+                      188.93
                   ],
                   "orientation": "N"
               }
@@ -181,8 +181,8 @@
           "instances": {
               "u_rs_dense": {
                   "location": [
-                      23.5,
-                      150.0
+                      24.0,
+                      150.85
                   ],
                   "orientation": "N"
               }

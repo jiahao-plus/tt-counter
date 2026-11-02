@@ -42,26 +42,28 @@
    "structure_id": "E",
    "macro_name": "research_fiducial",
    "instance": "u_rs_fiducial",
-   "x_um": 24.0,
+   "x_um": 22.0,
    "y_um": 208.0,
-   "place_x_um": 24.0,
-   "place_y_um": 208.0,
+   "place_x_um": 25.0,
+   "place_y_um": 211.0,
    "local_origin_um": [
-    0.0,
-    0.0
+    3.0,
+    3.0
    ],
    "w_um": 4.0,
    "h_um": 4.0,
-   "x1_um": 28.0,
-   "y1_um": 212.0,
+   "x1_um": 29.0,
+   "y1_um": 215.0,
    "orientation": "N",
    "electrical": false,
    "n_pins": 0,
    "inside_core": true,
-   "strap_crossings": 0,
-   "strap_x_hit": [],
-   "strap_width_fraction_ESTIMATE": 0.0,
-   "note": "gap 23.20-57.20"
+   "strap_crossings": 1,
+   "strap_x_hit": [
+    22.38
+   ],
+   "strap_width_fraction_ESTIMATE": 0.295,
+   "note": "gap 23.20-57.20, 5.43 um from A"
   },
   {
    "structure_id": "A",
@@ -86,7 +88,7 @@
    "strap_crossings": 0,
    "strap_x_hit": [],
    "strap_width_fraction_ESTIMATE": 0.0,
-   "note": "gap 23.20-57.20, 5.5 um from E"
+   "note": "gap 23.20-57.20"
   },
   {
    "structure_id": "B",
@@ -144,16 +146,16 @@
    "instance": "u_rs_near",
    "x_um": 64.0,
    "y_um": 191.57,
-   "place_x_um": 64.0,
-   "place_y_um": 191.57,
+   "place_x_um": 64.93,
+   "place_y_um": 192.5,
    "local_origin_um": [
-    0.0,
-    0.0
+    0.93,
+    0.93
    ],
    "w_um": 10.14,
    "h_um": 8.24,
-   "x1_um": 74.14,
-   "y1_um": 199.81,
+   "x1_um": 75.07,
+   "y1_um": 200.74,
    "orientation": "N",
    "electrical": false,
    "n_pins": 0,
@@ -169,16 +171,16 @@
    "instance": "u_rs_cross",
    "x_um": 102.0,
    "y_um": 188.0,
-   "place_x_um": 102.0,
-   "place_y_um": 188.0,
+   "place_x_um": 102.93,
+   "place_y_um": 188.93,
    "local_origin_um": [
-    0.0,
-    0.0
+    0.93,
+    0.93
    ],
    "w_um": 10.14,
    "h_um": 8.14,
-   "x1_um": 112.14,
-   "y1_um": 196.14,
+   "x1_um": 113.07,
+   "y1_um": 197.07,
    "orientation": "N",
    "electrical": false,
    "n_pins": 0,
@@ -194,16 +196,16 @@
    "instance": "u_rs_dense",
    "x_um": 23.5,
    "y_um": 150.0,
-   "place_x_um": 23.5,
-   "place_y_um": 150.0,
+   "place_x_um": 24.0,
+   "place_y_um": 150.85,
    "local_origin_um": [
-    0.0,
-    0.0
+    0.5,
+    0.85
    ],
    "w_um": 35.0,
    "h_um": 5.79,
-   "x1_um": 58.5,
-   "y1_um": 155.79,
+   "x1_um": 59.0,
+   "y1_um": 156.64,
    "orientation": "N",
    "electrical": false,
    "n_pins": 0,
@@ -212,7 +214,7 @@
    "strap_x_hit": [
     57.95
    ],
-   "strap_width_fraction_ESTIMATE": 0.0386,
+   "strap_width_fraction_ESTIMATE": 0.0457,
    "note": "35 um, crosses ~1 assumed strap"
   }
  ],
@@ -223,22 +225,22 @@
    "C1"
   ],
   [
-   6.43,
+   5.43,
    "E",
    "A"
   ],
   [
-   10.12,
+   9.19,
    "B",
    "C3"
   ],
   [
-   14.382,
+   13.153,
    "C1",
    "C3"
   ],
   [
-   20.331,
+   20.14,
    "C1",
    "C4"
   ],
@@ -248,7 +250,7 @@
    "B"
   ],
   [
-   23.699,
+   24.175,
    "A",
    "C3"
   ],
@@ -258,24 +260,24 @@
    "C4"
   ],
   [
-   30.184,
+   30.612,
    "B",
    "C4"
   ],
   [
-   36.2,
+   35.93,
+   "E",
+   "B"
+  ],
+  [
+   36.347,
    "C3",
    "D"
   ],
   [
-   36.92,
+   37.366,
    "E",
    "C3"
-  ],
-  [
-   36.93,
-   "E",
-   "B"
   ],
   [
    37.68,
@@ -283,42 +285,42 @@
    "C1"
   ],
   [
-   52.21,
-   "E",
-   "D"
-  ],
-  [
-   52.257,
+   51.25,
    "E",
    "C1"
   ],
   [
-   54.127,
-   "C4",
-   "D"
-  ],
-  [
-   54.14,
+   53.29,
    "A",
    "D"
   ],
   [
-   54.52,
+   53.619,
    "B",
    "D"
   ],
   [
-   61.009,
-   "A",
-   "C4"
+   54.36,
+   "E",
+   "D"
   ],
   [
-   61.046,
+   54.521,
+   "C4",
+   "D"
+  ],
+  [
+   60.074,
    "C1",
    "D"
   ],
   [
-   74.944,
+   61.715,
+   "A",
+   "C4"
+  ],
+  [
+   75.231,
    "E",
    "C4"
   ]

@@ -169,12 +169,12 @@
     8.24
    ],
    "lef_origin": [
-    0.93,
-    0.93
+    0.0,
+    0.0
    ],
    "gds_bbox_ll_um": [
-    0.93,
-    0.93
+    0.0,
+    0.0
    ],
    "prb_equals_metal": true,
    "lef_equals_prb": true,
@@ -204,12 +204,12 @@
     8.14
    ],
    "lef_origin": [
-    0.93,
-    0.93
+    0.0,
+    0.0
    ],
    "gds_bbox_ll_um": [
-    0.93,
-    0.93
+    0.0,
+    0.0
    ],
    "prb_equals_metal": true,
    "lef_equals_prb": true,
@@ -239,12 +239,12 @@
     5.79
    ],
    "lef_origin": [
-    0.5,
-    0.85
+    0.0,
+    0.0
    ],
    "gds_bbox_ll_um": [
-    0.5,
-    0.85
+    0.0,
+    0.0
    ],
    "prb_equals_metal": true,
    "lef_equals_prb": true,
@@ -274,12 +274,12 @@
     4.0
    ],
    "lef_origin": [
-    3.0,
-    3.0
+    0.0,
+    0.0
    ],
    "gds_bbox_ll_um": [
-    3.0,
-    3.0
+    0.0,
+    0.0
    ],
    "prb_equals_metal": true,
    "lef_equals_prb": true,

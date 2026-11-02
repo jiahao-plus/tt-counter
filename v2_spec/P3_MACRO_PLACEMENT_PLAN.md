@@ -37,13 +37,13 @@
 
 | Tag | 宏 | 实例名 | 位置 (µm) | 尺寸 (µm) | 朝向 | 电气 | PIN | 说明 |
 |---|---|---|---|---|---|---|---|---|
-| E | `research_fiducial` | `u_rs_fiducial` | (24.00, 208.00) | 4.00 × 4.00 | `N` | ✗ | 0 | 多层配准标记 |
+| E | `research_fiducial` | `u_rs_fiducial` | (25.00, 211.00) | 4.00 × 4.00 | `N` | ✗ | 0 | 多层配准标记 |
 | A | `research_via1` | `u_rs_via1` | (34.43, 209.93) | 8.14 × 4.94 | `N` | ✓ | 2 | M1–Via1–M2 信号连接 |
 | B | `research_via2` | `u_rs_via2` | (64.93, 209.93) | 10.22 × 3.27 | `N` | ✓ | 2 | M2–Via2–M3 信号连接 |
 | C1 | `research_branch` | `u_rs_branch` | (80.25, 212.83) | 10.14 × 3.24 | `N` | ✓ | 4 | 单 Net 多分支 |
-| C3 | `research_near` | `u_rs_near` | (64.00, 191.57) | 10.14 × 8.24 | `N` | ✗ | 0 | 不同间距的邻近金属线 |
-| C4 | `research_cross` | `u_rs_cross` | (102.00, 188.00) | 10.14 × 8.14 | `N` | ✗ | 0 | 跨层交叉但无 Via（负样本） |
-| D | `research_dense` | `u_rs_dense` | (23.50, 150.00) | 35.00 × 5.79 | `N` | ✗ | 0 | 线宽/密度阶梯 |
+| C3 | `research_near` | `u_rs_near` | (64.93, 192.50) | 10.14 × 8.24 | `N` | ✗ | 0 | 不同间距的邻近金属线 |
+| C4 | `research_cross` | `u_rs_cross` | (102.93, 188.93) | 10.14 × 8.14 | `N` | ✗ | 0 | 跨层交叉但无 Via（负样本） |
+| D | `research_dense` | `u_rs_dense` | (24.00, 150.85) | 35.00 × 5.79 | `N` | ✗ | 0 | 线宽/密度阶梯 |
 
 <!-- END AUTO-GENERATED PLACEMENT TABLE -->
 
@@ -128,22 +128,30 @@ x 位置 19.08 / 22.38 / 57.95 / 61.25 / 96.82 / 100.12 / 135.69 / 138.99 µm。
 ```json
 "MACROS": {
   "research_via1": {
-    "instances": { "u_rs_via1": { "location": [40.0, 198.0], "orientation": "N" } },
+    "instances": { "u_rs_via1": { "location": [34.43, 209.93], "orientation": "N" } },
     "gds": ["dir::../macros/out/struct_A.gds"],
     "lef": ["dir::../macros/out/struct_A.lef"]
   },
-  ... (七宏各一条)
+  ... (七宏各一条，位置见上方自动生成表)
 },
 "IGNORE_DISCONNECTED_MODULES": [
   "research_fiducial", "u_rs_fiducial",
-  "research_cross", "u_rs_cross",
-  "research_dense", "u_rs_dense"
-],
-"ERROR_ON_DISCONNECTED_PINS": false
+  "research_near",     "u_rs_near",
+  "research_cross",    "u_rs_cross",
+  "research_dense",    "u_rs_dense"
+]
 ```
 
-**只对 C4/D/E 三个非电气宏做 disconnect 豁免**。
-A/B/C1/C3 四个电气宏全部有真实 PIN，不依赖此开关。
+**只对 C3/C4/D/E 四个非电气宏做 disconnect 豁免**。
+豁免名单必须逐字等于"没有 LEF PIN 的宏"集合——`macros/out/struct_<T>.lef`
+里 `PIN` 出现 0 次的只有这四个。A/B/C1 三个电气宏各有真实 PIN，不依赖此开关。
+
+> 本段曾写作"只对 C4/D/E 三个"并称"A/B/C1/C3 四个电气宏全部有真实 PIN"，
+> 那是 C3 改为纯几何结构之前的记录。C3 的 `electrical` 现为 `false`、
+> LEF 无 PIN，若不加豁免，`odb-reportdisconnectedpins` 会为它报错。
+> 上面的 JSON 与 `src/config.json` 一致。
+
+`ERROR_ON_DISCONNECTED_PINS` 未在 `src/config.json` 中设置，沿用 OpenROAD 默认。
 
 **未添加**：`RUN_LVS`、`RUN_PDN`、`ERROR_ON_PDN_VIOLATIONS` —— 保持默认开启。
 

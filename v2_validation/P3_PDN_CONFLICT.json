@@ -35,13 +35,18 @@
    "structure_id": "E",
    "macro_name": "research_fiducial",
    "x_range_um": [
-    24.0,
-    28.0
+    22.0,
+    29.0
    ],
-   "n_straps_crossing": 0,
-   "straps": [],
-   "width_fraction_covered": 0.0,
-   "obstruction": "NONE"
+   "n_straps_crossing": 1,
+   "straps": [
+    {
+     "strap_x": 22.38,
+     "overlap_um": 1.18
+    }
+   ],
+   "width_fraction_covered": 0.1686,
+   "obstruction": "MEDIUM"
   },
   {
    "structure_id": "A",
@@ -84,7 +89,7 @@
    "macro_name": "research_near",
    "x_range_um": [
     64.0,
-    74.14
+    75.07
    ],
    "n_straps_crossing": 0,
    "straps": [],
@@ -96,7 +101,7 @@
    "macro_name": "research_cross",
    "x_range_um": [
     102.0,
-    112.14
+    113.07
    ],
    "n_straps_crossing": 0,
    "straps": [],
@@ -108,16 +113,16 @@
    "macro_name": "research_dense",
    "x_range_um": [
     23.5,
-    58.5
+    59.0
    ],
    "n_straps_crossing": 1,
    "straps": [
     {
      "strap_x": 57.95,
-     "overlap_um": 1.35
+     "overlap_um": 1.6
     }
    ],
-   "width_fraction_covered": 0.0386,
+   "width_fraction_covered": 0.0451,
    "obstruction": "LOW"
   }
  ],

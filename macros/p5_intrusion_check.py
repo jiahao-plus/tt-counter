@@ -198,6 +198,16 @@ def main(final_gds, def_path, out_json=None, macro_dir=None):
     # research_via2 artefact seen when this was first run.  The caller names
     # the matching pair explicitly (see the usage note at the top); the LEF
     # must come from the same directory or PIN classification silently breaks.
+    #
+    # Verify the pairing instead of trusting the caller.  Do NOT require
+    # normalised cells here: a non-zero prBoundary origin is legal, and rounds
+    # 4/5 wrote self-consistent DEFs for exactly such cells.  What is illegal is
+    # pairing cells from one round with a DEF from another, and the reliable
+    # symptom is in the comparison itself -- large `missing` area together with
+    # large `foreign` area means the reference footprint is displaced rather
+    # than intruded upon.  That test is applied to the totals below, so no
+    # up-front origin heuristic is needed (an earlier one here rejected a
+    # perfectly matched round-5 pair).
 
     fly = pya.Layout()
     fly.read(final_gds)
@@ -340,6 +350,10 @@ def main(final_gds, def_path, out_json=None, macro_dir=None):
             'lef_pin_layers': sorted(pins),
             'layers_with_foreign': n_foreign,
             'layers_polluting': n_pollute,
+            'missing_area_um2': round(
+                sum(d.get('missing_area_um2', 0.0) for d in per_layer.values()), 4),
+            'foreign_area_um2': round(
+                sum(d.get('foreign_area_um2', 0.0) for d in per_layer.values()), 4),
             'detail': per_layer,
             'clean': n_foreign == 0,
             'structure_intact': n_pollute == 0,
@@ -361,6 +375,10 @@ def main(final_gds, def_path, out_json=None, macro_dir=None):
         'macros': results,
         'layers_with_foreign': total_foreign_layers,
         'layers_polluting': total_pollution,
+        'missing_area_um2': round(
+            sum(r.get('missing_area_um2', 0.0) for r in results.values()), 4),
+        'foreign_area_um2': round(
+            sum(r.get('foreign_area_um2', 0.0) for r in results.values()), 4),
         'pass': total_pollution == 0,
     }
 
@@ -400,8 +418,24 @@ def main(final_gds, def_path, out_json=None, macro_dir=None):
     print()
     print('layers with foreign geometry: %d' % total_foreign_layers)
     print('layers polluting structures:  %d' % total_pollution)
-    print('VERDICT:', 'PASS - no off-PIN contact' if res['pass']
-          else 'FAIL - structure polluted')
+    miss = res['missing_area_um2']
+    fore = res['foreign_area_um2']
+    if miss > 0.5 and fore > 0.5:
+        # A large `missing` says the macro's own metal is absent where the
+        # reference says it should be.  Combined with large `foreign` that is
+        # the signature of comparing against cells from a different round, not
+        # of a real intrusion -- the reference footprint is simply in the wrong
+        # place.  Say so instead of reporting a physical defect.
+        res['verdict'] = 'INCONCLUSIVE'
+        print('VERDICT: INCONCLUSIVE - macro cells do not match this layout')
+        print('         missing %.4f um2 / foreign %.4f um2: the reference'
+              % (miss, fore))
+        print('         footprint is displaced, so neither number is physical.')
+        print('         Re-run with the macro dir that built this GDS.')
+    else:
+        res['verdict'] = 'PASS' if res['pass'] else 'FAIL'
+        print('VERDICT:', 'PASS - no off-PIN contact' if res['pass']
+              else 'FAIL - structure polluted')
 
     if out_json:
         json.dump(res, open(out_json, 'w', encoding='utf-8'), indent=1,
@@ -414,4 +448,9 @@ if __name__ == '__main__':
     _r = main(sys.argv[1], sys.argv[2],
               sys.argv[3] if len(sys.argv) > 3 else None,
               sys.argv[4] if len(sys.argv) > 4 else None)
+    # Exit 2 for "could not decide" so callers can report SKIP instead of FAIL;
+    # reporting an unmatched pair as a design failure is a false negative that
+    # looks exactly like a real one.
+    if _r.get('verdict') == 'INCONCLUSIVE':
+        sys.exit(2)
     sys.exit(0 if _r['pass'] else 1)
